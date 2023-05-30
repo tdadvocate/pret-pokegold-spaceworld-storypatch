@@ -140,13 +140,13 @@ MainMenuHeader:
 	db MENU_BACKUP_TILES
 	menu_coords 0, 0, 13, 7
 	dw .MenuData
-	db 1 ; default option
+	db 1 ; default option (which menu item is highlighted after leaving title screen)
 
 .MenuData:
 	db $80
 	db 0 ; items
 	dw MainMenuItems
-	db $8a, $1f
+	db $8a, $1f ; effects the text displayed on the menu screen
 	dw .Strings
 
 .Strings:
@@ -302,6 +302,6 @@ StartNewGame::
 	ldh [hMapAnims], a
 	ld a, [wDebugFlags]
 	bit DEBUG_FIELD_F, a
-	jp z, DemoStart
+	jp z, GameStart ; changed from DemoStart to switch from Demo Mode to Story Mode
 	call DebugSetUpPlayer
 	jp IntroCleanup
