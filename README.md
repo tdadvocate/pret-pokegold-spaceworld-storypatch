@@ -1,3 +1,41 @@
+# Pokémon Gold: Space World 1997 Story Mode Patch
+
+This is a work-in-progress build of making the Pokémon Gold prototype demoed at Space World 1997 into what could have been the final (or at least unfinished) version of Generation 2 that we could have received in an alternate timeline.
+
+At the very bottom of this README, you will find the original README provided on the PRET disassembly repository that this was initially forked from. Below you will also find the currently planned changes/features/fixes, stretch goal plans, and the necessary tools for building or contributing to this project. 
+
+## Currently Planned Changes
+- Change game from Demo Mode to Story Mode
+- Correct the Rival battle to use the appropriate counter starter choice.
+- Remove the barricades to the North and the East of Silent Hills
+  - Implement a temporary blockade to the East (and possibly North) ends of Silent Hills. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
+- Re-enable evolution of Pokémon within the game.
+- Re-enable Pokémon Center features in Silent Hills
+  - Re-enable healing feature.
+  - Re-enable the PC features.
+- Disable the game reset after all of your Pokémon that is currently implemented even outside of Demo Mode.
+
+## Stretch Goal Changes
+- Enable the ability to enter all Pokémon Centers within the game as well as both healing and PC boxes if possible.
+- Enable the ability to enter and purchase from PokéMarts everywhere in the game if possible.
+- English translation. (This is almost a zero percent chance thanks to my limited skillset but I am very much open to help with this as well as any of the other features listed above)
+- If I can either get the help or learn enough to do all of the above features, I would like to maybe make a separate version of the patch that would essentially be a Gold 97 Reforged situation. Though this would require a lot of additional research into as much info that can be found about the original plans for Generation 2 prior to them being scrapped for the versions that were officially released to us.
+
+## CONTRIBUTIONS EXTREMELY WELCOMED!
+Please feel free to help with this as much as you want. I am doing this solo as of the time of writing this README and do not have a ton of experience working with ROMs at this level. Any and all help is immensely appreciated!
+
+## Necessary Tools
+- RGBDS: [**rgbds github**] and/or [**rgbds Install**]
+- Programming Application Suggestions: [**Sublime Text Editor**] or [**Visual Studio Code**]
+- A copy of Gold_debug.sgb renamed **baserom.gb** to build the ROMs (you will need to provide yourself)
+
+[**rgbds github**]: https://github.com/gbdev/rgbds
+[**rgbds Install**]: https://rgbds.gbdev.io/install
+[**Sublime Text Editor**]: https://www.sublimetext.com/
+[**Visual Studio Code**]: https://code.visualstudio.com/
+
+# Original PRET README for the repository
+
 # Pokémon Gold and Silver: Space World 1997 Demo [![Build Status][ci-badge]][ci]
 
 This is a work-in-progress disassembly of the Pokémon Gold and Pokémon Silver prototypes demoed at Space World 1997.
@@ -10,7 +48,7 @@ It builds the following ROMs:
 You will need to provide a copy of Gold_debug.sgb renamed **baserom.gb** to build the ROMs.
 
 
-## See also
+### See also
 
 - **Discord:** [pret][discord]
 - **IRC:** [libera#pret][irc]
