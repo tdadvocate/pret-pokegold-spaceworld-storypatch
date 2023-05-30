@@ -4,12 +4,14 @@ This is a work-in-progress build of making the Pokémon Gold prototype demoed at
 
 At the very bottom of this README, you will find the original README provided on the PRET disassembly repository that this was initially forked from. Below you will also find the currently planned changes/features/fixes, stretch goal plans, and the necessary tools for building or contributing to this project. 
 
+## Currently Implemented Features
+- Changed game from Demo Mode to Story Mode
+- Re-enable evolution of Pokémon within the game. (Untested but should be functional)
+
 ## Currently Planned Changes
-- Change game from Demo Mode to Story Mode
 - Correct the Rival battle to use the appropriate counter starter choice.
 - Remove the barricades to the North and the East of Silent Hills
   - Implement a temporary blockade to the East (and possibly North) ends of Silent Hills. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
-- Re-enable evolution of Pokémon within the game.
 - Re-enable Pokémon Center features in Silent Hills
   - Re-enable healing feature.
   - Re-enable the PC features.
