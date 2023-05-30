@@ -22,3 +22,6 @@ __pycache__
 
 # utility output
 /coverage.png
+
+# MacOS Garbage
+*.ds_store
