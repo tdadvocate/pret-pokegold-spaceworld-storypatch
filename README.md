@@ -28,13 +28,14 @@ Please feel free to help with this as much as you want. I am doing this solo as 
 
 ## Necessary Tools
 - RGBDS: [**rgbds github**] and/or [**rgbds Install**]
-- Programming Application Suggestions: [**Sublime Text Editor**] or [**Visual Studio Code**]
+- Programming Application Suggestions: [**Sublime Text Editor**] or [**Visual Studio Code**] (If you use VSCode, try out this syntax highlighter. It isn't perfect but it is still helpful. Please let me know if there is a better option that you recommend instead. [**VSCode Assembly Syntax Highlight**])
 - A copy of Gold_debug.sgb renamed **baserom.gb** to build the ROMs (you will need to provide yourself)
 
 [**rgbds github**]: https://github.com/gbdev/rgbds
 [**rgbds Install**]: https://rgbds.gbdev.io/install
 [**Sublime Text Editor**]: https://www.sublimetext.com/
 [**Visual Studio Code**]: https://code.visualstudio.com/
+[**VSCode Assembly Syntax Highlight**]: https://marketplace.visualstudio.com/items?itemName=Toeffe3.asm-syntaxhighlight
 
 # Original PRET README for the repository
 
