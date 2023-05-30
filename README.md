@@ -7,9 +7,10 @@ At the very bottom of this README, you will find the original README provided on
 ## Currently Implemented Features
 - Changed game from Demo Mode to Story Mode
 - Re-enable evolution of Pokémon within the game. (Untested but should be functional)
+- Implemented Rival battle
+  - The Rival's name is currently messed up (Shows the text of "<rival's name>'s has started a battle!") but attempting to fix this later
 
 ## Currently Planned Changes
-- Correct the Rival battle to use the appropriate counter starter choice.
 - Remove the barricades to the North and the East of Silent Hills
   - Implement a temporary blockade to the East (and possibly North) ends of Silent Hills. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
 - Re-enable Pokémon Center features in Silent Hills
