@@ -120,11 +120,11 @@ MainMenu::
 	ldh a, [hJoyState]
 	and D_DOWN | B_BUTTON | A_BUTTON
 	cp D_DOWN | B_BUTTON | A_BUTTON
-	jr nz, .setMenuPlay
+	jr nz, .setMenuNew ; changed from .setMenuPlay to help for context
 	ld a, M_SET_TIME
 	jr .triggerMenu
-.setMenuPlay
-	ld a, M_PLAY_GAME
+.setMenuNew ; changed from .setMenuPlay to help for context
+	ld a, M_NEW_GAME ; changed from M_PLAY_GAME to mimic what a production copy would have
 .triggerMenu
 	ld [wWhichIndexSet], a
 	ld hl, MainMenuHeader
@@ -150,11 +150,11 @@ MainMenuHeader:
 	dw .Strings
 
 .Strings:
-	db "つづきから　はじめる@"
-	db "さいしょから　はじめる@"
-	db "せっていを　かえる@"
-	db "#を　あそぶ@"
-	db "じかんセット@"
+	db "つづきから　はじめる@" ; Continue Game
+	db "さいしょから　はじめる@" ; New Game
+	db "せっていを　かえる@" ; Settings
+	db "#を　あそぶ@" ; Play Pokemon
+	db "じかんセット@" ; Set Time
 
 MainMenuJumptable:
 	dw MainMenuOptionContinue
