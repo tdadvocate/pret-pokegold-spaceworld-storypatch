@@ -12,6 +12,7 @@ At the very bottom of this README, you will find the original README provided on
 - Removed the demo barricades at the North and East exits of Silent Hill
 
 ## Currently Planned Changes
+- Enable proper start menu so that the player can save the game
 - Implement a temporary blockade similar to Blue at the West exit to the East (and possibly North) exit of Silent Hill. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
 - Re-enable Pokémon Center features in Silent Hill
   - Re-enable healing feature
