@@ -282,9 +282,9 @@ PrintPlayTime::
 
 PlayerInfoText:
 	db   "しゅじんこう"
-	next "もっているバッジ　　　　こ"
+	next "もっているバッジ　　　　こ" ; Badges (lit: Badges being carried)
 	next "#ずかん　　　　ひき"
-	next "プレイじかん"
+	next "プレイじかん" ; Time (lit: Play Time)
 	text_end
 
 StartNewGame::

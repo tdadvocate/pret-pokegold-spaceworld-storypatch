@@ -6,22 +6,22 @@ At the very bottom of this README, you will find the original README provided on
 
 ## Currently Implemented Features
 - Changed game from Demo Mode to Story Mode
-- Re-enable evolution of Pokémon within the game. (Untested but should be functional)
+- Re-enable evolution of Pokémon within the game (Untested but should be functional)
 - Implemented Rival battle
   - The Rival's name is currently messed up (Shows the text of "<rival's name>'s has started a battle!") but attempting to fix this later
+- Removed the demo barricades at the North and East exits of Silent Hill
 
 ## Currently Planned Changes
-- Remove the barricades to the North and the East of Silent Hills
-  - Implement a temporary blockade to the East (and possibly North) ends of Silent Hills. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
-- Re-enable Pokémon Center features in Silent Hills
-  - Re-enable healing feature.
-  - Re-enable the PC features.
-- Disable the game reset after all of your Pokémon that is currently implemented even outside of Demo Mode.
+- Implement a temporary blockade similar to Blue at the West exit to the East (and possibly North) exit of Silent Hill. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
+- Re-enable Pokémon Center features in Silent Hill
+  - Re-enable healing feature
+  - Re-enable the PC features
+- Disable the game reset after all of your Pokémon that is currently implemented even outside of Demo Mode
 
 ## Stretch Goal Changes
-- Enable the ability to enter all Pokémon Centers within the game as well as both healing and PC boxes if possible.
-- Enable the ability to enter and purchase from PokéMarts everywhere in the game if possible.
-- English translation. (This is almost a zero percent chance thanks to my limited skillset but I am very much open to help with this as well as any of the other features listed above)
+- Enable the ability to enter all Pokémon Centers within the game as well as both healing and PC boxes if possible
+- Enable the ability to enter and purchase from PokéMarts everywhere in the game if possible
+- English translation (This is almost a zero percent chance thanks to my limited skillset but I am very much open to help with this as well as any of the other features listed above)
 - If I can either get the help or learn enough to do all of the above features, I would like to maybe make a separate version of the patch that would essentially be a Gold 97 Reforged situation. Though this would require a lot of additional research into as much info that can be found about the original plans for Generation 2 prior to them being scrapped for the versions that were officially released to us.
 
 ## CONTRIBUTIONS EXTREMELY WELCOMED!
