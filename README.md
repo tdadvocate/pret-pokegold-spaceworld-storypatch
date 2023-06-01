@@ -10,14 +10,19 @@ At the very bottom of this README, you will find the original README provided on
 - Implemented Rival battle
   - The Rival's name is currently messed up (Shows the text of "<rival's name>'s has started a battle!") but attempting to fix this later
 - Removed the demo barricades at the North and East exits of Silent Hill
+- Changed start menu to show the save option
+  - Save does not actually work at this moment in time
+- Added in Field Debug Menu (Activated by holding B and Start at the same time)
+  - This allows users to heal their party as well as some other features
 
 ## Currently Planned Changes
-- Enable proper start menu so that the player can save the game
 - Implement a temporary blockade similar to Blue at the West exit to the East (and possibly North) exit of Silent Hill. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
 - Re-enable Pokémon Center features in Silent Hill
   - Re-enable healing feature
   - Re-enable the PC features
 - Disable the game reset after all of your Pokémon that is currently implemented even outside of Demo Mode
+- Fix start menu to actually update with the story mode flags
+- Fix the save feature to actually be functional
 
 ## Stretch Goal Changes
 - Enable the ability to enter all Pokémon Centers within the game as well as both healing and PC boxes if possible
