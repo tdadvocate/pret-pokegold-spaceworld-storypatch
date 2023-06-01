@@ -12,7 +12,7 @@ OverworldStartButtonCheck::
 	jr nz, .regularMenu
 	ld a, [wDebugFlags]
 	bit DEBUG_FIELD_F, a
-	ret z              ; debug disabled
+	ret c ; changed from z to c to enable the debug menu
 	callba FieldDebugMenu
 	jr CheckStartmenuSelectHook
 .regularMenu
