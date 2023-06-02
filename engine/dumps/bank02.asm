@@ -37,9 +37,9 @@ Function8047:
 	ld a, $01
 	ld hl, Data805d
 	call Function1656
-	ld a, [wPlayerNextMapX]
+	ld a, [wPlayerMapX]
 	ld [wMap1ObjectXCoord], a
-	ld a, [wPlayerNextMapY]
+	ld a, [wPlayerMapY]
 	dec a
 	ld [wMap1ObjectYCoord], a
 	ret
@@ -71,84 +71,95 @@ Data8089:
 
 _InitializeVisibleSprites:
 	ld bc, wMap2Object
-	ld a, $02
-.sub_809d
+	ld a, 2
+.loop
 	ldh [hConnectionStripLength], a
-	ld hl, $0001
+	ld hl, MAPOBJECT_SPRITE
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .sub_80dc
-	ld hl, $0000
+	jr z, .next
+
+	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
 	add hl, bc
 	ld a, [hl]
-	cp $ff
-	jr nz, .sub_80dc
+	cp -1
+	jr nz, .next
+
 	ld a, [wXCoord]
 	ld d, a
 	ld a, [wYCoord]
 	ld e, a
-	ld hl, $0003
+
+	ld hl, MAPOBJECT_X_COORD
 	add hl, bc
 	ld a, [hl]
-	add $01
+	add 1
 	sub d
-	jr c, .sub_80dc
-	cp $0c
-	jr nc, .sub_80dc
-	ld hl, $0002
+	jr c, .next
+
+	cp MAPOBJECT_SCREEN_WIDTH
+	jr nc, .next
+
+	ld hl, MAPOBJECT_Y_COORD
 	add hl, bc
 	ld a, [hl]
-	add $01
+	add 1
 	sub e
-	jr c, .sub_80dc
-	cp $0b
-	jr nc, .sub_80dc
+	jr c, .next
+
+	cp MAPOBJECT_SCREEN_HEIGHT
+	jr nc, .next
+
 	push bc
 	call Function80eb
 	pop bc
-	jp c, Function80ea
-.sub_80dc
-	ld hl, $0010
+	jp c, .ret
+
+.next
+	ld hl, MAPOBJECT_LENGTH
 	add hl, bc
 	ld b, h
 	ld c, l
 	ldh a, [hConnectionStripLength]
 	inc a
-	cp $10
-	jr nz, .sub_809d
+	cp NUM_OBJECTS
+	jr nz, .loop
 	ret
 
-Function80ea:
+.ret:
 	ret
 
 Function80eb:
 	call Function811a
 	and a
-	ret nz
+	ret nz ; masked
+
 	ld hl, wObject1StructEnd
 	ld a, $03
-	ld de, $0028
-.sub_80f8
+	ld de, OBJECT_LENGTH
+.loop
 	ldh [hConnectedMapWidth], a
 	ld a, [hl]
 	and a
-	jr z, .sub_8108
+	jr z, .done
 	add hl, de
 	ldh a, [hConnectedMapWidth]
 	inc a
-	cp $0a
-	jr nz, .sub_80f8
+	cp NUM_OBJECT_STRUCTS
+	jr nz, .loop
 	scf
-	ret
-.sub_8108
+	ret ; overflow
+
+.done
 	ld d, h
 	ld e, l
 	call Function813d
 	ld a, [wVramState]
 	bit 7, a
 	ret z
-	ld hl, $0005
+
+	ld hl, OBJECT_FLAGS2
 	add hl, de
 	set 5, [hl]
 	ret
@@ -629,7 +640,7 @@ Function83e8:
 	ld a, [hl]
 	ld l, a
 	ld h, $00
-	ld de, Table83fb
+	ld de, .Table83fb
 	add hl, hl
 	add hl, de
 	ld e, [hl]
@@ -639,133 +650,128 @@ Function83e8:
 	push de
 	ret
 
-Table83fb:
-	dw Function8432
-	dw Function844a
-	dw Function8459
-	dw Function8433
-	dw Function8438
-	dw Function843d
-	dw Function8468
-	dw Function8477
-	dw Function8485
-	dw Function848b
-	dw Function8494
-	dw Function849b
-	dw Function84a9
-	dw Function84af
-	dw Function84b8
+.Table83fb:
+	dw .LoadDone
+	dw .LoadJumpShadow
+	dw .LoadUnknownBouncingOrb
+	dw .LoadShockEmote
+	dw .LoadQuestionEmote
+	dw .LoadHappyEmote
+	dw .LoadBoulderDust
+	dw .LoadGrampsSpriteStandPt0
+	dw .LoadGrampsSpriteStandPt1
+	dw .LoadGrampsSpriteWalkPt0
+	dw .LoadGrampsSpriteWalkPt1
+	dw .LoadClefairySpriteStandPt0
+	dw .LoadClefairySpriteStandPt1
+	dw .LoadClefairySpriteWalkPt0
+	dw .LoadClefairySpriteWalkPt1
 
-Function8419:
+.FarCopy:
 	ld a, c
 	ld [wVBCopyFarSrcBank], a
 	ld a, l
 	ld [wVBCopyFarSrc], a
 	ld a, h
 	ld [wVBCopyFarSrc+1], a
-
-Function8425:
+.ContinueFarCopyNewDst:
 	ld a, e
 	ld [wVBCopyFarDst], a
 	ld a, d
 	ld [wVBCopyFarDst+1], a
-
-Function842d:
+.ContinueFarCopy:
 	ld a, b
 	ld [wVBCopyFarSize], a
 	ret
 
-Function8432:
+.LoadDone:
 	ret
 
-Function8433:
+.LoadShockEmote:
 	ld hl, ShockEmoteGFX
-	jr Function8440
-
-Function8438:
+	jr .load_emote
+.LoadQuestionEmote:
 	ld hl, QuestionEmoteGFX
-	jr Function8440
-
-Function843d:
+	jr .load_emote
+.LoadHappyEmote:
 	ld hl, HappyEmoteGFX
-
-Function8440:
+.load_emote:
 	ld de, vChars1 + $780
-	ld b, $04
-	ld c, BANK(HappyEmoteGFX)
-	jp Function8419
+	ld b, (HappyEmoteGFX.end - HappyEmoteGFX) / LEN_2BPP_TILE
+	ld c, BANK(EmoteGFX)
+	jp .FarCopy
 
-Function844a:
+.LoadJumpShadow:
 	ld [hl], $00
 	ld hl, JumpShadowGFX
 	ld de, vChars1 + $7c0
-	ld b, $01
+	ld b, (JumpShadowGFX.end - JumpShadowGFX) / LEN_2BPP_TILE
 	ld c, BANK(JumpShadowGFX)
-	jp Function8419
+	jp .FarCopy
 
-Function8459:
+.LoadUnknownBouncingOrb:
 	ld [hl], $00
 	ld hl, UnknownBouncingOrbGFX
 	ld de, vChars1 + $7c0
-	ld b, $04
+	ld b, (UnknownBouncingOrbGFX.end - UnknownBouncingOrbGFX) / LEN_2BPP_TILE
 	ld c, BANK(UnknownBouncingOrbGFX)
-	jp Function8419
+	jp .FarCopy
 
-Function8468:
+.LoadBoulderDust:
 	ld [hl], $00
-	ld hl, UnknownBallGFX
+	ld hl, BoulderDustGFX
 	ld de, vChars1 + $7c0
-	ld b, $01
-	ld c, BANK(UnknownBallGFX)
-	jp Function8419
+	ld b, (BoulderDustGFX.end - BoulderDustGFX) / LEN_2BPP_TILE
+	ld c, BANK(BoulderDustGFX)
+	jp .FarCopy
 
-Function8477:
+.LoadGrampsSpriteStandPt0:
 	inc [hl]
 	ld hl, GrampsSpriteGFX
 	ld de, vChars0
-	ld b, $06
+	ld b, (GrampsSpriteGFX.end - GrampsSpriteGFX) / LEN_2BPP_TILE / 4
 	ld c, BANK(GrampsSpriteGFX)
-	jp Function8419
+	jp .FarCopy
 
-Function8485:
+.LoadGrampsSpriteStandPt1:
 	inc [hl]
-	ld b, $06
-	jp Function842d
+	ld b, (GrampsSpriteGFX.end - GrampsSpriteGFX) / LEN_2BPP_TILE / 4
+	jp .ContinueFarCopy
 
-Function848b:
+.LoadGrampsSpriteWalkPt0:
 	inc [hl]
 	ld de, vChars1
-	ld b, $06
-	jp Function8425
+	ld b, (GrampsSpriteGFX.end - GrampsSpriteGFX) / LEN_2BPP_TILE / 4
+	jp .ContinueFarCopyNewDst
 
-Function8494:
+.LoadGrampsSpriteWalkPt1:
 	ld [hl], $00
-	ld b, $06
-	jp Function842d
+	ld b, (GrampsSpriteGFX.end - GrampsSpriteGFX) / LEN_2BPP_TILE / 4
+	jp .ContinueFarCopy
 
-Function849b:
+.LoadClefairySpriteStandPt0:
 	inc [hl]
 	ld hl, ClefairySpriteGFX
 	ld de, vChars0
-	ld b, $06
+	ld b, (ClefairySpriteGFX.end - ClefairySpriteGFX) / LEN_2BPP_TILE / 4
 	ld c, BANK(ClefairySpriteGFX)
-	jp Function8419
+	jp .FarCopy
 
-Function84a9:
+.LoadClefairySpriteStandPt1:
 	inc [hl]
-	ld b, $06
-	jp Function842d
+	ld b, (ClefairySpriteGFX.end - ClefairySpriteGFX) / LEN_2BPP_TILE / 4
+	jp .ContinueFarCopy
 
-Function84af:
+.LoadClefairySpriteWalkPt0:
 	inc [hl]
 	ld de, vChars1
-	ld b, $06
-	jp Function8425
+	ld b, (ClefairySpriteGFX.end - ClefairySpriteGFX) / LEN_2BPP_TILE / 4
+	jp .ContinueFarCopyNewDst
 
-Function84b8:
+.LoadClefairySpriteWalkPt1:
 	ld [hl], $00
-	ld b, $06
-	jp Function842d
+	ld b, (ClefairySpriteGFX.end - ClefairySpriteGFX) / LEN_2BPP_TILE / 4
+	jp .ContinueFarCopy
 
 SECTION "engine/dumps/bank02.asm@QueueFollowerFirstStep", ROMX
 

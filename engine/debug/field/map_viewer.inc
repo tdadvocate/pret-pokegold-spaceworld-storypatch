@@ -329,7 +329,7 @@ DebugMapViewer_ReplacePlayerObject:
 	ld a, 1
 	call Function1908
 	ld bc, wObjectStructs
-	ld hl, OBJECT_FLAGS
+	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	set 3, [hl]
 	set 2, [hl]
@@ -337,7 +337,6 @@ DebugMapViewer_ReplacePlayerObject:
 	ret
 
 Datafd044:
-_NUM_OBJECT_EVENTS = 0
 	object_event -4, -4, SPRITE_GOLD, $17, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0
 	ds 2
 
