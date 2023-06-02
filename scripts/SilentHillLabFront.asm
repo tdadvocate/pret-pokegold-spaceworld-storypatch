@@ -557,7 +557,7 @@ SilentHillLabFrontScript17:
 	ld hl, wNumBagItems
 	ld a, 5
 	ld [wCurItem], a
-	ld a, 6
+	ld a, 999 ; changed from 6 (this is so that players can shiny hunt more safely for now
 	ld [wItemQuantity], a
 	call ReceiveItem
 	call Function20f8

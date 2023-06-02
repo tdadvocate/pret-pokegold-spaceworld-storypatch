@@ -15,7 +15,7 @@ PokemonCenterPC:
 
 	ld a, [wDebugFlags]
 	bit 1, a
-	jp z, PC_Demo
+;	jp z, PC_Demo commenting out allows the debug menu PC button to get to actually function outside of the Field Debug Mode but shows same message as in Demo Mode
 	call PC_PlayBootSound
 
 ; Return if there are no mons in party
@@ -27,8 +27,9 @@ PokemonCenterPC:
 	ld hl, wDebugFlags
 	bit 1, [hl]
 	jr nz, .DisplayMenu
-	ld hl, .NotConnectedText
-	call MenuTextBoxBackup
+;	ld hl, .NotConnectedText ; commented out to allow partially functioning debug PC menu
+;	call MenuTextBoxBackup ; commented out to allow partially functioning debug PC menu
+	call BillsPC ; switched from MenuTextBoxBackup to BillsPC to create a partially functioning debug PC menu
 	ret
 
 .NotConnectedText:
