@@ -126,7 +126,7 @@ $(BUILD)/%.tilemap: %.png | $$(dir $$@)
 
 .PRECIOUS: $(BUILD)/%.sgb.tilemap
 $(BUILD)/%.sgb.tilemap: %.bin | $$(dir $$@)
-	tr < $< -d '\000' > $@
+	tr < $< -d '0' > $@
 
 .PRECIOUS: %/
 %/:

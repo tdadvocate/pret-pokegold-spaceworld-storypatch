@@ -52,7 +52,7 @@ SilentHillPokecenterNPCText1:
 	call OpenTextbox
 	ret
 
-SilentHillPokecenterTextString2:
+SilentHillPokecenterTextString2: ; Nurse Demo text string
 	text "もうしわけありませんが"
 	line "ただいま　しゅうりちゅう　でして"
 
