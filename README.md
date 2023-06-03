@@ -14,6 +14,21 @@ At the very bottom of this README, you will find the original README provided on
   - Save does not actually work at this moment in time
 - Added in Field Debug Menu (Activated by holding B and Start at the same time)
   - This allows users to heal their party as well as some other features
+- Added partial support for the Debug Menu version of Bill's PC
+  - This will crash the game if accessed before getting your starter Pokémon
+  - There is only one box with roughly 20 spaces but the release feature does function properly from my limited testing
+- Adjusted the amount of PokéBalls that Nanami gives you after you defeat your rival from 6 to 99
+  - Her dialogue still states that she is giving you 6 because this is only temporary while I work on better systems of implementation for getting items
+
+## KNOWN BUGS
+- Opening the Debug Menu version of Bill's PC before getting your starter Pokémon will cause the game to crash
+- Nanami's dialogue incorrectly states that she is giving you 6 PokéBalls because the 99 she gives you is a temporary workaround
+- Encountering a wild Pokémon to the East (and possibly North) of Silent Hills before receiving your starter will cause a soft lock that requires a restart to resolve.
+- Rival battle has incorrect intro text
+- All of you Pokémon fainting will cause the game to reset.
+- Currently no way of acquiring more items besides the few PokéBalls that the player receives after defeating their Rival.
+- Save does not currently function
+- Start menu does not update along with the story flags being achieved
 
 ## Currently Planned Changes
 - Implement a temporary blockade similar to Blue at the West exit to the East (and possibly North) exit of Silent Hill. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.

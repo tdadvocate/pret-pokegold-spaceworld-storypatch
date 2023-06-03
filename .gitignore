@@ -24,4 +24,4 @@ __pycache__
 /coverage.png
 
 # MacOS Garbage
-*.ds_store
+.DS_Store
