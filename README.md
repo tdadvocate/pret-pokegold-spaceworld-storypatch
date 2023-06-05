@@ -19,8 +19,15 @@ At the very bottom of this README, you will find the original README provided on
   - There is only one box with roughly 20 spaces but the release feature does function properly from my limited testing
 - Adjusted the amount of PokéBalls that Nanami gives you after you defeat your rival from 6 to 99
   - Her dialogue still states that she is giving you 6 because this is only temporary while I work on better systems of implementation for getting items
+- Removed locked door text for Oak's Lab so that the player may now enter freely
+- Made the forced Rival end demo text at the end of Route 1 not trigger automatically
+  - Talking to the Rival will cause the dialogue to trigger as normal and send the player back to the title screen (need a better solution)
+- Implemented the Continue Game option on the title screen
+  - Selecting this option without having saved before will cause the game to crash
 
 ## KNOWN BUGS
+- Selecting the Continue Game option on the title screen without having a save made will cause the game to crash
+- Talking to the rival at the end of Route 1 will still trigger the end demo dialogue and reset the game
 - Opening the Debug Menu version of Bill's PC before getting your starter Pokémon will cause the game to crash
 - Nanami's dialogue incorrectly states that she is giving you 6 PokéBalls because the 99 she gives you is a temporary workaround
 - Encountering a wild Pokémon to the East (and possibly North) of Silent Hills before receiving your starter will cause a soft lock that requires a restart to resolve.
@@ -37,7 +44,7 @@ At the very bottom of this README, you will find the original README provided on
   - Re-enable the PC features
 - Disable the game reset after all of your Pokémon that is currently implemented even outside of Demo Mode
 - Fix start menu to actually update with the story mode flags
-- Fix the save feature to actually be functional
+- Fix the title menu to show Continue Game only after the player saves the game at least once
 
 ## Stretch Goal Changes
 - Enable the ability to enter all Pokémon Centers within the game as well as both healing and PC boxes if possible

@@ -145,7 +145,7 @@ MainMenuHeader:
 .MenuData:
 	db $80
 	db 0 ; items
-	dw MainMenuItems
+	dw ContinueMenu ; changed from MainMenuItems to force the continue screen to show
 	db $8a, $1f ; effects the text displayed on the menu screen
 	dw .Strings
 

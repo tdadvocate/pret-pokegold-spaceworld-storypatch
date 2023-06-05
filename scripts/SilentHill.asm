@@ -50,7 +50,7 @@ SilentHillScriptPointers6:
 	dw SilentHillNPCIDs2
 
 SilentHillScriptPointers7:
-	dw SilentHillScript7
+;	dw SilentHillScript7 ; Commenting out to remove the demo lockout from Oak's lav
 	dw SilentHillNPCIDs2
 
 SilentHillScript1:
