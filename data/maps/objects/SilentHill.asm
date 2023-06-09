@@ -16,6 +16,7 @@ SilentHill_MapEvents::
 	warp_event  3, 12, SILENT_HILL_HOUSE, 1, 114
 	warp_event 14, 11, SILENT_HILL_LAB_FRONT, 1, 104
 	warp_event 15, 11, SILENT_HILL_LAB_FRONT, 2, 104
+;"tell game it is warp" "spaces from left", "spaces from right", "map to load", "not sure". "not sure"
 
 	def_bg_events
 	bg_event  8,  4, 1

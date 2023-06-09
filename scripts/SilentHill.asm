@@ -50,7 +50,7 @@ SilentHillScriptPointers6:
 	dw SilentHillNPCIDs2
 
 SilentHillScriptPointers7:
-;	dw SilentHillScript7 ; Commenting out to remove the demo lockout from Oak's lav
+	dw SilentHillScript7 ; had to add back this lab lockout as it is causing crashes after defeating the rival for some reason now
 	dw SilentHillNPCIDs2
 
 SilentHillScript1:
