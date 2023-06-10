@@ -19,11 +19,12 @@ At the very bottom of this README, you will find the original README provided on
   - There is only one box with roughly 20 spaces but the release feature does function properly from my limited testing
 - Adjusted the amount of PokéBalls that Nanami gives you after you defeat your rival from 6 to 99
   - Her dialogue still states that she is giving you 6 because this is only temporary while I work on better systems of implementation for getting items
-- Removed locked door text for Oak's Lab so that the player may now enter freely
 - Made the forced Rival end demo text at the end of Route 1 not trigger automatically
   - Talking to the Rival will cause the dialogue to trigger as normal and send the player back to the title screen (need a better solution)
 - Implemented the Continue Game option on the title screen
   - Selecting this option without having saved before will cause the game to crash
+- Added proper collision data for Old City, West (City), Baadon (City), all of their connecting routes (that share the same tilesets), and all route gates
+  - This opens up roughly 30-40% of the map as mostly functional (including wild Pokémon but not including scripts after Route 1 Gate to Old City)
 
 ## KNOWN BUGS
 - Selecting the Continue Game option on the title screen without having a save made will cause the game to crash
@@ -38,6 +39,7 @@ At the very bottom of this README, you will find the original README provided on
 - Start menu does not update along with the story flags being achieved
 
 ## Currently Planned Changes
+- Remove locked door text for Oak's Lab so that the player may enter freely
 - Implement a temporary blockade similar to Blue at the West exit to the East (and possibly North) exit of Silent Hill. If you encounter a wild Pokémon before receiving your starter, the game will soft lock and require a restart.
 - Re-enable Pokémon Center features in Silent Hill
   - Re-enable healing feature
