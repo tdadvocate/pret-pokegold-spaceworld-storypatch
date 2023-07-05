@@ -73,16 +73,16 @@ Please feel free to help with this as much as you want. I am doing this solo as 
 ## Clean Setup Instructions
 Please note, this is only tested with a clean install of macOS Mojave (10.14.6) and may not be the same process for other macOS. This version was used as it is the most recent version of macOS that still supports 32-bit applications. This is helpful for tools like polished-map which will require Wine to be able to run them for map editing.
 
-1) Install Homebrew following this link [**Homebrew Install**]
-2) Install the latest supported version of Xcode Command Line Tools from this link [**Command Line Tools**]
+1) Install Homebrew following this tutorial [**Homebrew Install**]
+2) Install the latest supported version of [**Xcode Command Line Tools**]
 3) Install the latest version of RGBDS from [**rgbds Install**]
-4a) Download and install VSCode from here [**Visual Studio Code**]
-4b) You may also use [**Sublime Text Editor**] but I personally recommend VSCode for the easiest time
+4) (RECOMMENDED) Download and install [**Visual Studio Code**]
+4) (ALTERNATIVE) Download and install [**Sublime Text Editor**]
 5) Install [**WineHQ**]
 6) Download and install [polished-map] to run via WineHQ
 
 [**Homebrew Install**]: https://ralphjsmit.com/install-homebrew-macos
-[**Command Line Tools**]: https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_for_Xcode_11.3.1/Command_Line_Tools_for_Xcode_11.3.1.dmg
+[**Xcode Command Line Tools**]: https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_for_Xcode_11.3.1/Command_Line_Tools_for_Xcode_11.3.1.dmg
 [**WineHQ**]: https://wiki.winehq.org/MacOS
 [polished-map]: https://github.com/Rangi42/polished-map/releases
 
