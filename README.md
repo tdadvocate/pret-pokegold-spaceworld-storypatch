@@ -70,21 +70,41 @@ Please feel free to help with this as much as you want. I am doing this solo as 
 [**Visual Studio Code**]: https://code.visualstudio.com/
 [**VSCode Assembly Syntax Highlight**]: https://marketplace.visualstudio.com/items?itemName=Toeffe3.asm-syntaxhighlight
 
-## Clean Setup Instructions
-Please note, this is only tested with a clean install of macOS Mojave (10.14.6) and may not be the same process for other macOS. This version was used as it is the most recent version of macOS that still supports 32-bit applications. This is helpful for tools like polished-map which will require Wine to be able to run them for map editing.
+## macOS Mojave (10.14.6) Clean Setup Instructions
+Please note, this is only tested with a clean install of macOS Mojave (10.14.6) on a 2018 MacBook Pro 15" with the following specs (CPU: 2.6 GHz Intel Core i7)(RAM: 16 GB 2400 MHz DDR4)(GPU: Intel UHD Graphics 630 1536 MB) (mores specs here [**Models**]) using an external SSD setup and may not be the same process for other macOS or Mac Hardware. This version was used as it is the most recent version of macOS that still supports 32-bit applications. This is helpful for tools like polished-map which will require Wine to be able to run them for map editing.
 
-1) Install Homebrew following this tutorial [**Homebrew Install**]
-2) Install the latest supported version of [**Xcode Command Line Tools**]
-3) Install the latest version of RGBDS from [**rgbds Install**]
-4) (RECOMMENDED) Download and install [**Visual Studio Code**]
-4) (ALTERNATIVE) Download and install [**Sublime Text Editor**]
-5) Install [**WineHQ**]
-6) Download and install [polished-map] to run via WineHQ
+1) Download Xcode 11.3.1 from [**All Dev Downloads**]
+2) Extract "Xcode_11.3.1.xip" to get the Xcode application
+3) Move the Xcode application to your "Applications" folder
+4) Run Xcode, read and agree to the terms of service, make sure it downloads all the necessary requirements
+5) Install Homebrew following this tutorial [**Homebrew Install**] but ignore the first section about the Command Line Tools as this installs the wrong version and might not even be necessary since you already have Xcode installed and that should also automatically install the Command Line Tools that are needed
+6) Install [**make**] as it is required by RGBDS
+7) Install [**gcc**] as it is required by RGBDS
+8) Install [**bison**] as it is required by RGBDS
+9) Open a Terminal window and run the following command without the quotation marks: "cp /usr/local/opt/bison/bin/bison /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bison"
+10) Install [**pkg-config**] as it is required by RGBDS
+11) Download [**RGBDS 0.6.1**] for manual building
+12) Extract "rgbds-0.6.1-macos-x86-64.zip" inside of your Downloads folder
+13) In your Terminal window, CD to the root directory of the extracted folder
+14) In your Terminal window, type "sh" (without the quotations) and then drag and drop the file named "install.sh" into your terminal window
+15) Download and install [**Visual Studio Code**]
+16) Download and install (insert text format reader name here later)
+17) Install [**WineHQ**]
+18) Download and install [**polished-map**] to run via WineHQ
+19) In your Terminal window, CD to the root directory of the project
+20) In your Terminal window, run the following command without the quotation marks: "gmake"
+21) If you get an error stating "gmake: *** [Makefile:129: build/gfx/sgb/sgb_border.sgb.tilemap] Error 1", running the gmake command a second time seems to fix the issue
 
+[**All Dev Downloads**]: https://developer.apple.com/download/all/
 [**Homebrew Install**]: https://ralphjsmit.com/install-homebrew-macos
-[**Xcode Command Line Tools**]: https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_for_Xcode_11.3.1/Command_Line_Tools_for_Xcode_11.3.1.dmg
+[**RGBDS 0.6.1**]: https://github.com/gbdev/rgbds/releases/v0.6.1#:~:text=rgbds%2D0.6.1%2Dmacos%2Dx86%2D64.zip
+[**make**]: https://formulae.brew.sh/formula/make
+[**gcc**]: https://formulae.brew.sh/formula/gcc#default
+[**bison**]: https://formulae.brew.sh/formula/bison#default
+[**pkg-config**]: https://formulae.brew.sh/formula/pkg-config
 [**WineHQ**]: https://wiki.winehq.org/MacOS
-[polished-map]: https://github.com/Rangi42/polished-map/releases
+[**polished-map**]: https://github.com/Rangi42/polished-map/releases
+[**Models**]: https://support.apple.com/kb/SP776?viewlocale=en_US&locale=en_US
 
 # Original PRET README for the repository
 
