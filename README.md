@@ -83,17 +83,18 @@ Please note, this is only tested with a clean install of macOS Mojave (10.14.6) 
 8) Install [**bison**] as it is required by RGBDS
 9) Open a Terminal window and run the following command without the quotation marks: "cp /usr/local/opt/bison/bin/bison /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bison"
 10) Install [**pkg-config**] as it is required by RGBDS
-11) Download [**RGBDS 0.6.1**] for manual building
-12) Extract "rgbds-0.6.1-macos-x86-64.zip" inside of your Downloads folder
-13) In your Terminal window, CD to the root directory of the extracted folder
-14) In your Terminal window, type "sh" (without the quotations) and then drag and drop the file named "install.sh" into your terminal window
-15) Download and install [**Visual Studio Code**]
-16) Download and install (insert text format reader name here later)
-17) Install [**WineHQ**]
-18) Download and install [**polished-map**] to run via WineHQ
-19) In your Terminal window, CD to the root directory of the project
-20) In your Terminal window, run the following command without the quotation marks: "gmake"
-21) If you get an error stating "gmake: *** [Makefile:129: build/gfx/sgb/sgb_border.sgb.tilemap] Error 1", running the gmake command a second time seems to fix the issue
+11) Download and install [**Python 3**] so that you may compile everything properly
+12) Download [**RGBDS 0.6.1**] for manual building
+13) Extract "rgbds-0.6.1-macos-x86-64.zip" inside of your Downloads folder
+14) In your Terminal window, CD to the root directory of the extracted folder
+15) In your Terminal window, type "sh" (without the quotations) and then drag and drop the file named "install.sh" into your terminal window
+16) Download and install [**Visual Studio Code**]
+17) Download and install (insert text format reader name here later)
+18) Install [**WineHQ**]
+19) Download and install [**polished-map**] to run via WineHQ
+20) In your Terminal window, CD to the root directory of the project
+21) In your Terminal window, run the following command without the quotation marks: "gmake"
+22) If you get an error stating "gmake: *** [Makefile:129: build/gfx/sgb/sgb_border.sgb.tilemap] Error 1", running the gmake command a second time seems to fix the issue
 
 [**All Dev Downloads**]: https://developer.apple.com/download/all/
 [**Homebrew Install**]: https://ralphjsmit.com/install-homebrew-macos
@@ -102,6 +103,7 @@ Please note, this is only tested with a clean install of macOS Mojave (10.14.6) 
 [**gcc**]: https://formulae.brew.sh/formula/gcc#default
 [**bison**]: https://formulae.brew.sh/formula/bison#default
 [**pkg-config**]: https://formulae.brew.sh/formula/pkg-config
+[**Python 3**]: https://www.python.org/downloads/
 [**WineHQ**]: https://wiki.winehq.org/MacOS
 [**polished-map**]: https://github.com/Rangi42/polished-map/releases
 [**Models**]: https://support.apple.com/kb/SP776?viewlocale=en_US&locale=en_US
