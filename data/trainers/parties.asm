@@ -165,13 +165,13 @@ GamaGroup::
 	db 37, MON_GROWLITHE, MON_VULPIX, 0
 
 RivalGroup::
-	db "", TRAINERTYPE_NORMAL ;	used to be db  5, DEX_KURUSU,0
+	db "@", TRAINERTYPE_NORMAL ;	used to be db  5, DEX_KURUSU,0
 	db  5, DEX_KURUSU
 	db -1 ; end
-	db "", TRAINERTYPE_NORMAL ;	used to be db  5, DEX_HAPPA,0
+	db "@", TRAINERTYPE_NORMAL ;	used to be db  5, DEX_HAPPA,0
 	db  5, DEX_HAPPA
 	db -1 ; end
-	db "", TRAINERTYPE_NORMAL ;	used to be db  5, DEX_HONOGUMA,0
+	db "@", TRAINERTYPE_NORMAL ;	used to be db  5, DEX_HONOGUMA,0
 	db  5, DEX_HONOGUMA
 	db -1 ; end
 ; Leftover Hiker data from Red/Blue
