@@ -26,10 +26,11 @@ PokemonCenterPC:
 	call MenuTextBoxBackup
 	ld hl, wDebugFlags
 	bit 1, [hl]
-	jr nz, .DisplayMenu
+	jp z, .DisplayMenu
+;	jr nz, .DisplayMenu
 ;	ld hl, .NotConnectedText ; commented out to allow partially functioning debug PC menu
 ;	call MenuTextBoxBackup ; commented out to allow partially functioning debug PC menu
-	call BillsPC ; switched from MenuTextBoxBackup to BillsPC to create a partially functioning debug PC menu
+;	call BillsPC ; switched from MenuTextBoxBackup to BillsPC to create a partially functioning debug PC menu
 	ret
 
 .NotConnectedText:
