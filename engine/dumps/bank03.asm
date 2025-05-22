@@ -2474,6 +2474,18 @@ Texte461:
 	db "№．０９　@"
 	db "№．１０　@"
 
+; Old Texte461 code wanna look into before removing
+;	db "・．０１　@"
+;	db "・．０２　@"
+;	db "・．０３　@"
+;	db "・．０４　@"
+;	db "・．０５　@"
+;	db "・．０６　@"
+;	db "・．０７　@"
+;	db "・．０８　@"
+;	db "・．０９　@"
+;	db "・．１０　@"
+
 Functione49d: ; change box screen items
 	ld h, d
 	ld l, e

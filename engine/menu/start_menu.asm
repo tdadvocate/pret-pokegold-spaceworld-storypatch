@@ -76,15 +76,15 @@ DisplayStartMenu:
 	dw .Strings
 
 .Strings:
-	db "ずかん@"
-	db "ポケモン@"
-	db "りュック@"
-	db "<PLAYER>@"
-	db "レポート@"
-	db "せってい@"
-	db "とじる@"
-	db "わくせん@"
-	db "りセット@"
+	db "ずかん@" ; Pokedex
+	db "ポケモン@" ; Pokemon
+	db "りュック@" ; Bag (Lit: Rucksack)
+	db "<PLAYER>@" ; Player's Trainer Card
+	db "レポート@" ; Save (Lit: Report)
+	db "せってい@" ; Settings
+	db "とじる@" ; Close 
+	db "わくせん@" ; Set Frame (This is a guess based on surrounding code context clues as I have never seen this word before)
+	db "りセット@" ; Reset
 
 StartMenuJumpTable:
 	dw StartMenu_Pokedex
@@ -146,7 +146,7 @@ GetStartMenuState:
 ; based on story flags and debug mode.
 ; 4 = debug, 3 = starting, 2 = rival beat in lab
 ; 1 = pokedex recieved, 0 = chose starter
-	ld b, 4
+	ld b, 3 ; Changed from debug flag 4 to story flag 3 for full start menu (note: 0 technically should be what is used but the game does not appear to properly either set or refresh the flag counter to update the start menu as you progress through the story. Not sure which exactly.)
 	ld hl, wDebugFlags
 	bit DEBUG_FIELD_F, [hl]
 	jr z, .store

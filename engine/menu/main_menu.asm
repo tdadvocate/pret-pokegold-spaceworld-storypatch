@@ -120,11 +120,11 @@ MainMenu::
 	ldh a, [hJoyState]
 	and D_DOWN | B_BUTTON | A_BUTTON
 	cp D_DOWN | B_BUTTON | A_BUTTON
-	jr nz, .setMenuPlay
+	jr nz, .setMenuNew ; changed from .setMenuPlay to help for context
 	ld a, M_SET_TIME
 	jr .triggerMenu
-.setMenuPlay
-	ld a, M_PLAY_GAME
+.setMenuNew ; changed from .setMenuPlay to help for context
+	ld a, M_NEW_GAME ; changed from M_PLAY_GAME to mimic what a production copy would have
 .triggerMenu
 	ld [wWhichIndexSet], a
 	ld hl, MainMenuHeader
@@ -140,21 +140,21 @@ MainMenuHeader:
 	db MENU_BACKUP_TILES
 	menu_coords 0, 0, 13, 7
 	dw .MenuData
-	db 1 ; default option
+	db 1 ; default option (which menu item is highlighted after leaving title screen)
 
 .MenuData:
 	db $80
 	db 0 ; items
-	dw MainMenuItems
-	db $8a, $1f
+	dw ContinueMenu ; changed from MainMenuItems to force the continue screen to show
+	db $8a, $1f ; effects the text displayed on the menu screen
 	dw .Strings
 
 .Strings:
-	db "つづきから　はじめる@"
-	db "さいしょから　はじめる@"
-	db "せっていを　かえる@"
-	db "#を　あそぶ@"
-	db "じかんセット@"
+	db "つづきから　はじめる@" ; Continue Game
+	db "さいしょから　はじめる@" ; New Game
+	db "せっていを　かえる@" ; Settings
+	db "#を　あそぶ@" ; Play Pokemon
+	db "じかんセット@" ; Set Time
 
 MainMenuJumptable:
 	dw MainMenuOptionContinue
@@ -282,9 +282,9 @@ PrintPlayTime::
 
 PlayerInfoText:
 	db   "しゅじんこう"
-	next "もっているバッジ　　　　こ"
+	next "もっているバッジ　　　　こ" ; Badges (lit: Badges being carried)
 	next "#ずかん　　　　ひき"
-	next "プレイじかん"
+	next "プレイじかん" ; Time (lit: Play Time)
 	text_end
 
 StartNewGame::
@@ -302,6 +302,6 @@ StartNewGame::
 	ldh [hMapAnims], a
 	ld a, [wDebugFlags]
 	bit DEBUG_FIELD_F, a
-	jp z, DemoStart
+	jp z, GameStart ; changed from DemoStart to switch from Demo Mode to Story Mode
 	call DebugSetUpPlayer
 	jp IntroCleanup
