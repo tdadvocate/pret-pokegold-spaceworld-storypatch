@@ -10,19 +10,19 @@ GetPartyParamLocation::
 	ld b, 0
 	add hl, bc
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wWhichPokemon]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	pop bc
 	ret
 
 UseItem::
-	jpba _UseItem
+	farjp _UseItem
 
 CheckTossableItem::
 	push hl
 	push de
 	push bc
-	callab _CheckTossableItem
+	callfar _CheckTossableItem
 	pop bc
 	pop de
 	pop hl
@@ -76,12 +76,12 @@ GetBattleAnimByte::
 	ret
 
 InitSpriteAnimStruct::
-	ld [wSpriteAnimIDBuffer], a
+	ld [wSpriteAnimAddrBackup], a
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_InitSpriteAnimStruct)
 	call Bankswitch
-	ld a, [wSpriteAnimIDBuffer]
+	ld a, [wSpriteAnimAddrBackup]
 	call _InitSpriteAnimStruct
 	pop af
 	call Bankswitch

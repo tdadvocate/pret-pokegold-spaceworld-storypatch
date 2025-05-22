@@ -39,7 +39,7 @@ LoadSGBLayout:
 	dw SGB_TrainerCard
 	dw SGB_MoveList
 	dw SGB_PikachuMinigame
-	dw SGB_PokedexSelection
+	dw SGB_Pokedex_WaitBGMap
 	dw SGB_Poker
 	dw SGB12
 	dw SGB_TrainerGear
@@ -53,12 +53,12 @@ SGB_BattleGrayscale:
 
 SGB_BattleColors:
 	ld hl, PalPacket_995c
-	ld de, wcce1
+	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
 
-	ld a, [wca3f]
-	ld hl, wca02
+	ld a, [wPlayerSubStatus5]
+	ld hl, wBattleMon
 	call Function9567
 	jr c, .sub_92f7
 
@@ -66,8 +66,8 @@ SGB_BattleColors:
 	call Function9599
 .sub_92f7
 	ld b, a
-	ld a, [wca44]
-	ld hl, wcdd7
+	ld a, [wEnemySubStatus5]
+	ld hl, wTempEnemyMonSpecies
 	call Function9567
 	jr c, .sub_9308
 	ld e, $01
@@ -75,11 +75,11 @@ SGB_BattleColors:
 .sub_9308
 	ld c, a
 	ld hl, wcce2
-	ld a, [wccd1]
+	ld a, [wPlayerHPPal]
 	add $23
 	ld [hli], a
 	inc hl
-	ld a, [wccd2]
+	ld a, [wEnemyHPPal]
 	add $23
 	ld [hli], a
 	inc hl
@@ -103,7 +103,7 @@ SGB_MoveList:
 	ld [hl], $10
 	inc hl
 	inc hl
-	ld a, [wccd1]
+	ld a, [wPlayerHPPal]
 	add $23
 	ld [hl], a
 	ld hl, wcce1
@@ -120,12 +120,12 @@ SGB_StatsScreenHPPals:
 	ld de, wcce1
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
-	ld a, [wMonDexIndex]
+	ld a, [wCurPartySpecies]
 	call Function956d
 	call Function957e
 	push af
 	ld hl, wcce2
-	ld a, [wccd9]
+	ld a, [wCurHPPal]
 	add $23
 	ld [hli], a
 	inc hl
@@ -145,7 +145,7 @@ SGB_Pokedex:
 	ld de, wcce1
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
-	ld a, [wMonDexIndex]
+	ld a, [wCurPartySpecies]
 	call Function956d
 	ld hl, wcce4
 	ld [hl], a
@@ -153,7 +153,7 @@ SGB_Pokedex:
 	ld de, BlkPacket_Pokedex
 	ret
 
-SGB_PokedexSelection:
+SGB_Pokedex_WaitBGMap:
 	ld hl, PalPacket_GSIntroCharizard
 	ld de, BlkPacket_986c
 	ret
@@ -238,7 +238,7 @@ SGB_Evolution:
 	and a
 	ld a, $0e
 	jr nz, .sub_9437
-	ld a, [wccd1]
+	ld a, [wPlayerHPPal]
 	call Function956d
 	call Function957e
 .sub_9437
@@ -264,7 +264,7 @@ SGB12:
 	call GetMapPalsIndex
 	ld hl, wcce2
 	ld [hl], a
-	ld a, [wMonDexIndex]
+	ld a, [wCurPartySpecies]
 	call Function956d
 	ld hl, wcce4
 	ld [hl], a
@@ -436,10 +436,10 @@ Function957e:
 	push bc
 	push af
 	ld hl, wPartyMon1DVs
-	ld a, [wWhichPokemon]
+	ld a, [wCurPartyMon]
 	ld bc, $0030
 	call AddNTimes
-	call Function95b0
+	call CheckShininess
 	ld b, $00
 	jr nc, .sub_9595
 	ld b, $0a
@@ -454,7 +454,7 @@ Function9599:
 	push af
 	ld a, e
 	and a
-	ld a, [wcae1]
+	ld a, [wMonSGBPaletteFlagsBuffer]
 	jr z, .sub_95a4
 	srl a
 .sub_95a4
@@ -468,54 +468,69 @@ Function9599:
 	pop bc
 	ret
 
-Function95b0:
+; Check if a mon is shiny by DVs at hl.
+; Only used in vanilla for setting palettes.
+CheckShininess:
+	; Attack DV
 	ld a, [hl]
 	cp $a0
-	jr c, .sub_95ca
+	jr c, .not_shiny
+
+	; Defense DV
 	ld a, [hli]
 	and $0f
 	cp $0a
-	jr c, .sub_95ca
+	jr c, .not_shiny
+
+	; Speed DV
 	ld a, [hl]
 	cp $a0
-	jr c, .sub_95ca
+	jr c, .not_shiny
+
+	; Special DV
 	ld a, [hl]
 	and $0f
 	cp $0a
-	jr c, .sub_95ca
+	jr c, .not_shiny
 	scf
 	ret
-.sub_95ca
+.not_shiny
 	and a
 	ret
 
-Function95cc:
-	ld hl, wcddf
+; TODO: Come up with a better name for this.
+GetMonSGBPaletteFlags:
+	ld hl, wEnemyMonDVs
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .sub_95d7
-	ld hl, wca08
-.sub_95d7
-	call Function95b0
-	ld hl, wcae1
-	jr nc, .sub_95ec
+	jr nz, .enemy_turn
+	ld hl, wBattleMonDVs
+.enemy_turn
+	call CheckShininess
+	ld hl, wMonSGBPaletteFlagsBuffer
+	jr nc, .not_shiny
+
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .sub_95e8
+	jr nz, .enemy_shiny
+
 	set 0, [hl]
-	jr .sub_95f7
-.sub_95e8
+	jr .return
+.enemy_shiny
 	set 1, [hl]
-	jr .sub_95f7
-.sub_95ec
+	jr .return
+
+.not_shiny
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .sub_95f5
+	jr nz, .enemy_not_shiny
+
 	res 0, [hl]
-	jr .sub_95f7
-.sub_95f5
+	jr .return
+
+.enemy_not_shiny
 	res 1, [hl]
-.sub_95f7
+.return
 	ret
 
 Function95f8:
@@ -525,7 +540,7 @@ Function95f8:
 	jp CopyBytes
 
 SGB_ApplyPartyMenuHPPals:
-	ld hl, wccd3
+	ld hl, wHPPals
 	ld a, [wcce1]
 	ld e, a
 	ld d, $00

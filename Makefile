@@ -29,7 +29,7 @@ RGBFIX  ?= $(RGBDS)rgbfix
 RGBGFX  ?= $(RGBDS)rgbgfx
 RGBLINK ?= $(RGBDS)rgblink
 
-RGBASMFLAGS := -h -E -i $(BUILD)/ -DGOLD
+RGBASMFLAGS := -E -i $(BUILD)/ -DGOLD
 
 SCAN_INCLUDES := tools/scan_includes
 MAKE_SHIM := tools/make_shim.py
@@ -61,7 +61,7 @@ clean:
 # Remove generated files except for graphics.
 .PHONY: tidy
 tidy:
-	rm -rf $(ROM) $(CORRECTEDROM) $(ROMS:.gb=.sym) $(ROMS:.gb=.map) $(OBJS) $(BUILD)/shim.asm
+	rm -rf $(ROM) $(CORRECTEDROM) $(ROMS:.gb=.sym) $(ROMS:.gb=.map) $(OBJS) $(BUILD)/shim.asm rgbdscheck.o
 
 # Visualize disassembly progress.
 .PHONY: coverage
@@ -70,6 +70,9 @@ coverage: $(ROM:.gb=.map)
 
 
 ### Build products
+
+rgbdscheck.o: rgbdscheck.asm
+	$(RGBASM) -o $@ $<
 
 %.map: %.gb
 
@@ -97,10 +100,10 @@ include slack/slack.mk
 
 ### Catch-all build target rules
 
-$(BUILD)/%.o: $(BUILD)/%.asm | $$(dir $$@)
+$(BUILD)/%.o: $(BUILD)/%.asm | $$(dir $$@) rgbdscheck.o
 	$(RGBASM) $(RGBASMFLAGS) $(OUTPUT_OPTION) $<
 
-$(BUILD)/%.o: %.asm | $$(dir $$@)
+$(BUILD)/%.o: %.asm | $$(dir $$@) rgbdscheck.o
 	$(RGBASM) $(RGBASMFLAGS) $(OUTPUT_OPTION) $<
 
 $(BUILD)/%.d: %.asm | $$(dir $$@) $(SCAN_INCLUDES)
@@ -125,6 +128,7 @@ $(BUILD)/%.tilemap: %.png | $$(dir $$@)
 	$(RGBGFX) -t $@ $<
 
 .PRECIOUS: $(BUILD)/%.sgb.tilemap
+export LC_ALL=C
 $(BUILD)/%.sgb.tilemap: %.bin | $$(dir $$@)
 	tr < $< -d '\000' > $@
 

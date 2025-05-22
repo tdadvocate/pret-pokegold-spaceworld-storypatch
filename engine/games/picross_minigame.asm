@@ -27,7 +27,7 @@ DEF PICROSS_GFX_GROUNDTILE EQU $83
 
 DEF PICROSS_GFX_COLUMNS EQU $84
 DEF PICROSS_GFX_ROWS EQU $b4
-PICROSS_GFX_TABLESTART equ $f0
+DEF PICROSS_GFX_TABLESTART equ $f0
 
 ; The Picross game area is referred as the "table" here.
 ; The table consists of 256 cells, divided into 4x4 "grids" of 16 cells each.
@@ -43,13 +43,13 @@ PicrossMinigame:
 
 .Init:
 	call DisableLCD
-	callba InitEffectObject
+	farcall ClearSpriteAnims
 	call .InitGFX
 	call .PlacePlayerBG
 	call .InitRAM
 
 	depixel 8, 8, 0, 0
-	ld a, SPRITE_ANIM_INDEX_MINIGAME_PICROSS_CURSOR
+	ld a, SPRITE_ANIM_OBJ_MINIGAME_PICROSS_CURSOR
 	call InitSpriteAnimStruct
 
 	ld a, c
@@ -58,7 +58,7 @@ PicrossMinigame:
 	ld [wPicrossCursorSpritePointer+1], a
 
 	depixel 5, 4, 4, 4
-	ld a, SPRITE_ANIM_INDEX_MINIGAME_PICROSS_GOLD
+	ld a, SPRITE_ANIM_OBJ_MINIGAME_PICROSS_GOLD
 	call InitSpriteAnimStruct
 
 	ld a, -1
@@ -203,25 +203,25 @@ PicrossMinigame:
 
 ; load Gold sprites
 	ld de, vSprites + $100
-	ld hl, GoldSpriteGFX + $40
+	ld hl, GoldSpriteGFX + LEN_2BPP_TILE * 4	; Gold's back-facing standing sprite
 	ld bc, 4 tiles
 	ld a, BANK(GoldSpriteGFX)
 	call FarCopyData
 
 	ld de, vSprites + $140
-	ld hl, GoldSpriteGFX + $100
+	ld hl, GoldSpriteGFX + LEN_2BPP_TILE * 16	; Gold's back-facing walking sprite
 	ld bc, 4 tiles
 	ld a, BANK(GoldSpriteGFX)
 	call FarCopyData
 
-	ld a, SPRITE_ANIM_DICT_25
+	ld a, SPRITE_ANIM_DICT_MINIGAME_PICROSS
 	ld hl, wSpriteAnimDict
 	ld [hli], a
-	ld [hl], SPRITE_ANIM_DICT_DEFAULT
+	ld [hl], SPRITE_ANIM_DICT_NULL
 	inc hl
-	ld a, SPRITE_ANIM_DICT_22
+	ld a, SPRITE_ANIM_DICT_GS_INTRO_2
 	ld [hli], a
-	ld [hl], SPRITE_ANIM_DICT_10
+	ld [hl], SPRITE_ANIM_DICT_TAUROS_ICON
 	ret
 
 .PlacePlayerBG:
@@ -265,7 +265,7 @@ PicrossMinigame:
 	jr nz, .quit
 
 	call .ExecuteJumptable
-	callba EffectObjectJumpNoDelay
+	farcall PlaySpriteAnimations
 	call DelayFrame
 	and a
 	ret
@@ -277,14 +277,14 @@ PicrossMinigame:
 .GetJoypadState:
 	call GetJoypadDebounced
 	ldh a, [hJoyState]
-	ld [wc606], a
-	ld hl, wc607
+	ld [wPicrossJoyStateBuffer], a
+	ld hl, wPicrossCursorMovementDelay
 	ld a, [hl]
 	and a
 	ret z
 	dec [hl]
 	xor a
-	ld [wc606], a
+	ld [wPicrossJoyStateBuffer], a
 	ret
 
 .ExecuteJumptable:
@@ -555,7 +555,7 @@ Picross_ProcessJoypad:
 .mark_cell
 	ld [wPicrossJoypadAction], a
 	ld a, 1
-	ld [wca59], a
+	ld [wPicrossAnimateDust], a
 	call Picross_DetermineGridCoord
 	call Picross_MarkCell
 	call Picross_InitDustObject
@@ -582,7 +582,7 @@ Picross_InitDustObject:
 	ret nz
 
 ; Make dust object only if we are marking a cell
-	ld a, SPRITE_ANIM_INDEX_MINIGAME_PICROSS_DUST
+	ld a, SPRITE_ANIM_OBJ_MINIGAME_PICROSS_DUST
 	call InitSpriteAnimStruct
 	ret
 

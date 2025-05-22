@@ -100,8 +100,9 @@ DEF CAUGHT_EGG_LEVEL EQU 1
 DEF PARTY_LENGTH EQU 6
 
 ; boxes
-DEF MONS_PER_BOX EQU 20
-DEF NUM_BOXES    EQU 14
+; The Japanese version fits more Pokémon into the boxes, but has less boxes total
+DEF MONS_PER_BOX EQU 30
+DEF NUM_BOXES EQU 10
 
 ; hall of fame
 DEF HOF_MON_LENGTH EQUS "(wHallOfFamePokemonListMon1End - wHallOfFamePokemonListMon1)"
@@ -119,7 +120,7 @@ DEF NUM_HOF_TEAMS EQU 30
 
 ; wild data
 
-DEF NUM_GRASSMON EQU 7 ; data/wild/*_grass.asm table size
+DEF NUM_GRASSMON EQU 6 ; data/wild/*_grass.asm table size
 DEF NUM_WATERMON EQU 3 ; data/wild/*_water.asm table size
 
 DEF GRASS_WILDDATA_LENGTH EQU (NUM_GRASSMON * 2 + 1) * 3 + 2

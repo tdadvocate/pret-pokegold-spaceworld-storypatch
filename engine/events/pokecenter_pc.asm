@@ -141,7 +141,7 @@ PC_Demo:
 	done
 
 BillsPC:
-	callab _BillsPC
+	callfar _BillsPC
 	and a
 	ret
 
@@ -243,8 +243,8 @@ PlayerWithdrawItemMenu:
 	ret
 
 .Submenu:
-	callab _CheckTossableItem
-	ld a, [wItemAttributeParamBuffer]
+	callfar _CheckTossableItem
+	ld a, [wItemAttributeValue]
 	and a
 	jr z, .AskQuantity
 	ld a, 1
@@ -254,7 +254,7 @@ PlayerWithdrawItemMenu:
 .AskQuantity:
 	ld hl, .HowManyToWithdrawText
 	call MenuTextBox
-	callab SelectQuantityToToss
+	callfar SelectQuantityToToss
 	call ExitMenu
 	call ExitMenu
 	jr c, .done
@@ -309,7 +309,7 @@ PlayerTossItemMenu:
 	call PCItemsJoypad
 	jr c, .quit
 	ld de, wUnknownListLengthd1ea
-	callab TryTossItem
+	callfar TryTossItem
 	jr .loop
 .quit
 	ld hl, wVramState
@@ -326,10 +326,10 @@ PlayerDepositItemMenu:
 	call .CheckItemsInBag
 	ret c
 	call LoadStandardMenuHeader
-	callab GetPocket2Status
-	callab DrawBackpack
+	callfar GetPocket2Status
+	callfar DrawBackpack
 .loop
-	callab DebugBackpackLoop
+	callfar DebugBackpackLoop
 	jr c, .quit
 	call .TryDepositItem
 	jr .loop
@@ -342,7 +342,7 @@ PlayerDepositItemMenu:
 	ret
 
 .CheckItemsInBag:
-	callab CheckItemsQuantity
+	callfar CheckItemsQuantity
 	ret nc
 
 ; no item to deposit
@@ -357,8 +357,8 @@ PlayerDepositItemMenu:
 	prompt
 
 .TryDepositItem:
-	callab CheckItemMenu
-	ld a, [wItemAttributeParamBuffer]
+	callfar CheckItemMenu
+	ld a, [wItemAttributeValue]
 	ld hl, .Jumptable
 	jp CallJumptable
 
@@ -392,7 +392,7 @@ PlayerDepositItemMenu:
 	prompt
 
 .SwapPockets:
-	callab FlipPocket2Status
+	callfar FlipPocket2Status
 	xor a
 	ld [wSelectedSwapPosition], a
 	ret
@@ -402,8 +402,8 @@ PlayerDepositItemMenu:
 	ret
 
 .DepositItem:
-	callab _CheckTossableItem
-	ld a, [wItemAttributeParamBuffer]
+	callfar _CheckTossableItem
+	ld a, [wItemAttributeValue]
 	and a
 	jr z, .AskQuantity
 	ld a, 1
@@ -413,7 +413,7 @@ PlayerDepositItemMenu:
 .AskQuantity:
 	ld hl, .HowManyDepositText
 	call MenuTextBox
-	callab SelectQuantityToToss
+	callfar SelectQuantityToToss
 	push af
 	call ExitMenu
 	call ExitMenu
@@ -481,12 +481,12 @@ PCItemsJoypad:
 	jr z, .select
 	jr .next
 .select
-	callab SwitchItemsInBag
+	callfar SwitchItemsInBag
 	jp .next
 .next
 	jp PCItemsJoypad
 .a_button
-	callab ScrollingMenu_ClearLeftColumn
+	callfar ScrollingMenu_ClearLeftColumn
 	call PlaceHollowCursor
 	and a
 	ret
