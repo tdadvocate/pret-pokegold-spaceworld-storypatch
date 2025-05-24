@@ -549,18 +549,77 @@ SilentHillLabFrontMoveRivalLeave:
 Movememt12:
 	db $07, $07, $07, $05, $32
 
-SilentHillLabFrontScript17:
+; Temporarily commenting this out for testing as it is the original script here
+;SilentHillLabFrontScript17:
+;	ld hl, SilentHillLabFrontTextString23
+;	call OpenTextbox
+;	ld hl, wd41d
+;	set 2, [hl] ; not sure what exactly this is doing but maybe to do with what bag is being used?
+;	ld hl, wNumBagItems
+;	ld a, 5 ; Item ID given (5 = Pokeball)
+;	ld [wCurItem], a
+;	ld a, 6 ; Item quantity given
+;	ld [wItemQuantity], a
+;	call ReceiveItem ; Required to receive the item in your bag
+;	call Function20f8 ; possible something to do w/overworld sprite interactions being stored/updated?
+;	ld a, $11
+;	ld [wMapScriptNumber], a
+;	ret
+
+; Attempting to make Nanami give you more items but extra items cause overflow breaking the back lab
+; 2 items removes happa but 3 and 4 (maybe even more) items brings it back without seemingly breaking anything else?
+	SilentHillLabFrontScript17:
 	ld hl, SilentHillLabFrontTextString23
 	call OpenTextbox
 	ld hl, wd41d
-	set 2, [hl]
+	set 2, [hl] ; not sure what exactly this is doing but maybe to do with what bag is being used?
 	ld hl, wNumBagItems
-	ld a, 5
+	ld a, 1 ; Masterball
 	ld [wCurItem], a
-	ld a, 99 ; changed from 6 (this is so that players can shiny hunt more safely for now
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem ; required after every item to actually get both but causes overflow that removes happa from back lab
+	ld a, 14 ; Full Restore
+	ld [wCurItem], a
+	ld a, 99 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
-	call Function20f8
+	ld a, 40 ; Max Revive
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	ld a, 32 ; Rare Candy
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	ld a, 32 ; Rare Candy
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	ld a, 22 ; Fire Stone
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	ld a, 23 ; Thunder Stone
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	ld a, 24 ; Water Stone
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	ld a, 34 ; Leaf Stone
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	call Function20f8 ; seems to maybe have something to do with the overworld sprite interactions being stored/updated?
 	ld a, $11
 	ld [wMapScriptNumber], a
 	ret

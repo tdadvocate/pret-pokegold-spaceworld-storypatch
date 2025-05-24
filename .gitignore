@@ -8,6 +8,7 @@
 *.sn*
 *.rtc
 !shim.sym
+*.sgm
 
 # build artifacts
 /build
@@ -26,3 +27,5 @@ __pycache__
 
 # macos files
 .DS_STORE
+.DS_Store
+*.DS_Store
