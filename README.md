@@ -8,7 +8,6 @@ At the very bottom of this README, you will find the original README provided on
 - Changed game from Demo Mode to Story Mode
 - Re-enable evolution of Pokémon within the game
 - Implemented Rival battle
-  - The Rival's name is currently messed up (Shows the text of "<rival's name>'s has started a battle!") but attempting to fix this later
 - Removed the demo barricades at the North and East exits of Silent Hill
 - Changed start menu to show the save option
 - Added in Field Debug Menu (Activated by holding B and Start at the same time)
@@ -18,7 +17,6 @@ At the very bottom of this README, you will find the original README provided on
   - There is only one box with 30 spaces
   - The release Pokémon feature does appear to function
 - Adjusted the amount of PokéBalls that Nanami gives you after you defeat your rival from 6 to 99
-  - Her dialogue still states that she is giving you 6 because this is only temporary while I work on better systems of implementation for getting items
 - Made the forced Rival end demo text at the end of Route 1 not trigger automatically
   - Talking to the Rival will cause the dialogue to trigger as normal and send the player back to the title screen (need a better solution)
 - Implemented the Continue Game option on the title screen
@@ -26,18 +24,24 @@ At the very bottom of this README, you will find the original README provided on
 - Added proper collision data for all used map locations
   - This opens up all of the accessible map as mostly functional (including wild Pokémon but not including scripts after Route 1 Gate to Old City)
   - Some locations that have map files but are inaccessible do not have proper collision data since you cannot access them currently anyway
+  - Some maps still have blocks in place that I plan to remove in the future in the least damaging way possible if I can
 
 ## KNOWN BUGS
-- Selecting the Continue Game option on the title screen without having a save made will cause the game to crash
-- Talking to the rival at the end of Route 1 will still trigger the end demo dialogue and reset the game
-- Opening the Debug Menu version of Bill's PC before getting your starter Pokémon will cause the game to crash
-- Nanami's dialogue incorrectly states that she is giving you 6 PokéBalls because the 99 she gives you is a temporary workaround
-- Encountering a wild Pokémon to the East (and possibly North) of Silent Hills before receiving your starter will cause a soft lock that requires a restart to resolve.
-- Rival battle has grammatical error during the intro text
-- All of you Pokémon fainting will cause the game to reset.
-- Currently no way of acquiring more items besides the few PokéBalls that the player receives after defeating their Rival.
-- Start menu does not update along with the story flags being achieved
-- Title screen menu does not update along with existing/missing save data
+### MAJOR:
+-Selecting the Continue Game option on the title screen without having a save made will cause the game to crash
+-Encountering a wild Pokémon to the East (and possibly North) of Silent Hills before receiving your starter will cause a soft lock that requires a restart to resolve.
+-Opening the Debug Menu version of Bill's PC  or the one in the Player's bedroom before getting your starter Pokémon will cause the game to crash
+-Talking to the rival at the end of Route 1 will still trigger the end demo dialogue and reset the game
+-All of you Pokémon fainting will cause the game to reset.
+
+### Minor:
+-Storing Pokémon in the PC will corrupt them over time
+--Not exactly sure what causes them to corrupt so save states and limited usage of PC is recommended
+-Nanami's dialogue incorrectly states that she is giving you 6 PokéBalls because the items that she gives you are a temporary workaround for the lack of functional shop
+-Rival battle has grammatical error during the intro text (Shows the text of "<rival's name>'s has started a battle!")
+-Currently no way of acquiring more items besides the few PokéBalls that the player receives after defeating their Rival.
+-Start menu does not update along with the story flags being achieved
+-Title screen menu does not update along with existing/missing save data
 
 ## Currently Planned Changes
 - Remove locked door text for Oak's Lab so that the player may enter freely

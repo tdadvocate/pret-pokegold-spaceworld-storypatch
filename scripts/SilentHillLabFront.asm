@@ -567,54 +567,58 @@ Movememt12:
 ;	ret
 
 ; Attempting to make Nanami give you more items but extra items cause overflow breaking the back lab
-; 2 items removes happa but 3 and 4 (maybe even more) items brings it back without seemingly breaking anything else?
+; Number of items given by Nanami will break different aspects of the Back Lab (sweet  spot seems to be 3-8 items)
+; 2 items removes happa - 9 breaks the whole back - 10 removes Honouguma - 11 remove Happa - 12 breaks whole back - Maybe more but haven't tested
 	SilentHillLabFrontScript17:
 	ld hl, SilentHillLabFrontTextString23
 	call OpenTextbox
 	ld hl, wd41d
 	set 2, [hl] ; not sure what exactly this is doing but maybe to do with what bag is being used?
 	ld hl, wNumBagItems
+	; Gives Ball Holder in first bag slot
+	ld a, 159 ; Ball Holder
+	ld [wCurItem], a
+	ld a, 1 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Masterballs in Ball Holder
 	ld a, 1 ; Masterball
 	ld [wCurItem], a
 	ld a, 99 ; item qty
 	ld [wItemQuantity], a
-	call ReceiveItem ; required after every item to actually get both but causes overflow that removes happa from back lab
-	ld a, 14 ; Full Restore
+	call ReceiveItem
+	; Gives 99 Masterballs in Ball Holder
+	ld a, 1 ; Masterball
 	ld [wCurItem], a
 	ld a, 99 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
-	ld a, 40 ; Max Revive
+	; Gives TM Holder in second bag slot
+	ld a, 157 ; TM Holder
+	ld [wCurItem], a
+	ld a, 1 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives Cut TM51/HM01 in TM Holder
+	ld a, 248 ; HM01 technically
 	ld [wCurItem], a
 	ld a, 99 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
+	; Gives 99 Rare Candy in third bag slot
 	ld a, 32 ; Rare Candy
 	ld [wCurItem], a
 	ld a, 99 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
+	; Gives 99 Rare Candy in fourth bag slot
 	ld a, 32 ; Rare Candy
 	ld [wCurItem], a
 	ld a, 99 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
-	ld a, 22 ; Fire Stone
-	ld [wCurItem], a
-	ld a, 99 ; item qty
-	ld [wItemQuantity], a
-	call ReceiveItem
-	ld a, 23 ; Thunder Stone
-	ld [wCurItem], a
-	ld a, 99 ; item qty
-	ld [wItemQuantity], a
-	call ReceiveItem
-	ld a, 24 ; Water Stone
-	ld [wCurItem], a
-	ld a, 99 ; item qty
-	ld [wItemQuantity], a
-	call ReceiveItem
-	ld a, 34 ; Leaf Stone
+	; Gives 99 Rare Candy in fifth bag slot
+	ld a, 32 ; Rare Candy
 	ld [wCurItem], a
 	ld a, 99 ; item qty
 	ld [wItemQuantity], a

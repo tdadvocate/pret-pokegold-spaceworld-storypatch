@@ -46,7 +46,7 @@ TryCut:
 
 CheckCuttableBlock:
 	call GetFacingTileCoord
-	cp $80
+	cp $12 ; changed from 80 (OLD_COLLISION_CUT_TREE)to 12 (COLLISION_CUT_TREE) to use new cut tree collision data
 	jr nz, .fail
 	call GetBlockLocation
 	ld a, l
