@@ -36,6 +36,14 @@ SilentHillPokecenterPCText:
 	call OpenTextbox
 	ret
 
+; Use this code to make the PokemonCenter PC work. This causes probs 
+; w/the lab as well as the doll sprite in your bedroom if you somehow 
+; manage to get a starter and beat your rival
+;	call RefreshScreen
+;	callab PokemonCenterPC
+;	call Function1fea
+;	ret
+
 SilentHillPokecenterTextString1:
 	text "げんざい　ちょうせいちゅうです"
 	done
@@ -52,7 +60,7 @@ SilentHillPokecenterNPCText1:
 	call OpenTextbox
 	ret
 
-SilentHillPokecenterTextString2:
+SilentHillPokecenterTextString2: ; Nurse Demo text string
 	text "もうしわけありませんが"
 	line "ただいま　しゅうりちゅう　でして"
 
