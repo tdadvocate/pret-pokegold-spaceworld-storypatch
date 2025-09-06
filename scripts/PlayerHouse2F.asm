@@ -61,7 +61,7 @@ PlayerHouse2PositionCheck:
 	ld hl, PlayerHouse2FTextString2
 	call OpenTextbox
 	call PlayerHouse2FMovePlayer
-	call ClearAccumulator
+	call xor_a
 	ret
 
 PlayerHouse2FMovePlayer:
@@ -75,9 +75,9 @@ PlayerHouse2FMovePlayer:
 	ret
 
 Movement:
-	db $08
-	db $04
-	db $32
+	step DOWN
+	slow_step DOWN
+	step_end
 
 PlayerHouse2FScript2:
 	ld hl, PlayerHouse2FNPCIDs2
@@ -121,7 +121,7 @@ PlayerHouse2FComputerText:
 .jump
 	call RefreshScreen
 	callfar PokemonCenterPC
-	call Function1fea
+	call ScreenCleanup
 	ret
 
 PlayerHouse2FCheckEmail:

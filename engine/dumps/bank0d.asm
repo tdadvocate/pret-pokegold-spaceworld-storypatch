@@ -813,7 +813,7 @@ MoveDisabled:
 
 	ld a, [hl]
 	ld [wNamedObjectIndexBuffer], a
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	ld hl, DisabledMoveText
 	jp PrintText
 
@@ -2261,6 +2261,7 @@ BattleCommand_MoveAnim:
 	and a
 	jp nz, BattleCommand_MoveDelay
 
+	assert BATTLEANIM_NONE + 1 == BATTLEANIM_DAMAGE
 	inc a
 	ld [wNumHits], a
 	ldh a, [hBattleTurn]
@@ -3874,7 +3875,7 @@ BattleCommand_Sketch:
 	ld [hl], a
 
 	ld [wNamedObjectIndexBuffer], a
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	call LoadMoveAnim
 	ld hl, SketchedText
 	jp PrintText
@@ -4047,7 +4048,7 @@ BattleCommand_Spite:
 	jr z, .failed
 	push bc
 	push de
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	pop de
 
 	call BattleRandom
@@ -4381,7 +4382,7 @@ UpdateMoveData:
 	push bc
 	ld a, [wCurPlayerSelectedMove]
 	ld b, a
-	ld a, [wcabe]
+	ld a, [wPlayerDebugSelectedMove]
 	and a
 	jr z, .get_move_data
 	ld b, a
@@ -4409,7 +4410,7 @@ UpdateMoveData:
 	ld [wNamedObjectIndexBuffer], a
 
 .get_move_name:
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	jp CopyStringToStringBuffer2
 
 ; Unreferenced. Seems to be early sleep code leftover from Gen 1.
@@ -6738,7 +6739,7 @@ BattleCommand_Mimic:
 	ld a, [de]
 	ld [hl], a
 	ld [wNamedObjectIndexBuffer], a
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	call LoadMoveAnim
 	ld hl, MimicLearnedMoveText
 	jp PrintText
@@ -6869,7 +6870,7 @@ BattleCommand_Disable:
 .got_disabled_move_pointer
 	ld a, [wNamedObjectIndexBuffer]
 	ld [hl], a
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	ld hl, MoveDisabledText
 	jp PrintText
 
@@ -7435,9 +7436,11 @@ BattleCommand_Selfdestruct:
 	ld de, wEnemySubStatus4
 
 .ok
+; BUG: hl is increased one too many times, causing only the lower byte of the user's current HP to be zeroed out,
+; and incorrectly zeroing the high byte of the user's max HP.
 	xor a
 	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; Without this line, the bug wouldn't happen. This byte isn't even used in normal gameplay (wPartyMon#Unused)
 	inc hl
 	ld [hli], a
 	ld [hl], a
@@ -7481,7 +7484,7 @@ BattleCommand_MirrorMove:
 	call FarCopyBytes
 
 	call IncrementMovePP
-	call Unreferenced_GetMoveName
+	call GetMoveName
 	call CopyStringToStringBuffer2
 	call BattleCommand_MoveDelay
 	ldh a, [hBattleTurn]
@@ -8434,7 +8437,7 @@ BattleCommand_BatonPass:
 	call LoadStandardMenuHeader
 	ld a, PARTYMENUACTION_SWITCH
 	ld [wPartyMenuActionText], a
-	predef PartyMenuInBattle_Setup
+	predef OpenPartyMenu_ClearGraphics
 
 .player_loop
 	jr c, .pressed_b
@@ -8447,7 +8450,7 @@ BattleCommand_BatonPass:
 	call PrintText
 
 .pressed_b
-	predef PartyMenuInBattle
+	predef OpenPartyMenu
 	jr .player_loop
 
 .picked_mon

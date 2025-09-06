@@ -26,10 +26,10 @@ SilentHill_MapEvents::
 	bg_event  6, 12, 5
 
 	def_object_events
-	object_event  6, 10, SPRITE_SILVER, SLOW_STEP_LEFT, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0
-	object_event  6,  9, SPRITE_BLUE, SLOW_STEP_RIGHT, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0
-	object_event  8,  6, SPRITE_TEACHER, SLOW_STEP_DOWN, 1, 0, -1, -1, 0, 0, 0, 0, 0, 0
-	object_event 10, 13, SPRITE_SUPER_NERD, SLOW_STEP_DOWN, 2, 0, -1, -1, 0, 0, 0, 0, 0, 0
+	object_event  6, 10, SPRITE_SILVER, SPRITEMOVEFN_TURN_UP, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0
+	object_event  6,  9, SPRITE_BLUE, SPRITEMOVEFN_TURN_LEFT, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0
+	object_event  8,  6, SPRITE_TEACHER, SPRITEMOVEFN_RANDOM_WALK_X, 1, 0, -1, -1, 0, 0, 0, 0, 0, 0
+	object_event 10, 13, SPRITE_SUPER_NERD, SPRITEMOVEFN_RANDOM_WALK_X, 2, 0, -1, -1, 0, 0, 0, 0, 0, 0
 ;"tell game it is an object" "spaces from left (starts at 0)", "spaces from top (starts at 0)", "overworld sprite", "movement speed/style?", "movement pattern?"
 
 SilentHill_Blocks::

@@ -39,14 +39,14 @@ CheckStartmenuSelectHook:
 
 Function2c4a:
 ; copy of Function2ba8
-; calling Functiond4e6 instead of Functiond6e4
+; calling _HandlePlayerStep_Limited instead of _HandlePlayerStep
 .loop
 	call Function2c5a
 	and a
-	ld a, [$cb6e]
-	bit 5, a
+	ld a, [wPlayerStepFlags]
+	bit PLAYERSTEP_CONTINUE_F, a
 	ret z
-	bit 6, a
+	bit PLAYERSTEP_STOP_F, a
 	jr z, .loop
 	scf
 	ret
@@ -54,16 +54,16 @@ Function2c4a:
 Function2c5a:
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(Function50b9)
+	ld a, BANK(HandleNPCStep)
 	call Bankswitch
-	call Function50b9
-	call Function18a0
-	ld a, BANK(Functiond4e6)
+	call HandleNPCStep
+	call LoadMinorObjectGFX
+	ld a, BANK(_HandlePlayerStep_Limited)
 	call Bankswitch
-	call Functiond4e6
-	ld a, BANK(_UpdateSprites)
+	call _HandlePlayerStep_Limited
+	ld a, BANK(InitSprites)
 	call Bankswitch
-	call _UpdateSprites
+	call InitSprites
 	call DelayFrame
 	call UpdateToolgear
 	ld hl, wToolgearFlags

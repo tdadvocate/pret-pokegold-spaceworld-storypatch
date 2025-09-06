@@ -10,7 +10,7 @@ ItemTest_BagMenu:
 	db 1
 
 .MenuData:
-	db SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3
+	db SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_FUNCTION3
 	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY
 	dbw 0, wItems
@@ -34,7 +34,7 @@ ItemTest_KeyItemMenu:
 	db 1
 
 .MenuData:
-	db SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_FUNCTION3
+	db SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_LEFT | SCROLLINGMENU_ENABLE_FUNCTION3
 	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY
 	dbw 0, wNumKeyItems
@@ -48,14 +48,14 @@ ItemTest_KeyItemMenu:
 
 FieldDebug_ItemTest:
 	call ClearSprites
-	ld hl, wVramState
-	res 0, [hl]
+	ld hl, wStateFlags
+	res SPRITE_UPDATES_DISABLED_F, [hl]
 	call LoadStandardMenuHeader
 	call ClearTileMap
 	call UpdateSprites
 	call .DoItemTest
-	ld hl, wVramState
-	set 0, [hl]
+	ld hl, wStateFlags
+	set SPRITE_UPDATES_DISABLED_F, [hl]
 	call CloseWindow
 	ret
 ; unused
@@ -73,7 +73,7 @@ FieldDebug_ItemTest:
 	call .ClearTilemap
 .bag_menu
 	ld hl, ItemTest_BagMenu
-	call Function3810
+	call ScrollingMenu_FromTable
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .exit_menu
@@ -85,7 +85,7 @@ FieldDebug_ItemTest:
 
 .key_item_menu
 	ld hl, ItemTest_KeyItemMenu
-	call Function3810
+	call ScrollingMenu_FromTable
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .exit_menu
@@ -243,11 +243,11 @@ FieldDebug_ItemTest:
 	ld a, [wCurItem]
 	call ItemTest_FindUsableItem
 	jr c, .use_item2
-	call UseItem
+	call DoItemEffect
 	jp .restart
 
 .use_item
-	call UseItem
+	call DoItemEffect
 	ld a, [wFieldMoveSucceeded]
 	and a
 	jp z, .restart
@@ -255,9 +255,9 @@ FieldDebug_ItemTest:
 	ret
 
 .use_item2
-	call UseItem
+	call DoItemEffect
 	call ClearBGPalettes
-	call Function360b
+	call RestoreScreenAndReloadTiles
 	jp .restart
 
 ItemTest_FindUsableItem:

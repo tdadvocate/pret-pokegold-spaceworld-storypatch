@@ -96,21 +96,23 @@ hSpriteHeight::
 
 NEXTU
 
+hItemPrice_Old:: ds 3
+
+NEXTU
+
 hConnectionStripLength:: db
 hConnectedMapWidth:: db
-
+hSpriteOffset:: db
 NEXTU
 
 hMapObjectIndex:: db
 hObjectStructIndex:: db
-
-ENDU
-
-UNION
-hSpriteOffset::
-	db
-NEXTU
 hEnemyMonSpeed:: dw
+
+NEXTU
+
+hPokedexTempWeight:: dw
+
 ENDU
 
 UNION
@@ -150,23 +152,33 @@ hPrintNumDividend:: ds 3 ; big-endian
 hPrintNumDivisor:: ds 3 ; big-endian
 hPrintNumTemp:: ds 3 ; big-endian
 
+NEXTU
+	ds 1
+hMutateWY:: db
+hMutateWX:: db
+
 ENDU
 
 	ds 3 ; TODO
 
-hCurSpriteYCoord::
 hFFC0:: ds 1
 
 	ds 6
 
-hFFC7:: db
-hFFC8:: db
-hFFC9:: db
-hFFCA:: db
-hFFCB:: db
-hFFCC:: db
-hFFCD:: db
-	ds 2 ; TODO
+UNION
+hUsedSpriteIndex:: db
+hUsedSpriteTile:: db
+hCurSpriteHorizTilesOccupied:: db
+NEXTU
+hCurSpriteXCoord:: db
+hCurSpriteYCoord:: db
+hCurSpriteXPixel:: db
+hCurSpriteYPixel:: db
+hCurSpriteTile:: db
+hCurSpriteOAMFlags:: db
+ENDU
+
+hMoneyTemp:: ds 3
 
 hLCDCPointer::
 	db
@@ -198,7 +210,7 @@ hWX:: db
 hWY:: db
 
 hOverworldFlashlightEffect:: db
-; Influences draw distance of map around HIRO
+; Influences draw distance of map around the player.
 ; Meant to go from 0 --> to desired distance
 ; or else graphical errors will occur.
 ; 0 - regular distance

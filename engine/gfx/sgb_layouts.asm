@@ -533,8 +533,8 @@ GetMonSGBPaletteFlags:
 .return
 	ret
 
-Function95f8:
-	ld hl, BlkPacket_98fc
+InitPartyMenuPalettes:
+	ld hl, BlkPacket_PartyMenu
 	ld de, wcce2
 	ld bc, $0030
 	jp CopyBytes
@@ -711,8 +711,8 @@ PushSGBBorder:
 	ret
 
 .LoadSGBBorderPointers:
-	ld a, [wce5f]
-	bit 3, a
+	ld a, [wOptions]
+	bit SGB_BORDER_F, a
 	jr nz, .spaceworld_border
 
 ; load alternate border

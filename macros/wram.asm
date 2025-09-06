@@ -30,7 +30,7 @@ ENDM
 MACRO party_struct
 	box_struct \1
 \1Status::         db
-\1Unused::         db
+\1Unused4::        db
 \1HP::             dw
 \1MaxHP::          dw
 \1Stats:: ; big endian
@@ -101,18 +101,26 @@ MACRO battle_struct
 ENDM
 
 MACRO box
-\1::
-\1Count::           ds 1
-\1Species::         ds MONS_PER_BOX + 1
+\1Count::   db
+\1Species:: ds MONS_PER_BOX + 1
 \1Mons::
-\1Mon1::            box_struct \1Mon1
-\1Mon2::            ds BOXMON_STRUCT_LENGTH * (MONS_PER_BOX +- 1)
-\1MonOT::           ds NAME_LENGTH * MONS_PER_BOX
-\1MonNicknames::    ds PKMN_NAME_LENGTH * MONS_PER_BOX
+	; \1Mon1 - \1Mon30
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}:: box_struct \1Mon{d:n}
+	endr
+\1MonOTs::
+	; \1Mon1OT - \1Mon30OT
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}OT:: ds PLAYER_NAME_LENGTH
+	endr
+\1MonNicknames::
+	; \1Mon1Nickname - \1Mon30Nickname
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}Nickname:: ds MON_NAME_LENGTH
+	endr
 \1MonNicknamesEnd::
-\1End::             ds 2 ; padding
+\1End::
 ENDM
-
 
 MACRO map_connection_struct
 \1ConnectedMapGroup::       db
@@ -312,6 +320,25 @@ MACRO map_object
 	ds 2
 ENDM
 
+MACRO minor_object
+\1ParentObject:: db
+\1Type:: db
+\1Animation:: db
+\1SpriteTile:: db
+\1XCoord:: db
+\1YCoord:: db
+\1XOffset:: db
+\1YOffset:: db
+\1_08:: db
+\1_09:: db
+\1JumptableIndex:: db
+\1Timer:: db
+\1Frame:: db
+\1Var1:: db
+\1Var2:: db
+\1Var3:: db
+ENDM
+
 MACRO sprite_anim_struct
 \1Index:: ds 1          ; 0
 \1FramesetID:: ds 1     ; 1
@@ -332,38 +359,29 @@ MACRO sprite_anim_struct
 ENDM
 
 MACRO battle_anim_struct
-; Placeholder until we can figure out what it all means
-\1_Index::  ds 1
-\1_Anim01:: ds 1
-\1_Anim02:: ds 1
-\1_FramesetIndex:: ds 1
-\1_FunctionIndex:: ds 1
-\1_Anim05:: ds 1
-\1_TileID:: ds 1
-\1_XCoord:: ds 1
-\1_YCoord:: ds 1
-\1_XOffset:: ds 1
-\1_YOffset:: ds 1
-\1_Anim0b:: ds 1
-\1_Anim0c:: ds 1
-\1_Anim0d:: ds 1
-\1_AnonJumptableIndex:: ds 1
-\1_Anim0f:: ds 1
-\1_Anim10:: ds 1
-\1_Anim11:: ds 1
-\1_Anim12:: ds 1
-\1_Anim13:: ds 1
-\1_Anim14:: ds 1
-\1_Anim15:: ds 1
-\1_Anim16:: ds 1
-\1_Anim17:: ds 1
+\1Index::          db
+\1OAMFlags::       db
+\1FixY::           db
+\1FramesetID::     db
+\1Function::       db
+\1TileID::         db
+\1XCoord::         db
+\1YCoord::         db
+\1XOffset::        db
+\1YOffset::        db
+\1Param::          db
+\1Duration::       db
+\1Frame::          db
+\1JumptableIndex:: db
+\1Var1::           db
+\1Var2::           db
 ENDM
 
 MACRO battle_bg_effect
-\1_Function:: ds 1
-\1_01:: ds 1
-\1_02:: ds 1
-\1_03:: ds 1
+\1Function::       db
+\1JumptableIndex:: db
+\1BattleTurn::     db
+\1Param::          db
 ENDM
 
 MACRO sprite_oam_struct

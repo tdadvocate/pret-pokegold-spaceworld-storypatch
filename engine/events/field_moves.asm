@@ -168,7 +168,7 @@ CutScript:
 	call LoadMapPart
 	call UpdateSprites
 	call WaitBGMap
-	call Function1fea
+	call ScreenCleanup
 	scf
 	ret
 
@@ -252,7 +252,7 @@ SurfScript:
 	call RedrawPlayerSprite
 	call PlayMapMusic
 	call MovePlayerIntoWater
-	call Function1fea
+	call ScreenCleanup
 	ret
 
 Text_UsedSurf:
@@ -375,7 +375,7 @@ Text_CantUseFlyHere:
 FlyScript:
 	ld a, MAPSETUP_TELEPORT
 	ldh [hMapEntryMethod], a
-	jpfar Functionfcc24
+	jpfar DoTeleportAnimation
 
 
 DigFunction:
@@ -441,7 +441,7 @@ DigScript:
 	call CopyBytes
 	ld a, MAPSETUP_WARP
 	ldh [hMapEntryMethod], a
-	jpfar Functionfcc24
+	jpfar DoTeleportAnimation
 
 EmptyFunctiond2da:
 	ret
@@ -531,10 +531,10 @@ TeleportScript:
 	ld c, 60
 	call DelayFrames
 	call CloseWindow
-	call Function1fea
+	call ScreenCleanup
 	ld a, MAPSETUP_TELEPORT
 	ldh [hMapEntryMethod], a
-	jpfar Functionfcc24
+	jpfar DoTeleportAnimation
 
 Text_ReturnToLastMonCenter:
 	text "さいごに　たちよった"

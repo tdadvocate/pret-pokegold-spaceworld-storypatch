@@ -79,24 +79,24 @@ RefreshPlayerCoords::
 
 	; This piece of code has been removed in pokegold (note that the conditions above were altered, as well)
 	call GetObjectStruct
-	ld hl, 16 ; TODO: constantify this
+	ld hl, OBJECT_MAP_X
 	add hl, bc
 	ld a, [hl]
 	add a, d
 	ld [hl], a
 	ld [wMap1ObjectXCoord], a
-	ld hl, 18 ; TODO: constantify this
+	ld hl, OBJECT_LAST_MAP_X
 	add hl, bc
 	ld a, [hl]
 	add a, d
 	ld [hl], a
-	ld hl, 17 ; TODO: constantify this
+	ld hl, OBJECT_MAP_Y
 	add hl, bc
 	ld a, [hl]
 	add a, e
 	ld [hl], a
 	ld [wMap1ObjectYCoord], a
-	ld hl, 19
+	ld hl, OBJECT_LAST_MAP_Y
 	add hl, bc
 	ld a, [hl]
 	add a, e
@@ -214,7 +214,7 @@ RefreshTiles::
 	ld d, a
 	ld a, [wPlayerMapY]
 	ld e, a
-	call GetCoordTile
+	call GetCoordTileCollision
 	ld [wPlayerTile], a
 	ret
 
@@ -225,11 +225,11 @@ RefreshTiles::
 	ld e, a
 	push de
 	inc e
-	call GetCoordTile
+	call GetCoordTileCollision
 	ld [wTileDown], a
 	pop de
 	dec e
-	call GetCoordTile
+	call GetCoordTileCollision
 	ld [wTileUp], a
 	ret
 
@@ -240,11 +240,11 @@ RefreshTiles::
 	ld e, a
 	push de
 	dec d
-	call GetCoordTile
+	call GetCoordTileCollision
 	ld [wTileLeft], a
 	pop de
 	inc d
-	call GetCoordTile
+	call GetCoordTileCollision
 	ld [wTileRight], a
 	ret
 
@@ -291,7 +291,7 @@ GetFacingTileCoord::
 	db 1, 0
 	dw wTileRight
 
-GetCoordTile::
+GetCoordTileCollision::
 ; Get the collision byte for tile d, e
 	call GetBlockLocation
 	ld a, [hl]

@@ -41,10 +41,10 @@ FieldDebugMenu::
 	call UpdateTimePals
 	call UpdateSprites
 	ld a, [wFieldDebugMenuCursorBuffer]
-	ld [wMenuCursorBuffer], a
+	ld [wMenuCursorPosition], a
 	call OpenMenu
 	jr c, .WaitInput
-	ld a, [wMenuCursorBuffer]
+	ld a, [wMenuCursorPosition]
 	ld [wFieldDebugMenuCursorBuffer], a
 	call PlaceHollowCursor
 
@@ -83,7 +83,7 @@ FieldDebugMenu::
 
 .Cleanup:
 	push af
-	call Function1fea
+	call ScreenCleanup
 	pop af
 	ret
 
@@ -187,7 +187,7 @@ FieldDebug_TownMap:
 	call ClearSprites
 	callfar FlyMap
 	call ClearPalettes
-	call Function3657
+	call ReloadSpritesAndFont
 	call LoadFontExtra
 	call CloseWindow
 	call GetMemSGBLayout
@@ -208,8 +208,8 @@ FieldDebug_NamePlayer:
 	call ClearSprites
 	call GetMemSGBLayout
 	call SetPalettes
-	ld hl, wce5f
-	res 4, [hl]
+	ld hl, wOptions
+	res NO_TEXT_SCROLL_F, [hl]
 	call LoadFontExtra
 	ld a, FIELDDEBUG_RETURN_REOPEN
 	ret

@@ -57,9 +57,7 @@ wMusicFade::
 ; $00 = none (default)
 	db
 wMusicFadeCount:: db
-wMusicFadeID::
-wMusicFadeIDLow:: db
-wMusicFadeIDHigh:: db
+wMusicFadeID:: dw
 
 wSweepingFadeIndex:: db
 wSweepingFadeCounter:: db
@@ -137,6 +135,8 @@ NEXTU
 	ds 1
 
 wClockDialogArrowBlinkCounter:: ds 1
+
+
 wc40a:: ds 1
 
 ; Monster or Trainer test?
@@ -147,6 +147,16 @@ wWhichPicTest::
 wc40c:: ds 1
 wc40d:: ds 1
 wc40e:: ds 1
+NEXTU
+wOptionsMenuCursorX:: db
+wOptionsMenuCursorY:: db
+wOptionsTextSpeedCursorX:: db
+wOptionsBattleAnimCursorX:: db
+wOptionsBattleStyleCursorX:: db
+wOptionsAudioSettingsCursorX:: db
+wOptionsBottomRowCursorX:: db
+NEXTU
+	ds 7
 
 	ds 3
 
@@ -288,6 +298,7 @@ wMapBuffer::
 wMapScriptNumber:: db
 wMapScriptNumberLocation:: dw
 wUnknownMapPointer:: dw ; TODO
+; setting bit 7 seems to disable overworld updates and player control?
 wc5ed:: db
 	ds 18
 wMapBufferEnd::
@@ -385,7 +396,19 @@ wPicrossErrorCheck:: ds 1
 	ds 1
 NEXTU
 ; Battle-related
-	ds $1ea
+	ds $140
+
+wBattleAnimTileDict::
+; wBattleAnimTileDict pairs keys with values
+; keys: BATTLE_ANIM_GFX_* indexes (taken from anim_*gfx arguments)
+; values: vTiles0 offsets
+	ds NUM_BATTLEANIMTILEDICT_ENTRIES * 2
+
+wActiveAnimObjects::
+; wAnimObject1 - wAnimObject10
+for n, 1, NUM_BATTLE_ANIM_STRUCTS + 1
+wAnimObject{d:n}:: battle_anim_struct wAnimObject{d:n}
+endr
 
 wActiveBGEffects::
 wBGEffect1:: battle_bg_effect wBGEffect1
@@ -395,7 +418,7 @@ wBGEffect4:: battle_bg_effect wBGEffect4
 wBGEffect5:: battle_bg_effect wBGEffect5
 wActiveBGEffectsEnd::
 
-wNumActiveBattleAnims:: db
+wLastAnimObjectIndex:: db
 
 wBattleAnimFlags:: db
 wBattleAnimAddress:: dw
@@ -408,22 +431,39 @@ wBattleAnimOAMPointerLo:: db
 	db
 
 UNION
-; unidentified
-wBattleAnimTemp0:: db
-wBattleAnimTemp1:: db
-wBattleAnimTemp2:: db
-wBattleAnimTemp3:: db
+wBattleObjectTempID:: db
+wBattleObjectTempXCoord:: db
+wBattleObjectTempYCoord:: db
+wBattleObjectTempParam:: db
+
+NEXTU
+wBattleBGEffectTempID:: db
+wBattleBGEffectTempJumptableIndex:: db
+wBattleBGEffectTempTurn:: db
+wBattleBGEffectTempParam:: db
+
+NEXTU
+wBattleSineWaveTempProgress:: db
+wBattleSineWaveTempOffset:: db
+wBattleSineWaveTempAmplitude:: db
+wBattleSineWaveTempTimer:: db
 
 NEXTU
 wBattleAnimTempOAMFlags:: db
-wBattleAnimTempField02:: db
+wBattleAnimTempFixY:: db
 wBattleAnimTempTileID:: db
 wBattleAnimTempXCoord:: db
 wBattleAnimTempYCoord:: db
 wBattleAnimTempXOffset:: db
 wBattleAnimTempYOffset:: db
-wBattleAnimTempAddSubFlags:: db
+wBattleAnimTempFrameOAMFlags:: db
 wBattleAnimTempPalette:: db
+
+NEXTU
+wBattleAnimGFXTempTileID::
+wBattleAnimGFXTempPicHeight:: db
+wBattlePicResizeTempPointer:: dw
+
 ENDU
 
 	ds $32
@@ -578,18 +618,18 @@ wEnemyEvaLevel:: db
 
 	ds 1
 
-wcab9:: ds 1
+wForceEvolution:: db
 wcaba:: ds 1
 
 	ds 1
 
 wPlayerSubstituteHP:: ds 1
 wEnemySubstituteHP:: ds 1
-wcabe:: ds 1
+wPlayerDebugSelectedMove:: ds 1
 
 	ds 1
 
-wcac0:: ds 1
+wMoveSelectionMenuType:: ds 1
 
 wCurPlayerSelectedMove:: db
 wCurEnemySelectedMove:: db
@@ -705,6 +745,7 @@ wPokedexSlowpokeNumSearchEntries::
 wNestIconBlinkCounter::
 wBattleTransitionCounter:: db
 
+UNION
 wBattleTransitionSineWaveOffset::
 wBattleTransitionSpinQuadrant::
 wIntroSceneTimer::
@@ -712,7 +753,10 @@ wTrainerGearCard::
 wcb60:: ds 1
 
 wTrainerGearRadioIndex::
-wcb61:: ds 1
+wSlotReelIconDelay:: db
+NEXTU
+wFlyIconAnimStructPointer:: dw
+ENDU
 
 wVBCopySize:: ds 1
 wVBCopySrc:: ds 2
@@ -720,14 +764,14 @@ wVBCopyDst:: ds 2
 wVBCopyDoubleSize:: ds 1
 wVBCopyDoubleSrc:: ds 2
 wVBCopyDoubleDst:: ds 2
-wcb6c:: db
-wcb6d:: db
-wcb6e:: db
+wPlayerStepVectorX:: db
+wPlayerStepVectorY:: db
+wPlayerStepFlags:: db
 wPlayerStepDirection:: db
 
 SECTION "CB71", WRAM0[$CB70]
 
-wcb70:: db
+wQueuedMinorObjectGFX:: db
 
 wVBCopyFarSize:: ds 1
 wVBCopyFarSrc:: ds 2
@@ -737,7 +781,7 @@ wPlayerMovement:: db
 wMovementObject:: db
 	ptrba wMovementData
 
-wcb7c:: ds 1
+wIndexedMovement2Pointer:: dw
 
 SECTION "Collision buffer", WRAM0[$CB90]
 
@@ -769,34 +813,62 @@ wWindowStackSize:: db
 SECTION "CC09", WRAM0[$CC02]
 
 wMenuDataHeader::
-	db
+wMenuFlags:: db
 wMenuBorderTopCoord:: db
 wMenuBorderLeftCoord:: db
 wMenuBorderBottomCoord:: db
 wMenuBorderRightCoord:: db
 wMenuDataPointer:: dw
-wMenuCursorBuffer:: db
-	ds 8 ; TODO
+wMenuCursorPosition:: db
+	ds 8
 wMenuDataHeaderEnd::
 
-wMenuData2::
+wMenuData::
 wMenuDataFlags:: db
+
+UNION
 wMenuDataItems:: db
 wMenuDataIndicesPointer:: dw
 wMenuDataDisplayFunctionPointer:: dw
 wMenuDataPointerTableAddr:: dw
+wMenuDataEnd::
 	ds 2
-wcc1c:: dw
-	ds 1
-wcc1f:: dw
-	ds 1
-wMenuData3::
+NEXTU
+; 2D Menu
+wMenuData_2DMenuDimensions:: db
+wMenuData_2DMenuSpacing:: db
+wMenuData_2DMenuItemStringsBank:: db
+wMenuData_2DMenuItemStringsAddr:: dw
+wMenuData_2DMenuFunctionBank:: db
+wMenuData_2DMenuFunctionAddr:: dw
+NEXTU
+wMenuData_ScrollingMenuHeight:: db
+wMenuData_ScrollingMenuWidth:: db
+wMenuData_ScrollingMenuItemFormat:: db
+wMenuData_ItemsPointerBank:: db
+wMenuData_ItemsPointerAddr:: dw
+wMenuData_ScrollingMenuFunction1:: ds 3
+wMenuData_ScrollingMenuFunction2:: ds 3
+wMenuData_ScrollingMenuFunction3:: ds 3
+ENDU
+
+wMoreMenuData::
 
 w2DMenuCursorInitY:: db
 w2DMenuCursorInitX:: db
 w2DMenuNumRows:: db
 w2DMenuNumCols:: db
-w2DMenuFlags:: dw
+w2DMenuFlags1::
+; bit 7: Disable checking of wMenuJoypadFilter
+; bit 6: Enable sprite animations
+; bit 5: Wrap around vertically
+; bit 4: Wrap around horizontally
+; bit 3: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 5 is disabled and we tried to go too far down
+; bit 2: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 5 is disabled and we tried to go too far up
+; bit 1: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 4 is disabled and we tried to go too far left
+; bit 0: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 4 is disabled and we tried to go too far right
+	db
+w2DMenuFlags2:: db
 w2DMenuCursorOffsets:: db
 wMenuJoypadFilter:: db
 w2DMenuDataEnd::
@@ -828,9 +900,14 @@ UNION
 
 wcc3a::
 wChargeMoveNum::
-wMovementBufferCount:: db
+wPrevPartyLevel::
+wRodResponse_Old::
+wPokeFluteCuredSleep::
+wTempRestorePPItem:: db
 
-wcc3b::
+NEXTU
+
+wMovementBufferCount:: db
 wMovementBufferObject:: db
 
 	ptrba wMovementBufferPointer
@@ -847,13 +924,24 @@ wSpriteViewerMenuStartingItem:: db
 wSpriteViewerSavedMenuPointerY:: db
 wSpriteViewerJumptableIndex:: db
 
-	ds 56
-
 NEXTU
 ; trainer HUD data
 	ds 1
 wPlaceBallsDirection:: db
 wTrainerHUDTiles:: ds 4
+
+NEXTU
+; switching items in pack
+wSwitchItemBuffer:: ds 2
+
+NEXTU
+
+wBattleMenuRows:: db
+wBattleMenuColumns:: db
+
+NEXTU
+
+wTempBoxName:: ds BOX_NAME_LENGTH
 
 ENDU
 
@@ -862,11 +950,8 @@ SECTION "CC9A", WRAM0[$CC9A]
 wSkatingDirection:: db
 wCompanionCollisionFrameCounter:: db
 
-wUnknownWordcc9c::
-	dw
-
-wUnknownBuffercc9e::
-	ds 14
+wObjectMasks::
+	ds NUM_OBJECTS
 
 
 wSpriteCurPosX::         ds 1
@@ -940,25 +1025,17 @@ wccf4:: ds 1
 
 SECTION "CD11", WRAM0[$CD11]
 
-wcd11:: ds 1
+wMonOrItemNameBuffer:: ds MON_NAME_LENGTH
 
-	ds 11
+	ds MON_NAME_LENGTH
 
-wcd1d:: ds 8
+wTMHMMoveNameBackup:: ds 8
 
 	ds 1
 
-UNION
+
 wStringBuffer1:: ds STRING_BUFFER_LENGTH
-NEXTU
-	ds 1
-wcd27:: ds 1
 
-	ds 1
-
-wcd29:: ds 1
-wcd2a:: ds 1
-ENDU
 SECTION "CD31", WRAM0[$CD31]
 
 UNION
@@ -982,7 +1059,9 @@ ENDU
 
 SECTION "CD3C", WRAM0[$CD3C]
 
-wcd3c:: db
+wcd3c::
+wPartyMenuCursor::
+wBillsPCCursor:: db
 wRegularItemsCursor:: db
 wBackpackAndKeyItemsCursor:: db
 
@@ -990,17 +1069,17 @@ wBattleMenuCursorPosition::
 wStartmenuCursor:: db
 
 wCurMoveNum:: db
+wCurBattleMon:: db
 
-wCurBattleMon::
-wcd41:: db
-
-wcd42:: db
+wTMHolderCursor:: db
 wFieldDebugMenuCursorBuffer::
 wcd43:: db
 wRegularItemsScrollPosition:: db
 wBackpackAndKeyItemsScrollPosition:: db
-wcd46:: ds 1
-wcd47:: ds 1
+wBillsPCScrollPosition:: db
+wTMHolderScrollPosition:: db
+
+; TODO: change to wSwitchItem, wSwitchMon, wSwappingMove
 wSelectedSwapPosition:: db
 wMenuScrollPosition:: db
 
@@ -1032,7 +1111,7 @@ wFieldMoveSucceeded::
 ; 2 - switch
 wBattlePlayerAction:: db
 
-wVramState:: db
+wStateFlags:: db
 
 	ds 3 ; TODO
 wcd5d:: db
@@ -1041,21 +1120,21 @@ wChosenStarter:: db
 wcd60:: db
 
 SECTION "CD70", WRAM0[$CD70]
-wcd70:: ds 1
-wcd71:: ds 1
-wcd72:: dw
-wcd74:: db
-wcd75:: db
+wListPointer:: dw
+wNamesPointer:: dw
+wItemAttributesPointer:: dw
 
 wCurItem:: db
+wCurItemQuantity::
 wItemIndex:: db
+
 wCurPartySpecies: db
 wCurPartyMon: db
 
-SECTION "CD7B", WRAM0[$CD7B]
+	ds 1
 
 wWhichHPBar:: db
-wPokemonWithdrawDepositParameter:: ds 1
+wPokemonWithdrawDepositParameter:: db
 
 wItemQuantity:: db
 wItemQuantityBuffer:: db
@@ -1069,7 +1148,7 @@ wTalkingTargetType:: db
 ;bit 1 = has engaged sign in dialogue
 
 wcdb1:: ds 1
-wcdb2:: ds 1
+wHandlePlayerStep:: ds 1
 
 	ds 1
 
@@ -1098,7 +1177,7 @@ wNextMapGroup:: db
 wNextMapNumber:: db
 wPrevWarp:: db
 
-wcdc2:: db
+wEvolvableFlags:: db
 
 UNION
 wSkipMovesBeforeLevelUp::
@@ -1110,6 +1189,13 @@ wReplacementBlock:: db
 NEXTU
 wMonSubmenuCount:: db
 wMonSubmenuItems:: ds NUM_MONMENU_ITEMS + 1
+
+NEXTU
+; general-purpose HP buffers
+wHPBuffer1:: dw
+wHPBuffer2:: dw
+wHPBuffer3:: dw
+
 NEXTU
 
 wHPBarMaxHP:: dw
@@ -1124,7 +1210,16 @@ wEnemyEffectivenessVsPlayerMons:: flag_array PARTY_LENGTH
 wPlayerEffectivenessVsEnemyMons:: flag_array PARTY_LENGTH	
 
 NEXTU
+wBuySellItemPrice:: dw
 
+NEXTU
+; Used for an old nickname function
+wMiscStringBuffer:: ds STRING_BUFFER_LENGTH
+
+NEXTU
+wExpToNextLevel:: ds 3
+
+NEXTU
 wcdc3:: db
 wcdc4:: db
 wcdc5:: db
@@ -1138,6 +1233,18 @@ wcdca:: db
 NEXTU
 ; battle HUD
 wBattleHUDTiles:: ds PARTY_LENGTH
+
+NEXTU
+; thrown ball data
+wFinalCatchRate:: db
+wThrownBallWobbleCount:: db
+
+NEXTU
+; evolution data
+wEvolutionOldSpecies:: db
+wEvolutionNewSpecies:: db
+wEvolutionPicOffset::  db
+wEvolutionCanceled::   db
 
 ENDU
 
@@ -1153,10 +1260,9 @@ wEnemyMonBaseStats:: ds NUM_EXP_STATS
 wEnemyMonCatchRate:: db
 wcdff:: ds 1
 wBattleMode:: db
-wce01:: ds 1
+wTempWildMonSpecies:: ds 1
 wOtherTrainerClass:: ds 1
-wBattleType::
-wce03:: ds 1
+wBattleType:: db
 wce04:: ds 1
 wOtherTrainerID:: ds 1
 wBattleResult:: ds 1
@@ -1225,7 +1331,7 @@ wMonHLearnset::
 	ds 1
 wMonHeaderEnd::
 
-SECTION "CE26", WRAM0[$CE26]
+
 wce26:: ds 1
 
 	ds 2
@@ -1234,23 +1340,27 @@ wCurDamage:: dw
 
 	ds 2
 
-wce2d:: ds 1
+wRepelEffect:: db
 
 wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
-wce32:: ds 1
+wPutativeTMHMMove:: db
 wce33:: ds 1
 wce34:: ds 1
-wce35:: ds 1
+wWildMon:: db
 wBattleHasJustStarted:: db
 
 wNamedObjectIndexBuffer::
 wNumSetBits::
 wTextDecimalByte::
 wTempIconSpecies::
+wTempPP::
+wTempTMHM::
+wUsePPUp::
 wTempSpecies::
 wMoveGrammar::
 wTypeMatchup::
 wCurType::
+wBreedingCompatibility::
 wTempByteValue::
 wApplyStatLevelMultipliersToEnemy::
 wce37::
@@ -1261,9 +1371,7 @@ wce38:: ds 1
 wNumFleeAttempts::
 wce39:: ds 1
 
-SECTION "CE3A", WRAM0[$CE3A]
-
-wce3a:: ds 1
+wMonTriedToEvolve:: db
 
 wVBlankSavedROMBank::
 	db
@@ -1279,11 +1387,11 @@ wTimeOfDay:: db
 ; 02 - Cave                35--50s
 ; 03 - Morning  06--09h    50--59s
 
+wcd3e: ds 1
 wcd3f: ds 1
 
-SECTION "CE5F", WRAM0[$CE5F]
+SECTION "Options", WRAM0[$CE5F]
 
-wce5f:: ; debug menu writes $41 to it
 wOptions::
 ; bit 0-2: number of frames to delay when printing text
 ;   fast 1; mid 3; slow 5
@@ -1294,12 +1402,15 @@ wOptions::
 ; bit 7: battle scene off/on
 	db
 
-wce60::
-	db ; main menu checks this, maybe states if there's a save present?
+; A buffer for sOptions that is used to check if a save file exists.
+; Only checks the bottom bit, for whatever reason.
+wSaveFileExists:: db
 
 wActiveFrame:: db
 
-wTextBoxFlags::  db
+; bit 0: 1-frame text delay
+; bit 1: when unset, no text delay
+wTextboxFlags::  db
 
 wDebugFlags:: db
 ; Bit 0: Debug battle indicator
@@ -1336,20 +1447,20 @@ wFollowMovementQueue::
 	ds 5
 
 wObjectStructs::
-; Note: this might actually not be an object. TODO: Investigate (if indexing starts at 1, then this isn't an object)
-; It might just be unused/a leftover.
-wUnkObjectStruct:: object_struct wUnkObject
+; Object struct reserved for the map viewer cursor and for Blue in Silent Hill.
+; Presumably needed any time they needed something to have a higher priority than the player.
+wReservedObjectStruct:: object_struct wReservedObject
+
 wPlayerStruct::   object_struct wPlayer
 ; wObjectStruct1 - wObjectStruct12
 for n, 1, NUM_OBJECT_STRUCTS - 1
 wObject{d:n}Struct:: object_struct wObject{d:n}
 endr
 
-wCmdQueue::
-wCmdQueueEntry1:: ds 16
-wCmdQueueEntry2:: ds 16
-wCmdQueueEntry3:: ds 16
-wCmdQueueEntry4:: ds 16
+wMinorObjects::
+for n, 0, NUM_MINOR_OBJECTS
+wMinorObject{d:n}Struct:: minor_object wMinorObject{d:n}
+endr
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0
@@ -1413,9 +1524,7 @@ wJohtoBadges::
 wKantoBadges::
 	flag_array NUM_KANTO_BADGES
 
-wTMsHMs:: db
-
-SECTION "D19E", WRAM0[$D19E]
+wTMsHMs:: ds NUM_TM_HM
 
 wItems::
 wNumBagItems:: db
@@ -1487,10 +1596,14 @@ wd41d:: db
 wd41e:: db
 
 SECTION "D4A9", WRAM0[$D4A7]
+; Bit 0 set when exiting a battle.
+; Bit 1 set when viewing summary/opening new dex entry, and reset when closing new dex entry.
 wd4a7:: db
 	ds 1
 wd4a9:: db
 	ds 1 ; TODO
+
+; TODO: change to wJoypadDisable, constantify flags
 wJoypadFlags:: db
 ; 76543210
 ; ||||\__/
@@ -1506,10 +1619,13 @@ wDigWarpNumber:: db
 wd4b3:: ds 1
 wd4b4:: ds 1
 wd4b5:: ds 1
-wd4b6:: ds 1
-wd4b7:: ds 1
-wd4b8:: ds 1
-wd4b9:: ds 1
+
+; Doesn't get written to at any point yet, but it's read... once.
+wCurBox:: db
+
+	ds 2
+
+wBoxNames:: ds BOX_NAME_LENGTH * NUM_BOXES
 
 
 SECTION "Warp data", WRAM0[$D513]
@@ -1546,22 +1662,12 @@ wd637:: db ;OW battle state? $3 wild battle, $8 is trainer battle $4 is left bat
 wd638:: db ;wd637's last written-to value
 
 SECTION "Used sprites", WRAM0[$D642]
-wd642:: db
+wUnusedAddOutdoorSpritesReturnValue:: db
 wBGMapAnchor::
 	dw
 
-UNION
-
 wUsedSprites::
 	ds 2
-
-NEXTU
-
-	ds 1
-
-wd646:: db
-
-ENDU
 
 wUsedNPCSprites::
 	ds 8
@@ -1671,27 +1777,21 @@ wUnownDex:: ds NUM_UNOWN
 
 wAnnonID:: ds 1
 
-wd875:: ds 1
+	ds 1
 
-wBufferMonNickname::
-wd876:: ds 1
+; Buffer used for withdrawing Breeder Pokémon, as well as checking gender.
 
-	ds 5
+wBufferMonNickname:: ds MON_NAME_LENGTH
+wBufferMonOT:: ds PLAYER_NAME_LENGTH
+wBufferMon:: box_struct wBufferMon
 
-wBufferMonOT::
-wd87c:: ds 1
+; 1 = One Pokémon deposited.
+; 2 = Two Pokémon deposited.
+; 3 = Egg laid.
+; 4 = Egg received, don't lay another egg.
+wBreederStatus:: ds 1
 
-	ds 5
-
-wd882:: ds 1
-wd883:: ds 1
-wd884:: ds 1
-
-SECTION "D8A2", WRAM0[$D8A2]
-
-wd8a2:: ds 1
-wd8a3:: ds 1
-wd8a4:: ds 1
+	ds 2
 
 wBreedMon1Nickname:: ds MON_NAME_LENGTH
 wBreedMon1OT:: ds PLAYER_NAME_LENGTH
@@ -1701,9 +1801,9 @@ wBreedMon2Nickname:: ds MON_NAME_LENGTH
 wBreedMon2OT:: ds PLAYER_NAME_LENGTH
 wBreedMon2:: box_struct wBreedMon2
 
-SECTION "D8FD", WRAM0[$D8FD]
-
-wd8fd:: ds 1
+; Uses the last two bits to keep track of your breeder mons' genders.
+; Bit clear = male, bit set = female
+wBreedMonGenders:: db
 wd8fe:: ds 1
 
 SECTION "D913", WRAM0[$D913]
@@ -1738,38 +1838,7 @@ endr
 wOTPartyDataEnd::
 ENDU
 
-SECTION "DA83", WRAM0[$DA83]
-
-wBoxListLength:: db
-wBoxList:: ds MONS_PER_BOX
-wBoxListEnd:: db
-
-SECTION "DAA3", WRAM0[$DAA3]
-
-wBoxMons::
-; wBoxMon1 - wBoxMon30
-for n, 1, MONS_PER_BOX + 1
-wBoxMon{d:n}:: box_struct wBoxMon{d:n}
-endr
-
-wBoxDataEnd::
-
-SECTION "DE63", WRAM0[$DE63]
-
-wBoxMonOT::
-; wBoxMon1OT - wBoxMon30OT
-for n, 1, MONS_PER_BOX + 1
-wBoxMon{d:n}OT:: ds PLAYER_NAME_LENGTH
-endr
-wBoxMonOTEnd::
-
-wBoxMonNicknames::
-; wBoxMon1Nick - wBoxMon30Nick
-for n, 1, MONS_PER_BOX + 1
-wBoxMon{d:n}Nick:: ds MON_NAME_LENGTH
-endr
-wBoxMonNicknamesEnd::
-wdfcb:: ds 1
+wBox:: box wBox
 
 SECTION "Stack Bottom", WRAM0
 

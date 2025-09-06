@@ -1,14 +1,48 @@
+; wOptions
 DEF TEXT_DELAY_MASK EQU %111
 	const_def 3
-	const SGB_BORDER     ; 3
-	const NO_TEXT_SCROLL ; 4
-	const STEREO         ; 5
-	const BATTLE_SHIFT   ; 6
-	const BATTLE_SCENE   ; 7
+	shift_const SGB_BORDER     ; 3
+	shift_const NO_TEXT_SCROLL ; 4
+	shift_const STEREO         ; 5
+	shift_const BATTLE_SHIFT   ; 6
+	shift_const BATTLE_SCENE   ; 7
 
 DEF TEXT_DELAY_FAST EQU %001 ; 1
 DEF TEXT_DELAY_MED  EQU %011 ; 3
 DEF TEXT_DELAY_SLOW EQU %101 ; 5
+
+DEF START_MONEY EQU 3000
+
+; wStateFlags
+DEF SPRITE_UPDATES_DISABLED_F EQU 0
+DEF SCRIPTED_MOVEMENT_STATE_F EQU 7
+
+; wSpriteFlags::
+DEF SPRITES_SKIP_WALKING_GFX_F  EQU 6
+DEF SPRITES_SKIP_STANDING_GFX_F EQU 7
+
+; wPokemonWithdrawDepositParameter::
+DEF PC_WITHDRAW        EQU 0
+DEF PC_DEPOSIT         EQU 1
+DEF REMOVE_PARTY       EQU 0
+DEF REMOVE_BOX         EQU 1
+DEF BUFFERMON_WITHDRAW EQU 2
+DEF BUFFERMON_DEPOSIT  EQU 3
+DEF GET_BUFFER_MON     EQU 0
+DEF GET_BREED_MON      EQU 1
+
+; wBreederStatus::
+DEF BREEDER_ONE_BREEDMON EQU 1
+DEF BREEDER_TWO_BREEDMON EQU 2
+DEF BREEDER_EGG_READY    EQU 3
+DEF BREEDER_GAVE_EGG     EQU 4
+
+; wPlayerStepFlags::
+	const_def 4
+	const PLAYERSTEP_MIDAIR_F   ; 4
+	const PLAYERSTEP_CONTINUE_F ; 5
+	const PLAYERSTEP_STOP_F     ; 6
+	const PLAYERSTEP_START_F    ; 7
 
 ; wTextboxFrame::
 	const_def
@@ -21,6 +55,11 @@ DEF TEXT_DELAY_SLOW EQU %101 ; 5
 	const FRAME_7 ; 6
 	const FRAME_8 ; 7
 DEF NUM_FRAMES EQU const_value
+
+; wTextboxFlags::
+	const_def
+	const FAST_TEXT_DELAY_F ; 0
+	const TEXT_DELAY_F      ; 1
 
 ; wMonType::
 	const_def
@@ -103,3 +142,10 @@ DEF OVERWORLD_MINUTE_TIME_F EQU 7
 
 ; wTimeOfDayPalFlags::
 DEF CLEAR_PALSET_F EQU 7
+
+; wBattleAnimFlags::
+const_def
+const BATTLEANIM_STOP_F          ; 0
+const BATTLEANIM_IN_SUBROUTINE_F ; 1
+const BATTLEANIM_IN_LOOP_F       ; 2
+const BATTLEANIM_KEEPSPRITES_F   ; 3
