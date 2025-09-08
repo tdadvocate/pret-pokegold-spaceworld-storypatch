@@ -2108,13 +2108,28 @@ EnemySendOutFirstMon:
 	inc a
 	ldh [hBattleTurn], a
 
-; Play shiny animation for Sunflora and Pikachu
+; Original Code - Play shiny animation for Sunflora and Pikachu
 	ld b, 1
 	ld a, [wCurPartySpecies]
 	cp DEX_SUNNY
 	jr z, .apply_animation
 	cp DEX_PIKACHU
 	jr z, .apply_animation
+	
+; Me attempting to fix - Play shiny animation for Sunflora and Pikachu (only enemy mon)
+;	ld b, 1
+;	ld a, [wCurPartySpecies]
+;	cp PAL_SHINY_GREENMON
+;	jr z, .apply_animation
+;	cp PAL_BLUEMON
+;	jr z, .apply_animation
+;	ld hl, wEnemyMonDVs
+;	callfar CheckShininess
+;	jr z, .apply_animation
+	;ld hl, wEnemyMonDVs
+    ;ld a, [hBattleTurn]
+    ;call CheckShininess
+	;jr c, .apply_animation
 
 ; Play scanline fade animation for Hoothoot
 	ld b, 2
@@ -2541,13 +2556,22 @@ SendOutPlayerMon:
 	ldh [hBattleTurn], a
 	ld [wNumHits], a
 
-; Play shiny animation for Sunflora and Pikachu
+; Original Code - Play shiny animation for Sunflora and Pikachu (only your mon)
 	ld b, 1
 	ld a, [wCurPartySpecies]
 	cp DEX_SUNNY
 	jr z, .apply_animation
 	cp DEX_PIKACHU
 	jr z, .apply_animation
+
+; Fixed Implentation (maybe) - Play shiny animation for your party
+;	ld b, 1
+;	ld hl, wPartyMon1DVs
+;	ld a, [wCurPartyMon]
+;	ld bc, PARTYMON_STRUCT_LENGTH
+;	call AddNTimes
+;	call CheckShininess
+;	jr c, .apply_animation
 
 ; Play scanline fade animation for Hoothoot
 	ld b, 2
