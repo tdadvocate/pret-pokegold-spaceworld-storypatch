@@ -4,6 +4,33 @@ This is a work-in-progress build of making the Pokémon Gold prototype demoed at
 
 At the very bottom of this README, you will find the original README provided on the PRET disassembly repository that this was initially forked from. Below you will also find the currently planned changes/features/fixes, stretch goal plans, and the necessary tools for building or contributing to this project. 
 
+## Debug Menu Guide
+- This is for things like healing, cutting trees, PC storage, and more
+### Page 1
+  Next Page
+	Warp 
+	Sprite Viewer
+	Change Transportation
+	Tools (Clock Adjustment & Such)
+	PC Menu
+	Close Menu
+### Page 2
+	Next Page
+	PokeMart Menu (Non-Functional)
+	Heal Pokemon
+	Trainer Gear
+	Mini Games
+	Map Viewer (Tile Data)
+	Field Cut
+### Page 3
+	Next Page
+	Clear Event Flags
+	VRAM Viewer
+	Teleport
+	Follow NPC Test
+	Town Map
+	Close Menu
+
 ## Currently Implemented Features
 - Changed game from Demo Mode to Story Mode
 - Re-enable evolution of Pokémon within the game

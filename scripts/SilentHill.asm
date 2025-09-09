@@ -307,9 +307,9 @@ CheckLabDoor:
 	call SetObjectFacing
 	ld hl, wJoypadFlags
 	set 6, [hl]
-	ld hl, SilentHillTextString1
-	call OpenTextbox
-	call LabClosed
+;	ld hl, SilentHillTextString1
+;	call OpenTextbox
+;	call LabClosed
 	call xor_a
 	ret
 

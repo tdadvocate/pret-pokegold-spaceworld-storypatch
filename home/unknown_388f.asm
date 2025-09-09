@@ -78,19 +78,23 @@ Function391f::
 Function3920::
 	ld a, [wcd5d]
 	cp $1
-	jr z, .asm_392d
+;	jr z, .asm_392d ; just removing this is enough to remove the demo reset code but doesn't heal mon
+; Commenting out the above also disables retries against the trainer you lost too unfortunately
+;	callfar HealParty ; This heals after every battle, not just whiteouts
 	ld a, $4
 	call WriteIntod637
 	ret
 
-.asm_392d:
-	ld hl, wJoypadFlags
-	res 4, [hl]
-	ld hl, .text
-	call OpenTextbox
-	call GBFadeOutToBlack
-	jp Init
+; Demo Mode Reset Code 
+;.asm_392d:
+;	ld hl, wJoypadFlags
+;	res 4, [hl]
+;	ld hl, .text
+;	call OpenTextbox
+;	call GBFadeOutToBlack
+;	jp Init
 
-.text:
-	text "つぎは　がんばるぞ！！"
-	done
+; Demo Mode Reset Text
+;.text:
+;	text "つぎは　がんばるぞ！！"
+;	done
