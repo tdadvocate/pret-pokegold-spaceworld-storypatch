@@ -628,8 +628,8 @@ Movememt12:
 	SilentHillLabFrontScript17:
 	ld hl, SilentHillLabFrontTextString23
 	call OpenTextbox
-	ld hl, wd41d
-	set 2, [hl] ; not sure what exactly this is doing but maybe to do with what bag is being used?
+	ld hl, wd41d 
+	set 2, [hl] ; Setting flag of Rucksack being received from Nanami after Rival battle?
 	ld hl, wNumBagItems
 	; Gives Ball Holder in first bag slot
 	ld a, 159 ; Ball Holder

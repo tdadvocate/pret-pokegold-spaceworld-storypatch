@@ -146,9 +146,9 @@ GetStartMenuState:
 ; based on story flags and debug mode.
 ; 4 = debug, 3 = starting, 2 = rival beat in lab
 ; 1 = pokedex recieved, 0 = chose starter
-	ld b, 3 ; Changed from debug flag 4 to story flag 3 for full start menu (note: 0 technically should be what is used but the game does not appear to properly either set or refresh the flag counter to update the start menu as you progress through the story. Not sure which exactly.)
+	ld b, 3 ; Changed from debug flag 4 to story flag 3 for full start menu (note: 0 technically should be what is used but the game doesn't properly refresh the flag counter to update the start menu as you progress through the story.)
 	ld hl, wDebugFlags
-	bit DEBUG_FIELD_F, [hl]
+	bit DEBUG_FIELD_F, [hl] ; Needs changed from DEBUG_FIELD_F to CONTINUED_F (note: this is required for the flags to actually be set seemingly)
 	jr z, .store
 	ld b, 0
 	ld hl, wd41b
@@ -159,7 +159,7 @@ GetStartMenuState:
 	bit 4, [hl]
 	jr z, .store
 	ld b, 2
-	ld hl, wd41d
+	ld hl, wd41d ; Flag of Rucksack being received from Nanami after Rival battle?
 	bit 2, [hl]
 	jr z, .store
 	ld b, 3
