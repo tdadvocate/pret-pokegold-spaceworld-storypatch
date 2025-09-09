@@ -155,16 +155,16 @@ ItemNames::
 	db "しようきんし@" ; 96
 	db "りゅうのウロコ@" ; DRAGON_SCALE
 	db "はかいのいでんし@" ; BERSERK_GENE
-	db "こころのいし@" ; HEART_STONE
+	db "こころのいし@" ; HEART_STONE (153)
 	db "ほのおのシッポ@" ; FIRE_TAIL
 	db "かみなりのシッポ@" ; THUNDER_TAIL
 	db "せいなるはい@" ; SACRED_ASH
 	db "わざマシンホルダ@" ; TM_HOLDER  (157)
 	db "メール@" ; MAIL
-	db "ボールホルダ@" ; BALL_HOLDER (15)
+	db "ボールホルダ@" ; BALL_HOLDER (159)
 	db "どうぐ@" ; BAG
-	db "だいじなどうぐ@" ; IMPORTANT_BAG
-	db "どくのいし@" ; POISON_STONE
+	db "だいじなどうぐ@" ; IMPORTANT_BAG (161)
+	db "どくのいし@" ; POISON_STONE (162) 
 	db "みしよう@" ; A3
 	db "みしよう@" ; A4
 	db "みしよう@" ; A5
