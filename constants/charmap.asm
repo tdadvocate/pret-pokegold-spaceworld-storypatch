@@ -138,6 +138,7 @@
 	charmap "「", $70
 ;	charmap "‘", $70
 	charmap "」", $71
+;	charmap "’", $71
 	charmap "『", $72
 ;	charmap "“", $72
 	charmap "』", $73
