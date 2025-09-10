@@ -65,6 +65,7 @@ DisplayStartMenu:
 .StartMenuHeader:
 	db MENU_BACKUP_TILES
 	menu_coords $0C, 00, $13, $11
+;	menu_coords $0A, 00, $13, $11 ; changed start of border drawing to fit English text
 	dw .MenuData
 	db 1 ; default option
 
@@ -85,6 +86,17 @@ DisplayStartMenu:
 	db "とじる@" ; Close 
 	db "わくせん@" ; Set Frame (This is a guess based on surrounding code context clues as I have never seen this word before)
 	db "りセット@" ; Reset
+
+;.Strings:
+;	db "POKéDEX@"
+;	db "POKéMON@"
+;	db "PACK@"
+;	db "<PLAYER>@"
+;	db "SAVE@"
+;	db "OPTION@"
+;	db "EXIT@"
+;	db "FRAMES@"
+;	db "RESET@"
 
 StartMenuJumpTable:
 	dw StartMenu_Pokedex
@@ -417,6 +429,7 @@ DebugBackpackLoop:
 
 .ToolsPocketText
 	db "　　　　　　ふつうの　どうぐ　　　　　　@"
+;	db "Item Bag@"
 
 .NoTools
 	ld hl, KeyItemsPocketHeader
@@ -437,6 +450,7 @@ DebugBackpackLoop:
 
 KeyItemsPocketText:
 	db "　　　　　　だいじな　もの　　　　　　　@"
+;	db "Key Item Bag@"
 
 NondebugBackpackLoop:
 	ld hl, BackpackMenuHeader
@@ -457,6 +471,7 @@ NondebugBackpackLoop:
 
 BackpackHeaderText:
 	db "　　　　　　りュックの　なか　　　　　@"
+;	db "Inventory@"
 
 HandleBackpackInput:
 	ld a, [wMenuJoypad]
@@ -586,6 +601,13 @@ DebugSelectedItemMenu:
 	db "すてる@" ; toss
 	db "とうろく@" ; register
 
+;.DebugSelectedItemMenuText
+;	db (STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING)
+;	db 3
+;	db "USE@"
+;	db "TOSS@"
+;	db "REGISTER@"
+
 SelectedItemMenu:
 	db MENU_BACKUP_TILES
 	menu_coords $0E, $0A, $13, $0E
@@ -597,6 +619,12 @@ SelectedItemMenu:
 	db 2
 	db "つかう@" ; use
 	db "すてる@" ; toss
+
+;.SelectedItemMenuText
+;	db (STATICMENU_CURSOR | STATICMENU_NO_TOP_SPACING)
+;	db 2
+;	db "USE@"
+;	db "TOSS@"
 
 TossItemSelection:
 	ld de, wNumBagItems
@@ -1714,6 +1742,7 @@ PartyMenuAttributes:
 
 PartyTypeText:
 	db "タイプ／　　　　　いりょく／@"
+;	db "TYP／　　　　　ATK／@" ; first text should be type but shortened due to text size limits
 
 PartyPokeDivider:
 	db "ーーー@"
@@ -2150,9 +2179,11 @@ DrawTrainerCardMainPage:
 
 TrainerCardText:
 	db "なまえ／<NEXT><NEXT>おこづかい<NEXT><NEXT>#ずかん@"
+;	db "NAME／<NEXT><NEXT>MONEY<NEXT><NEXT>#DEX@"
 
 TrainerCardDexEntriesText:
 	db "ひき@"
+;	db "@" ; Seen mon?
 
 TrainerCardNameTiles:
 	db $0A, $0C, $0D, $0E, $0F, $FF
@@ -2189,6 +2220,7 @@ DrawTrainerCaseBadgePage:
 
 TrainerCardLeagueBadgesTextTiles:
 	db "#りーグバッジ@"
+;	db "GYM LEADERS@" ; Badges?
 
 TrainerCardBadgesTiles:
 	db $0A, $0B, $0C, $0D, $0E, $FF

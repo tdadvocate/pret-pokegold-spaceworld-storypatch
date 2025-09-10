@@ -12,6 +12,16 @@ TextEntryChars:
 	db "ゃゅょっを　ャュョッヲ　ﾞﾟ　ー。"
 	db "１２３４５　６７８９０　？！×．円"
 
+;TextEntryChars:
+;	db "ABCDE　FGHIJ　KLMNO"
+;	db "PQRST　UVWXY　ZÄÖÜ　"
+;	db "abcde　fghij　klmno"
+;	db "pqrst　uvwxy　zäéöü"
+;	db "12345　67890　　　　　　"
+;	db "?!.,'　:;×-/　　　　　　"
+;	db "[]()&　<PK><MN>　　　　　　　　　"
+;	db "　　　　　　　　　　　　　　　　円"
+
 TextEntryHiragana:
 	db "あいうえお　かきくけこ　さしすせそ"
 	db "たちつてと　なにぬねの　はひふへほ"

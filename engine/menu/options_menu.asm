@@ -407,33 +407,60 @@ DisplayOptionsMenu:
 	add "１"
 	ld [hl], a
 	ret
-
+	
 .OptionsText_TextSpeed:
 	db "はなしの　はやさ"
 	next "　はやい　　　　ふつう　　　　おそい"
 	text_end
+
+;.OptionsText_TextSpeed:
+;	db "Text Speed"
+;	next "　Fast　　　Med　　　　Slow"
+;	text_end
 
 .OptionsText_BattleScene:
 	db "せんとう　アニメーション"
 	next "　じっくり　みる　　とばして　みる"
 	text_end
 
+;.OptionsText_BattleScene:
+;	db "Battle Animation"
+;	next "　On　　　　　　　Off"
+;	text_end
+
 .OptionsText_BattleStyle:
 	db "しあいの　ルール"
 	next "　いれかえタイプ　　かちぬきタイプ"
 	text_end
+	
+;.OptionsText_BattleStyle:
+;	db "Battle Style"
+;	next "　Shift　　　　Set"
+;	text_end
 
 .OptionsText_Sound:
 	db "　モノラル　　　　　ステレオ"
 	text_end
 
+;.OptionsText_Sound:
+;	db "　Mono　　　　　Stereo"
+;	text_end
+
 .OptionsText_Cancel:
 	db "　おわり"
 	text_end
 
+;.OptionsText_Cancel:
+;	db "　END"
+;	text_end
+
 .OptionsText_FrameType:
 	db "　わく　を　かえる　"
 	text_end
+
+;.OptionsText_FrameType:
+;	db "　Set Frame　"
+;	text_end
 
 ; Table that indicates how the 3 text speed options affect frame delays.
 ; Format:

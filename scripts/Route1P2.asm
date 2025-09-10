@@ -85,14 +85,28 @@ Route1P2TextString1:
 	line "うちと　ポケモン　しはります？"
 	done
 
+;Route1P2TextString1:
+;	text "What a lovely"
+;	line "trainer you are!"
+;	cont "Won't you partake"
+;	cont "in a battle?"
+;	done
+
 Route1P2TextString2: ; (unused?)
-	text "いやあ　かんにんやわあ"
+	text "いやあ　かんにんやわあ" ; Kansai dilect "Oh, I'm so sorry!" (I think)
 	done
 
 Route1P2TextString3:
 	text "かわいい　かおして　つよおすなあ"
 	line "その　ちょうしで　おきばりやす"
 	done
+
+;Route1P2TextString3:
+;	text "You look cute, but"
+;	line "you truly don't"
+;	cont "hold back! You'll"
+;	cont "strain yourself..."
+;	done
 
 Route1P2TextString4: ; Rival Demo End Text
 	text "シゲル『おっ　サトシじゃないか！"
@@ -111,7 +125,38 @@ Route1P2TextString4: ; Rival Demo End Text
 	line "じゃあな"
 	done
 
+;Route1P2TextString4: ; Rival Demo End Text
+;	text "GARY: Oh! If it"
+;	line "isn't ASH!"
+;
+;	para "Guess you actually"
+;	line "made it all the"
+;	cont "way here."
+;	cont "Even though you're"
+;	cont "a wimp! Don't push"
+;	cont "yourself, huh?"
+;
+;	para "You've got your"
+;	line "work cut out for"
+;	cont "you, don'tcha?"
+;	cont "Like catching more"
+;	
+;	para "POKéMON, or"
+;	line "raising lotsa"
+;	cont "different types"
+;	cont "of POKéMON."
+;
+;	para "You should turn"
+;	line "back here! See ya!"
+;	done
+
 Route1P2TextString5: ; Route 1 Part 2 Sign Text
 	text "ここは　１ばん　どうろ"
 	line "サイレントヒル　⋯⋯　オールドシティ"
 	done
+
+;Route1P2TextString5: ; Route 1 Part 2 Sign Text
+;	text "ROUTE 1"
+;	line "SILENT HILL -"
+;	cont "OLD CITY"
+;	done

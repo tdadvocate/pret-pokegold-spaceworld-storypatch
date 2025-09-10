@@ -57,3 +57,16 @@ PlayerHouse1FTextString1:
 	line "わたしも　ポケモン　きらいって"
 	cont "わけじゃないし　がんばるのよ！"
 	done
+
+;PlayerHouse1FTextString1:
+;	text "MOM: Oh, you were"
+;	line "asked by PROF. OAK"
+;	cont "to help make a new"
+;	cont "POKéDEX?"
+;
+;	para "That's wonderful!"
+;	line "I may not know too"
+;	cont "much about POKéMON,"
+;	cont "but I'll be"
+;	cont "rooting for you!"
+;	done

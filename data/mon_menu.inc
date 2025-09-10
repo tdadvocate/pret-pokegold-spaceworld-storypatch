@@ -48,6 +48,15 @@ MonMenuOptionStrings:
 	db "メール@"      ; Mail
 	db "エラー！@"     ; Error!
 
+;MonMenuOptionStrings:
+;	db "STATS@"
+;	db "SWITCH@"
+;	db "ITEM@"
+;	db "CANCEL@"
+;	db "MOVE@"
+;	db "MAIL@"
+;	db "ERROR@"
+
 Unreferenced_FieldMoveList:
 	db MOVE_UPROOT, MONMENUITEM_CUT
 	db MOVE_WIND_RIDE, MONMENUITEM_FLY

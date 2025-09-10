@@ -217,19 +217,19 @@ AskForgetMoveText:
 	text "は　あたらしく"
 	line "@"
 	text_from_ram wStringBuffer2
-	text "を　おぼえたい<⋯⋯>！"
-	para "しかし　@"
+	text "を　おぼえたい<⋯⋯>！" ; "wants to learn a new move..."
+	para "しかし　@" ; "but"
 	text_from_ram wMonOrItemNameBuffer
-	text "は　わざを　４つ"
-	line "おぼえるので　せいいっぱいだ！"
+	text "は　わざを　４つ" ; "can't learn more than 4"
+	line "おぼえるので　せいいっぱいだ！" ; "moves!"
 	para "@"
 	text_from_ram wStringBuffer2
-	text "の　かわりに"
-	line "ほかの　わざを　わすれさせますか？"
+	text "の　かわりに" ; "forget another"
+	line "ほかの　わざを　わすれさせますか？" ; "move instead?"
 	done
 
 Text_1_2_and_Poof:
-	text "１　２の　<⋯⋯>@"
+	text "１　２の　<⋯⋯>@" ; "1, 2, and ..."
 	text_exit
 	start_asm
 	push de
@@ -240,19 +240,19 @@ Text_1_2_and_Poof:
 	ret
 
 MoveForgotText:
-	text "　ポカン！@"
+	text "　ポカン！@" ; "POOF!"
 	text_exit
 	text ""
 	para "@"
 	text_from_ram wMonOrItemNameBuffer
-	text "は　@"
+	text "は　@" ; "<MON>"
 	text_from_ram wStringBuffer1
 	text "の"
-	line "つかいかたを　きれいに　わすれた！"
-	para "そして<⋯⋯>！"
+	line "つかいかたを　きれいに　わすれた！" ; "forgot how to use it"
+	para "そして<⋯⋯>！" ; "and learned <MOVE>"
 	prompt
 
 MoveCantForgetHMText:
-	text "それは　たいせつなわざです"
-	line "わすれさせることは　できません！"
+	text "それは　たいせつなわざです" ; "This move is too important"
+	line "わすれさせることは　できません！" ; "to be forgotten"
 	prompt

@@ -631,6 +631,10 @@ StatusText_StatusType:
 	db   "じょうたい／"
 	next "タイプ／@"
 
+;StatusText_StatusType:
+;	db   "CND／" ; Condition
+;	next "TYP／@" ; should be type but shortened due to text size limits
+
 StatusText_OK:
 	db "ふつう@"
 

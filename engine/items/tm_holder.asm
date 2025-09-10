@@ -305,6 +305,7 @@ TMHM_ThreeDashesString:
 
 TMHM_TypeString:
 	db "タイプ／@"
+;	db "TYP／@" ; should be type but shortened due to text size limits
 
 TMHolder_DisplayItems:
 	hlcoord 3, 0
