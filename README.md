@@ -35,7 +35,7 @@ Please see the [Wiki](https://github.com/tdadvocate/pret-pokegold-spaceworld-sto
 - [ ] English translation (very unlikely without assembly help)
 - [ ] Full story recreation (even less likely)
 - [ ] Full Japanese story recreation (basically 0% chance)
--- This is including, but not limited to; adding the boat to travel between Fonto, High Tech, and West, adding the proper connections for Cave and Power Plant if actually intended to be used, story events found in other leaked sources, etc.
+- This is including, but not limited to; adding the boat to travel between Fonto, High Tech, and West, adding the proper connections for Cave and Power Plant if actually intended to be used, story events found in other leaked sources, etc.
 
 ## KNOWN BUGS
 Please see the [Wiki](https://github.com/tdadvocate/pret-pokegold-spaceworld-storypatch/wiki/Known-Bugs) for more info
