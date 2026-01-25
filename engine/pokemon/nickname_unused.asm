@@ -69,6 +69,12 @@ AskGiveNickname_Old:
 	line "ニックネームを　つけますか？"
 	done
 
+;AskGiveNickname_Old:
+;	text_from_ram wStringBuffer1
+;	text "Would you like to"
+;	line "give it a nickname?"s
+;	done
+
 Unreferenced_DisplayNameRaterScreen:
 	ld de, wMiscStringBuffer
 	push de
