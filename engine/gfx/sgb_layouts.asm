@@ -474,23 +474,27 @@ CheckShininess:
 	; Attack DV
 	ld a, [hl]
 	cp $a0
+;	cp $00 ; set for always shiny (all required and remove $a0 & $0a)
 	jr c, .not_shiny
 
 	; Defense DV
 	ld a, [hli]
 	and $0f
 	cp $0a
+;	cp $00 ; set for always shiny (all required and remove $a0 & $0a)
 	jr c, .not_shiny
 
 	; Speed DV
 	ld a, [hl]
 	cp $a0
+;	cp $00 ; set for always shiny (all required and remove $a0 & $0a)
 	jr c, .not_shiny
 
 	; Special DV
 	ld a, [hl]
 	and $0f
 	cp $0a
+;	cp $00 ; set for always shiny (all required and remove $a0 & $0a)
 	jr c, .not_shiny
 	scf
 	ret

@@ -53,7 +53,8 @@ FieldDebug_FieldCut:
 
 .IsCollision: ; broken
 	call GetFacingTileCoord
-	cp OLD_COLLISION_CUT_TREE
+;	cp OLD_COLLISION_CUT_TREE
+	cp COLLISION_CUT_TREE ; should point to the new collision data for cut trees as used on the map
 	ret
 
 .IsCuttableTile:

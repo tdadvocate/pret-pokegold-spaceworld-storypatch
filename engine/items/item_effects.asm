@@ -177,7 +177,8 @@ ItemEffects:
 	dw Dummy_NewItemEffect ; ITEM_96
 	dw Dummy_NewItemEffect ; ITEM_DRAGON_SCALE
 	dw Dummy_NewItemEffect ; ITEM_BERSERK_GENE
-	dw Dummy_NewItemEffect ; ITEM_HEART_STONE
+;	dw Dummy_NewItemEffect ; ITEM_HEART_STONE
+	dw EvoStoneEffect ; Heart Stone Fix?
 	dw Dummy_NewItemEffect ; ITEM_FIRE_TAIL
 	dw Dummy_NewItemEffect ; ITEM_THUNDER_TAIL
 	dw Dummy_NewItemEffect ; ITEM_SACRED_ASH
@@ -186,7 +187,8 @@ ItemEffects:
 	dw Dummy_NewItemEffect ; ITEM_BALL_HOLDER
 	dw Dummy_NewItemEffect ; ITEM_BAG
 	dw Dummy_NewItemEffect ; ITEM_IMPORTANT_BAG
-	dw Dummy_NewItemEffect ; ITEM_POISON_STONE
+;	dw Dummy_NewItemEffect ; ITEM_POISON_STONE
+	dw EvoStoneEffect ; Poison Stone Fix?
 	dw Dummy_NewItemEffect ; ITEM_A3
 	dw Dummy_NewItemEffect ; ITEM_A4
 	dw Dummy_NewItemEffect ; ITEM_A5

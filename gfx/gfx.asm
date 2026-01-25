@@ -101,6 +101,7 @@ TrainerCardLeadersGFX:: INCBIN "gfx/trainer_card/leaders.2bpp"
 	db $18, $00 ; leftover of previous graphics
 Unreferenced_UnusedLeaderNameGFX:: INCBIN "gfx/trainer_card/unused_leader_name.2bpp"
 
+; TILESET_SILENT_HILL
 SECTION "gfx.asm@Bank 6 Tilesets 00", ROMX
 Tileset_00_GFX:
 Tileset_1b_GFX:
@@ -110,12 +111,14 @@ INCBIN "data/tilesets/tileset_00_metatiles.bin"
 Tileset_00_Coll:
 INCBIN "data/tilesets/tileset_00_collision.bin"
 
+; TILESET_FOREST
 SECTION "gfx.asm@Bank 6 Tilesets 1b", ROMX
 Tileset_1b_Meta:
 INCBIN "data/tilesets/tileset_1b_metatiles.bin"
 Tileset_1b_Coll:
 INCBIN "data/tilesets/tileset_1b_collision.bin"
 
+; TILESET_OLD_CITY
 SECTION "gfx.asm@Bank 6 Tilesets 01", ROMX
 Tileset_01_GFX:
 INCBIN "gfx/tilesets/tileset_01.common.2bpp"
@@ -124,6 +127,7 @@ INCBIN "data/tilesets/tileset_01_metatiles.bin"
 Tileset_01_Coll:
 INCBIN "data/tilesets/tileset_01_collision.bin"
 
+; TILESET_WEST
 SECTION "gfx.asm@Bank 6 Tilesets 02", ROMX
 Tileset_02_GFX:
 INCBIN "gfx/tilesets/tileset_02.common.2bpp"
@@ -132,6 +136,7 @@ INCBIN "data/tilesets/tileset_02_metatiles.bin"
 Tileset_02_Coll:
 INCBIN "data/tilesets/tileset_02_collision.bin"
 
+; TILESET_HOUSE
 SECTION "gfx.asm@Bank 6 Tilesets 09", ROMX
 Tileset_09_GFX:
 INCBIN "gfx/tilesets/tileset_09.2bpp"
@@ -140,6 +145,7 @@ INCBIN "data/tilesets/tileset_09_metatiles.bin"
 Tileset_09_Coll:
 INCBIN "data/tilesets/tileset_09_collision.bin"
 
+; TILESET_ROCKET_HOUSE
 SECTION "gfx.asm@Bank 7 Tilesets 13", ROMX
 Tileset_13_GFX:
 INCBIN "gfx/tilesets/tileset_13.2bpp"
@@ -148,6 +154,7 @@ INCBIN "data/tilesets/tileset_13_metatiles.bin"
 Tileset_13_Coll:
 INCBIN "data/tilesets/tileset_13_collision.bin"
 
+; TILESET_AQUARIUM
 SECTION "gfx.asm@Bank 7 Tilesets 0e", ROMX
 Tileset_0e_GFX:
 INCBIN "gfx/tilesets/tileset_0e.2bpp"
@@ -156,6 +163,7 @@ INCBIN "data/tilesets/tileset_0e_metatiles.bin"
 Tileset_0e_Coll:
 INCBIN "data/tilesets/tileset_0e_collision.bin"
 
+; TILESET_BULL_FOREST
 SECTION "gfx.asm@Bank 7 Tilesets 06", ROMX
 Tileset_06_GFX:
 INCBIN "gfx/tilesets/tileset_06.common.2bpp"
@@ -164,6 +172,7 @@ INCBIN "data/tilesets/tileset_06_metatiles.bin"
 Tileset_06_Coll:
 INCBIN "data/tilesets/tileset_06_collision.bin"
 
+; TILESET_FONTO
 SECTION "gfx.asm@Bank 7 Tilesets 05", ROMX
 Tileset_05_GFX:
 INCBIN "gfx/tilesets/tileset_05.common.2bpp"
@@ -172,6 +181,7 @@ INCBIN "data/tilesets/tileset_05_metatiles.bin"
 Tileset_05_Coll:
 INCBIN "data/tilesets/tileset_05_collision.bin"
 
+; TILESET_HAITEKU
 SECTION "gfx.asm@Bank 7 Tilesets 03", ROMX
 Tileset_03_GFX:
 INCBIN "gfx/tilesets/tileset_03.common.2bpp"
@@ -180,6 +190,7 @@ INCBIN "data/tilesets/tileset_03_metatiles.bin"
 Tileset_03_Coll:
 INCBIN "data/tilesets/tileset_03_collision.bin"
 
+; TILESET_BAADON
 SECTION "gfx.asm@Bank 8 Tilesets 04", ROMX
 Tileset_04_GFX:
 INCBIN "gfx/tilesets/tileset_04.common.2bpp"
@@ -188,6 +199,7 @@ INCBIN "data/tilesets/tileset_04_metatiles.bin"
 Tileset_04_Coll:
 INCBIN "data/tilesets/tileset_04_collision.bin"
 
+; TILESET_KANTO
 SECTION "gfx.asm@Bank 8 Tilesets 07", ROMX
 Tileset_07_GFX:
 INCBIN "gfx/tilesets/tileset_07.common.2bpp"
@@ -196,6 +208,7 @@ INCBIN "data/tilesets/tileset_07_metatiles.bin"
 Tileset_07_Coll:
 INCBIN "data/tilesets/tileset_07_collision.bin"
 
+; TILESET_SOUTH
 SECTION "gfx.asm@Bank 8 Tilesets 08", ROMX
 Tileset_08_GFX:
 INCBIN "gfx/tilesets/tileset_08.common.2bpp"
@@ -204,6 +217,7 @@ INCBIN "data/tilesets/tileset_08_metatiles.bin"
 Tileset_08_Coll:
 INCBIN "data/tilesets/tileset_08_collision.bin"
 
+; TILESET_TOWER
 SECTION "gfx.asm@Bank 8 Tilesets 0f", ROMX
 Tileset_0f_GFX:
 INCBIN "gfx/tilesets/tileset_0f.2bpp"
@@ -212,6 +226,7 @@ INCBIN "data/tilesets/tileset_0f_metatiles.bin"
 Tileset_0f_Coll:
 INCBIN "data/tilesets/tileset_0f_collision.bin"
 
+; TILESET_ROUTE_GATE
 SECTION "gfx.asm@Bank 8 Tilesets 11", ROMX
 Tileset_11_GFX:
 INCBIN "gfx/tilesets/tileset_11.2bpp"
@@ -224,6 +239,7 @@ SECTION "gfx.asm@Gameboy GFX", ROMX
 TradeGameBoyGFX::
 INCBIN "gfx/trade/gameboy.2bpp"
 
+; TILESET_RADIO_TOWER
 SECTION "gfx.asm@Bank C Tilesets 12", ROMX
 Tileset_12_GFX:
 INCBIN "gfx/tilesets/tileset_12.2bpp"
@@ -232,6 +248,7 @@ INCBIN "data/tilesets/tileset_12_metatiles.bin"
 Tileset_12_Coll:
 INCBIN "data/tilesets/tileset_12_collision.bin"
 
+; TILESET_JAPANESE_HOUSE
 SECTION "gfx.asm@Bank C Tilesets 0b", ROMX
 Tileset_0b_GFX:
 INCBIN "gfx/tilesets/tileset_0b.2bpp"
@@ -240,6 +257,7 @@ INCBIN "data/tilesets/tileset_0b_metatiles.bin"
 Tileset_0b_Coll:
 INCBIN "data/tilesets/tileset_0b_collision.bin"
 
+; TILESET_MART
 SECTION "gfx.asm@Bank C Tilesets 0d", ROMX
 Tileset_0d_GFX:
 INCBIN "gfx/tilesets/tileset_0d.2bpp"
@@ -248,6 +266,7 @@ INCBIN "data/tilesets/tileset_0d_metatiles.bin"
 Tileset_0d_Coll:
 INCBIN "data/tilesets/tileset_0d_collision.bin"
 
+; TILESET_GYM
 SECTION "gfx.asm@Bank C Tilesets 14", ROMX
 Tileset_14_GFX:
 INCBIN "gfx/tilesets/tileset_14.2bpp"
@@ -256,6 +275,7 @@ INCBIN "data/tilesets/tileset_14_metatiles.bin"
 Tileset_14_Coll:
 INCBIN "data/tilesets/tileset_14_collision.bin"
 
+; TILESET_POKECENTER
 SECTION "gfx.asm@Bank C Tilesets 0c", ROMX
 Tileset_0c_GFX:
 INCBIN "gfx/tilesets/tileset_0c.2bpp"
@@ -322,7 +342,7 @@ SoldierPic:: INCBIN "gfx/trainer/soldier.pic"
 KimonoGirlPic:: INCBIN "gfx/trainer/kimonogirl.pic"
 TwinsPic:: INCBIN "gfx/trainer/twins.pic"
 
-
+; TILESET_LAB
 SECTION "gfx.asm@Bank 13 Tilesets 0a", ROMX
 Tileset_0a_GFX:
 INCBIN "gfx/tilesets/tileset_0a.2bpp"
@@ -331,6 +351,7 @@ INCBIN "data/tilesets/tileset_0a_metatiles.bin"
 Tileset_0a_Coll:
 INCBIN "data/tilesets/tileset_0a_collision.bin"
 
+; TILESET_RUINS_OF_ALPH
 SECTION "gfx.asm@Bank 13 Tilesets 16", ROMX
 Tileset_16_GFX:
 INCBIN "gfx/tilesets/tileset_16.2bpp"
@@ -339,6 +360,7 @@ INCBIN "data/tilesets/tileset_16_metatiles.bin"
 Tileset_16_Coll:
 INCBIN "data/tilesets/tileset_16_collision.bin"
 
+; likely TILESET_SS_ANNE but seemingly unused
 SECTION "gfx.asm@Bank 13 Tilesets 19", ROMX
 Tileset_19_GFX:
 INCBIN "gfx/tilesets/tileset_19.2bpp"
@@ -347,6 +369,7 @@ INCBIN "data/tilesets/tileset_19_metatiles.bin"
 Tileset_19_Coll:
 INCBIN "data/tilesets/tileset_19_collision.bin"
 
+; likely TILESET_SS_ANNE_DOCK but seemingly unused
 SECTION "gfx.asm@Bank 13 Tilesets 1a", ROMX
 Tileset_1a_GFX:
 INCBIN "gfx/tilesets/tileset_1a.2bpp"
@@ -533,6 +556,7 @@ OldLinkReceptionistSpriteGFX:: INCBIN "gfx/sprites/old_link_receptionist.2bpp"
 EggSpriteGFX:: INCBIN "gfx/sprites/egg.2bpp"
 BoulderSpriteGFX:: INCBIN "gfx/sprites/boulder.2bpp"
 
+; TILESET_BIG_MART
 SECTION "gfx.asm@Bank 37 Tilesets 10", ROMX
 Tileset_10_GFX:
 INCBIN "gfx/tilesets/tileset_10.2bpp"
@@ -541,6 +565,7 @@ INCBIN "data/tilesets/tileset_10_metatiles.bin"
 Tileset_10_Coll:
 INCBIN "data/tilesets/tileset_10_collision.bin"
 
+; TILESET_OFFICE
 SECTION "gfx.asm@Bank 37 Tilesets 15", ROMX
 Tileset_15_GFX:
 INCBIN "gfx/tilesets/tileset_15.2bpp"
@@ -549,6 +574,7 @@ INCBIN "data/tilesets/tileset_15_metatiles.bin"
 Tileset_15_Coll:
 INCBIN "data/tilesets/tileset_15_collision.bin"
 
+; TILESET_CAVE
 SECTION "gfx.asm@Bank 37 Tilesets 17", ROMX
 Tileset_17_GFX:
 INCBIN "gfx/tilesets/tileset_17.2bpp"
@@ -557,6 +583,7 @@ INCBIN "data/tilesets/tileset_17_metatiles.bin"
 Tileset_17_Coll:
 INCBIN "data/tilesets/tileset_17_collision.bin"
 
+; TILESET_POWER_PLANT
 SECTION "gfx.asm@Bank 37 Tilesets 18", ROMX
 Tileset_18_GFX:
 INCBIN "gfx/tilesets/tileset_18.2bpp"

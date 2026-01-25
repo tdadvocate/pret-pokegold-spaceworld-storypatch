@@ -78,19 +78,23 @@ OverworldLoop_05::
 OverworldLoop_ExitBattle::
 	ld a, [wBattleResult]
 	cp LOSE
-	jr z, .DemoGameOver
+;	jr z, .DemoGameOver ; just removing this is enough to remove the demo reset code but doesn't heal mon
+; Commenting out the above also disables retries against the trainer you lost too unfortunately
+;	callfar HealParty ; This heals after every battle, not just whiteouts
 	ld a, MAPSTATUS_RETURN_TO_MAIN
 	call SetMapStatus
 	ret
 
-.DemoGameOver:
-	ld hl, wJoypadFlags
-	res 4, [hl]
-	ld hl, .text
-	call OpenTextbox
-	call GBFadeOutToBlack
-	jp Init
+; Demo Mode Reset Code 
+;.DemoGameOver:
+;	ld hl, wJoypadFlags
+;	res 4, [hl]
+;	ld hl, .text
+;	call OpenTextbox
+;	call GBFadeOutToBlack
+;	jp Init
 
-.text:
-	text "つぎは　がんばるぞ！！"
-	done
+; Demo Mode Reset Text
+;.text:
+;	text "つぎは　がんばるぞ！！"
+;	done

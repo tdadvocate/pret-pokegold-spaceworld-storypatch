@@ -605,18 +605,81 @@ Movememt12:
 	slow_step UP
 	step_end
 
-SilentHillLabFrontScript17:
+; Temporarily commenting this out for testing as it is the original script here
+;SilentHillLabFrontScript17:
+;	ld hl, SilentHillLabFrontTextString23
+;	call OpenTextbox
+;	ld hl, wd41d
+;	set 2, [hl] ; not sure what exactly this is doing but maybe to do with what bag is being used?
+;	ld hl, wNumBagItems
+;	ld a, 5 ; Item ID given (5 = Pokeball)
+;	ld [wCurItem], a
+;	ld a, 6 ; Item quantity given
+;	ld [wItemQuantity], a
+;	call ReceiveItem ; Required to receive the item in your bag
+;	call Function20f8 ; possible something to do w/overworld sprite interactions being stored/updated?
+;	ld a, $11
+;	ld [wMapScriptNumber], a
+;	ret
+
+; Attempting to make Nanami give you more items but extra items cause overflow breaking the back lab
+; Number of items given by Nanami will break different aspects of the Back Lab (sweet  spot seems to be 3-8 items)
+; 2 items removes happa - 9 breaks the whole back - 10 removes Honouguma - 11 remove Happa - 12 breaks whole back - Maybe more but haven't tested
+	SilentHillLabFrontScript17:
 	ld hl, SilentHillLabFrontTextString23
 	call OpenTextbox
-	ld hl, wd41d
-	set 2, [hl]
+	ld hl, wd41d 
+	set 2, [hl] ; Setting flag of Rucksack being received from Nanami after Rival battle?
 	ld hl, wNumBagItems
-	ld a, 5
+	; Gives Ball Holder in first bag slot
+	ld a, 159 ; Ball Holder
 	ld [wCurItem], a
-	ld a, 6
+	ld a, 1 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
-	call Function20f8
+	; Gives 99 Masterballs in Ball Holder
+	ld a, 1 ; Masterball
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Masterballs in Ball Holder
+	ld a, 1 ; Masterball
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives TM Holder in second bag slot
+	ld a, 157 ; TM Holder
+	ld [wCurItem], a
+	ld a, 1 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives Cut TM51/HM01 in TM Holder
+	ld a, 248 ; HM01 technically
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Rare Candy in third bag slot
+	ld a, 32 ; Rare Candy
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Rare Candy in fourth bag slot
+	ld a, 32 ; Rare Candy
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Rare Candy in fifth bag slot
+	ld a, 32 ; Rare Candy
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	call Function20f8 ; seems to maybe have something to do with the overworld sprite interactions being stored/updated?
 	ld a, $11
 	ld [wMapScriptNumber], a
 	ret

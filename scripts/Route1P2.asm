@@ -14,7 +14,7 @@ Route1P2ScriptPointers:
 
 Route1P2NPCIDs:
 	db $00
-	db $01
+	db $01 ; Appears to be the ID for the Kimono Girl Trainer/Battle
 	db $FF
 
 Route1P2SignPointers:
@@ -25,26 +25,26 @@ Route1P2_TextPointers::
 	dw Route1P2Text2
 
 Route1P2Script::
-	ld a, [wYCoord]
+	ld a, [wYCoord] ; Y Position of Kimono Girl Trainer/Battle
 	cp $06
 	jr nz, .skipCheck
-	ld a, [wXCoord]
+	ld a, [wXCoord] ; X Position of Kimono Girl Trainer/Battle
 	cp $09
 	jr nz, .skipCheck
-	ld a, 0 ; player
-	ld d, LEFT
-	call SetObjectFacing
-	ld a, 2
-	ld d, RIGHT
-	call SetObjectFacing
-	jr .endDemo
+;	ld a, 0 ; player
+;	ld d, LEFT
+;	call SetObjectFacing
+;	ld a, 2
+;	ld d, RIGHT
+;	call SetObjectFacing
+;	jr .endDemo
 .skipCheck
 	ld hl, Route1P2NPCIDs ;data
 	ld de, Route1P2SignPointers ;start of textld pointers?
 	call CallMapTextSubroutine
 	ret
 
-.endDemo
+; .endDemo
 Route1P2Text1:
 	ld hl, Route1P2TextString4
 	call OpenTextbox
@@ -94,7 +94,7 @@ Route1P2TextString3:
 	line "その　ちょうしで　おきばりやす"
 	done
 
-Route1P2TextString4:
+Route1P2TextString4: ; Rival Demo End Text
 	text "シゲル『おっ　サトシじゃないか！"
 
 	para "なんとか　ここまで　これた"
@@ -111,7 +111,7 @@ Route1P2TextString4:
 	line "じゃあな"
 	done
 
-Route1P2TextString5:
+Route1P2TextString5: ; Route 1 Part 2 Sign Text
 	text "ここは　１ばん　どうろ"
 	line "サイレントヒル　⋯⋯　オールドシティ"
 	done

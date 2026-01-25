@@ -50,7 +50,7 @@ SilentHillScriptPointers6:
 	dw SilentHillNPCIDs2
 
 SilentHillScriptPointers7:
-	dw SilentHillScript7
+	dw SilentHillScript7 ; had to add back this lab lockout as it is causing crashes after defeating the rival for some reason now
 	dw SilentHillNPCIDs2
 
 SilentHillScript1:
@@ -307,9 +307,9 @@ CheckLabDoor:
 	call SetObjectFacing
 	ld hl, wJoypadFlags
 	set 6, [hl]
-	ld hl, SilentHillTextString1
-	call OpenTextbox
-	call LabClosed
+;	ld hl, SilentHillTextString1
+;	call OpenTextbox
+;	call LabClosed
 	call xor_a
 	ret
 

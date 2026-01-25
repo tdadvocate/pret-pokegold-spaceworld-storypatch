@@ -16,6 +16,7 @@ SilentHill_MapEvents::
 	warp_event  3, 12, SILENT_HILL_HOUSE, 1, 114
 	warp_event 14, 11, SILENT_HILL_LAB_FRONT, 1, 104
 	warp_event 15, 11, SILENT_HILL_LAB_FRONT, 2, 104
+;"tell game it is warp" "spaces from left", "spaces from right", "map to load", "not sure". "not sure"
 
 	def_bg_events
 	bg_event  8,  4, 1
@@ -29,6 +30,7 @@ SilentHill_MapEvents::
 	object_event  6,  9, SPRITE_BLUE, SPRITEMOVEFN_TURN_LEFT, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0
 	object_event  8,  6, SPRITE_TEACHER, SPRITEMOVEFN_RANDOM_WALK_X, 1, 0, -1, -1, 0, 0, 0, 0, 0, 0
 	object_event 10, 13, SPRITE_SUPER_NERD, SPRITEMOVEFN_RANDOM_WALK_X, 2, 0, -1, -1, 0, 0, 0, 0, 0, 0
+;"tell game it is an object" "spaces from left (starts at 0)", "spaces from top (starts at 0)", "overworld sprite", "movement speed/style?", "movement pattern?"
 
 SilentHill_Blocks::
 INCBIN "maps/SilentHill.blk"
