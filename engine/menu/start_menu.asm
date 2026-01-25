@@ -78,13 +78,13 @@ DisplayStartMenu:
 .Strings:
 	db "ずかん@" ; Pokedex
 	db "ポケモン@" ; Pokemon
-	db "りュック@" ; Bag (Lit: Rucksack)
+	db "リュック@" ; Bag (Lit: Rucksack)
 	db "<PLAYER>@" ; Player's Trainer Card
 	db "レポート@" ; Save (Lit: Report)
 	db "せってい@" ; Settings
 	db "とじる@" ; Close 
 	db "わくせん@" ; Set Frame (This is a guess based on surrounding code context clues as I have never seen this word before)
-	db "りセット@" ; Reset
+	db "リセット@" ; Reset
 
 StartMenuJumpTable:
 	dw StartMenu_Pokedex
@@ -189,7 +189,7 @@ StartMenu_Reset:
 	ret
 
 StartMenu_Save:
-	predef Function143e0
+	predef SaveMenu
 	call UpdateSprites
 	ld a, 0
 	ret
@@ -456,7 +456,7 @@ NondebugBackpackLoop:
 	jr HandleBackpackInput
 
 BackpackHeaderText:
-	db "　　　　　　りュックの　なか　　　　　@"
+	db "　　　　　　リュックの　なか　　　　　@"
 
 HandleBackpackInput:
 	ld a, [wMenuJoypad]
@@ -698,28 +698,24 @@ TryTossItem:
 	ret
 
 .TossedText:
-	db 1
-	dw wStringBuffer2
+	text_from_ram wStringBuffer2
 	text "を　"
 	line "いくつ　すてますか？"
 	done
 
 .TossVerifyText:
-	db 1
-	dw wStringBuffer2
+	text_from_ram wStringBuffer2
 	text "を　@"
-	db 9
-	dw wItemQuantity
-	db $12
+	deciram wItemQuantity, 1, 2
 	text "こ"
 	line "すててもよろしいですか？"
 	done
 
 .TossedTextCopy:
-	db 1
-	dw wStringBuffer1
+	text_from_ram wStringBuffer1
 	text "を"
-	line "すてました！<PROMPT>"
+	line "すてました！"
+	prompt
 
 CantDropItem:
 	ld hl, .CantDropItemText
@@ -728,7 +724,8 @@ CantDropItem:
 
 .CantDropItemText:
 	text "それは　とても　たいせつなモノです"
-	line "すてることは　できません！<PROMPT>"
+	line "すてることは　できません！"
+	prompt
 
 PrintCantUseHM:
 	ld hl, .CantUseHMText
@@ -737,7 +734,8 @@ PrintCantUseHM:
 
 .CantUseHMText:
 	text "かいはつちゅう　です"
-	line "いまは　つかえません<PROMPT>"
+	line "いまは　つかえません"
+	prompt
 
 PrintCantUseText:
 	ld hl, .CantUseHereText
@@ -747,7 +745,8 @@ PrintCantUseText:
 .CantUseHereText:
 	text "オーキドの　ことば<⋯⋯>"
 	line "<PLAYER>よ！　こういうものには"
-	cont "つかいどきが　あるのじゃ！<PROMPT>"
+	cont "つかいどきが　あるのじゃ！"
+	prompt
 
 DrawNoItemsText:
 	ld hl, .NoItemsText
@@ -755,7 +754,9 @@ DrawNoItemsText:
 	ret
 
 .NoItemsText:
-	text "どうぐ　をひとつも<NEXT>もっていません！<PROMPT>"
+	text "どうぐ　をひとつも"
+	next "もっていません！"
+	prompt
 
 BallPocket:
 	xor a
@@ -871,10 +872,10 @@ RegisterItem:
 	ret
 
 .RegisteredItemText:
-	db 1
-	dw wStringBuffer2
+	text_from_ram wStringBuffer2
 	text "を　"
-	line "べんりボタンに　とうろくした！<PROMPT>"
+	line "べんりボタンに　とうろくした！"
+	prompt
 
 PrintCantRegisterToolText:
 	ld hl, .CantRegisterToolText
@@ -883,7 +884,8 @@ PrintCantRegisterToolText:
 
 .CantRegisterToolText:
 	text "そのどうぐは　"
-	line "とうろくできません！<PROMPT>"
+	line "とうろくできません！"
+	prompt
 
 StartMenu_Party:
 	ld a, [wPartyCount]
@@ -974,7 +976,7 @@ PartyCheckLessThanTwo:
 
 PartyHeldItem:
 	callfar FreezeMonIcons
-	ld hl, .HoldItemMenu
+	ld hl, .GiveTakeItemMenuData
 	call LoadMenuHeader
 	call VerticalMenu
 	jp c, .close
@@ -1019,7 +1021,7 @@ PartyHeldItem:
 	jr z, .NoItem
 	ld [wce37], a
 	call GetItemName
-	ld hl, ItemPrompt6753
+	ld hl, PokemonAskSwapItemText
 	call MenuTextBox
 	call YesNoBox
 	call ExitMenu
@@ -1034,11 +1036,11 @@ PartyHeldItem:
 	ld [wce37], a
 	ld a, b
 	ld [wCurItem], a
-	call PartyRecieveItem
+	call ReceiveItemFromPokemon
 	jp nc, .GiveItem
 	ld a, [wce37]
 	ld [wCurItem], a
-	ld hl, ItemWasEquippedText
+	ld hl, PokemonSwapItemText
 	call MenuTextBoxBackup
 	jr .CheckMail
 
@@ -1047,7 +1049,7 @@ PartyHeldItem:
 	ld [wItemQuantity], a
 	ld hl, wNumBagItems
 	call TossItem
-	ld hl, ItemPrompt66FA
+	ld hl, PokemonHoldItemText
 	call MenuTextBoxBackup
 .CheckMail
 	call GetPartyItemOffset
@@ -1061,13 +1063,13 @@ PartyHeldItem:
 .GiveItem
 	ld a, [wce37]
 	ld [wCurItem], a
-	call PartyRecieveItem
-	ld hl, PartyItemRecieveBagFullText
+	call ReceiveItemFromPokemon
+	ld hl, ItemStorageFullText
 	call MenuTextBoxBackup
 	jr .ExitGiveItem
 
 .CantGive
-	ld hl, .CantBeEquippedText
+	ld hl, ItemCantHeldText
 	call MenuTextBoxBackup
 .ExitGiveItem
 	call ClearPalettes
@@ -1082,102 +1084,87 @@ PartyHeldItem:
 	and a
 	jr z, .NoItemToRecieve
 	ld [wCurItem], a
-	call PartyRecieveItem
+	call ReceiveItemFromPokemon
 	jr nc, .jump2
 	call GetPartyItemOffset
 	ld a, [hl]
-	ld [wce37], a
-	ld [hl], 0
+	ld [wNamedObjectIndexBuffer], a
+	ld [hl], ITEM_NONE
 	call GetItemName
-	ld hl, ItemPrompt673D
+	ld hl, PokemonTookItemText
 	call MenuTextBoxBackup
 	jr .escape
 .NoItemToRecieve
-	ld hl, PartyNoItemToRecieveText
+	ld hl, PokemonNotHoldingText
 	call MenuTextBoxBackup
 	jr .escape
 .jump2
-	ld hl, PartyItemRecieveBagFullText
+	ld hl, ItemStorageFullText
 	call MenuTextBoxBackup
 .escape
 	ret
 
-.HoldItemMenu ; verticalmenu
+GiveTakeItemMenuData:
 	db STATICMENU_NO_TOP_SPACING | STATICMENU_PLACE_TITLE
 	menu_coords 4, 4, $e, 9
-	dw .HoldItemMenuText
-	db 1
+	dw .Items
+	db 1 ; default option
 
-.HoldItemMenuText
-	db $80
-
-	db 2
+.Items:
+	db STATICMENU_CURSOR ; flags
+	db 2 ; # items
 	db "そうびを　する@"
 	db "そうびを　はずす@"
 
-.CantBeEquippedText
-	db 1
-	dw wStringBuffer1
+ItemCantHeldText:
+	text_from_ram wStringBuffer1
 	text "を　そうびすることは"
-	line "できません<PROMPT>"
+	line "できません"
+	prompt
 
-ItemWasEquippedText:
-	db 1
-	dw wMonOrItemNameBuffer
+PokemonSwapItemText:
+	text_from_ram wMonOrItemNameBuffer
 	text "は　そうび　していた"
 	line "@"
-
-.UnusedText1
-	db 1
-	dw wStringBuffer1
+	text_from_ram wStringBuffer1
 	text "を　はずして"
 	para "@"
+	text_from_ram wStringBuffer2
+	text "を　そうびした！"
+	prompt
 
-.UnusedText2
-	db 1
-	dw wStringBuffer2
-	text "を　そうびした！<PROMPT>"
-
-ItemPrompt66FA:
-	db 1
-	dw wMonOrItemNameBuffer
+PokemonHoldItemText:
+	text_from_ram wMonOrItemNameBuffer
 	text "は　@"
-
-.UnusedText3
-	db 1
-	dw wStringBuffer2
+	text_from_ram wStringBuffer2
 	text "を"
-	line "そうびした！<PROMPT>"
+	line "そうびした！"
+	prompt
 
-PartyNoItemToRecieveText:
-	db 1
-	dw wMonOrItemNameBuffer
+PokemonNotHoldingText:
+	text_from_ram wMonOrItemNameBuffer
 	text "は　なにも"
-	line "そうび　していません！<PROMPT>"
+	line "そうび　していません！"
+	prompt
 
-PartyItemRecieveBagFullText:
+ItemStorageFullText:
 	text "どうぐが　いっぱいで"
-	line "そうびを　はずせません！<PROMPT>"
+	line "そうびを　はずせません！"
+	prompt
 
-ItemPrompt673D:
-	db 1
-	dw wMonOrItemNameBuffer
+PokemonTookItemText:
+	text_from_ram wMonOrItemNameBuffer
 	text "から　@"
-
-.UnusedText4
-	db 1
-	dw wStringBuffer1
+	text_from_ram wStringBuffer1
 	text "を"
-	line "はずしました！<PROMPT>"
+	line "はずしました！"
+	prompt
 
-ItemPrompt6753:
-	db 1
-	dw wMonOrItemNameBuffer
+
+ItemPromptPokemonAskSwapItemText6753:
+	text_from_ram wMonOrItemNameBuffer
 	text "は　@"
-
-.UnusedText5:
-	db 1
-	dw wStringBuffer1
+	text_from_ram wStringBuffer1
 	text "を"
 	line "すでに　そうび　しています"
 	para "そうびしている　どうぐを"
@@ -1191,7 +1178,7 @@ GetPartyItemOffset:
 	pop af
 	ret
 
-PartyRecieveItem:
+ReceiveItemFromPokemon:
 	ld a, 1
 	ld [wItemQuantity], a
 	ld hl, wNumBagItems
@@ -1341,17 +1328,18 @@ PartyMailMenu:
 	done
 
 .DrawNick
-	db 1
-	dw wStringBuffer1
+	text_from_ram wStringBuffer1
 	text "から　@"
 
 .DeleteMailText
 	text "メールを"
-	line "はずしました！<PROMPT>"
+	line "はずしました！"
+	prompt
 
 .MailFullText
 	text "どうぐが　いっぱいで"
-	line "メールを　はずせません！<PROMPT>"
+	line "メールを　はずせません！"
+	prompt
 
 PartyPokemonSummary:
 	call LoadStandardMenuHeader
@@ -1441,7 +1429,8 @@ PrintNotHealthyEnoughText:
 	jp HandleSelectedPokemon
 
 NotHealthyEnoughText:
-	text "たいりょくが　たりません！<PROMPT>"
+	text "たいりょくが　たりません！"
+	prompt
 
 PrintNeedNewBadgeText:
 	ld hl, NeedNewBadgeText
@@ -1450,7 +1439,8 @@ PrintNeedNewBadgeText:
 
 NeedNewBadgeText:
 	text "あたらしい　バッジを　てにするまで"
-	line "まだ　つかえません！<PROMPT>"
+	line "まだ　つかえません！"
+	prompt
 
 PartyPokemonSummary2:
 	ld hl, wOptions
@@ -1502,7 +1492,7 @@ PokeSummary:
 	ld a, [wCurPartyMon]
 	and a
 	jr z, .FirstPokeChosen
-	ld [hl], "」"
+	ld [hl], '」'
 .FirstPokeChosen
 	inc a
 	ld b, a
@@ -1511,7 +1501,7 @@ PokeSummary:
 	jr z, .LastPokeChosen
 	inc hl
 	inc hl
-	ld [hl], "▶" ; right filled arrow
+	ld [hl], '▶' ; right filled arrow
 .LastPokeChosen
 	ld de, PartyMenuAttributes
 	call SetMenuAttributes
@@ -1740,7 +1730,8 @@ CheckRegisteredItem:
 
 .NothingRegisteredText:
 	text "べんりボタンを　おした！"
-	line "⋯しかしなにもおきない！<PROMPT>"
+	line "⋯しかしなにもおきない！"
+	prompt
 
 GetRegisteredItemID:
 ; if you can use the registered item, sets the ID to a
@@ -1976,18 +1967,18 @@ TrainerCardMainInputs:
 	ret
 .left
 	hlcoord 4, 16
-	ld [hl], "▶"
+	ld [hl], '▶'
 	hlcoord 11, 16
-	ld [hl], "　"
+	ld [hl], '　'
 	xor a
 	ld [wFlyDestination], a
 	and a
 	ret
 .right
 	hlcoord 4, 16
-	ld [hl], "　"
+	ld [hl], '　'
 	hlcoord 11, 16
-	ld [hl], "▶"
+	ld [hl], '▶'
 	ld a, 1
 	ld [wFlyDestination], a
 	and a
@@ -2145,11 +2136,15 @@ DrawTrainerCardMainPage:
 	ld de, TrainerCardBadgesTextTiles
 	call PlaceTrainerCardTiles
 	hlcoord 4, 16
-	ld [hl], "▶"
+	ld [hl], '▶'
 	ret
 
 TrainerCardText:
-	db "なまえ／<NEXT><NEXT>おこづかい<NEXT><NEXT>#ずかん@"
+	db   "なまえ／"
+	next ""
+	next "おこづかい"
+	next ""
+	next "#ずかん@"
 
 TrainerCardDexEntriesText:
 	db "ひき@"
@@ -2188,7 +2183,7 @@ DrawTrainerCaseBadgePage:
 	ret
 
 TrainerCardLeagueBadgesTextTiles:
-	db "#りーグバッジ@"
+	db "#リーグバッジ@"
 
 TrainerCardBadgesTiles:
 	db $0A, $0B, $0C, $0D, $0E, $FF

@@ -14,7 +14,7 @@ PokemonCenterPC:
 ; Also used for player's PC (both in debug and in demo mode)
 
 	ld a, [wDebugFlags]
-	bit 1, a
+	bit DEBUG_FIELD_F, a
 ;	jp z, PC_Demo commenting out allows the debug menu PC button to get to actually function outside of the Field Debug Mode but shows same message as in Demo Mode
 	call PC_PlayBootSound
 
@@ -25,7 +25,7 @@ PokemonCenterPC:
 	ld hl, .TurnOnText
 	call MenuTextBoxBackup
 	ld hl, wDebugFlags
-	bit 1, [hl]
+	bit DEBUG_FIELD_F, [hl]
 	jp z, .DisplayMenu
 ;	jr nz, .DisplayMenu
 ;	ld hl, .NotConnectedText ; commented out to allow partially functioning debug PC menu
@@ -57,6 +57,7 @@ PokemonCenterPC:
 
 .TurnOnText:
 	text "コンピューターを　きどう！"
+
 	para "ネットワークにせつぞくした！"
 	prompt
 
@@ -127,12 +128,14 @@ PC_Demo:
 	ret
 
 .SkarmoryText:
-	text "ポケモン　ジャーナル　ホームぺージ"
+	text "ポケモン　ジャーナル　ホームページ"
 	line "<⋯⋯>　<⋯⋯>　<⋯⋯>　<⋯⋯>　<⋯⋯>　<⋯⋯>"
+
 	para "しんポケモン　はっけん！！"
-	line "めいめい　ヨロイドり"
+	line "めいめい　ヨロイドリ"
 	cont "はがねの　ように"
 	cont "かたい　つばさが　とくちょう"
+
 	para "ひこうタイプ　だけではなく"
 	line "あたらしく　メタルタイプ　としても"
 	cont "ぶんるい　されることが　けってい"
@@ -218,6 +221,7 @@ _PlayersPC:
 .TurnOnText:
 	text "<PLAYER>は　じぶんのパソコンに"
 	line "つないだ"
+
 	para "どうぐあずかりシステムを"
 	line "よびだした！"
 	prompt
@@ -225,6 +229,7 @@ _PlayersPC:
 .ShutDownText:
 	text "<PLAYER>は　じぶんのパソコンとの"
 	line "せつぞくをきった"
+
 	para ""
 	done
 
@@ -260,7 +265,7 @@ PlayerWithdrawItemMenu:
 	jr c, .done
 
 .Withdraw:
-	ld hl, wUnknownListLengthd1ea
+	ld hl, wNumPCItems
 	ld a, [wItemIndex]
 	call TossItem
 	ld hl, wNumBagItems
@@ -274,7 +279,7 @@ PlayerWithdrawItemMenu:
 .PackFull:
 	ld hl, .NoRoomWithdrawText
 	call MenuTextBoxBackup
-	ld hl, wUnknownListLengthd1ea
+	ld hl, wNumPCItems
 	call ReceiveItem
 	ret
 
@@ -308,7 +313,7 @@ PlayerTossItemMenu:
 .loop
 	call PCItemsJoypad
 	jr c, .quit
-	ld de, wUnknownListLengthd1ea
+	ld de, wNumPCItems
 	callfar TryTossItem
 	jr .loop
 .quit
@@ -424,7 +429,7 @@ PlayerDepositItemMenu:
 	ld hl, wNumBagItems
 	ld a, [wItemIndex]
 	call TossItem
-	ld hl, wUnknownListLengthd1ea
+	ld hl, wNumPCItems
 	call ReceiveItem
 	jr nc, .NoRoomInPC
 	predef LoadItemData
@@ -504,7 +509,23 @@ PCItemsJoypad:
 	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_LEFT
 	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; type
-	dbw 0, wUnknownListLengthd1ea
+	dbw 0, wNumPCItems
+	dba PlaceMenuItemName
+	dba PlaceMenuItemQuantity
+	dba UpdateItemDescription
+
+; Leftover menu data for a Gen I-styled deposit menu (with the addition of the item's description)
+.UnusedDepositMenuHeader:
+	db MENU_BACKUP_TILES
+	menu_coords 4, 1, 19, 10
+	dw .UnusedDepositMenuData
+	db  1 ; default selection
+
+.UnusedDepositMenuData:
+	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3 | SCROLLINGMENU_ENABLE_RIGHT | SCROLLINGMENU_ENABLE_LEFT
+	db 4, 8 ; rows, columns
+	db SCROLLINGMENU_ITEMS_QUANTITY ; type
+	dbw 0, wItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
