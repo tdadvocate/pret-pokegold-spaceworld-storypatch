@@ -42,7 +42,7 @@ DEF EFFECTIVENESS_MASK EQU %01111111
 	const SP_DEFENSE
 	const ACCURACY
 	const EVASION
-	const ABILITY ; used for BattleCommand_Curse
+	const_skip ; The ABILITY text doesn't exist yet, nor does the effect that would use it.
 DEF NUM_LEVEL_STATS EQU const_value
 
 ; move struct members (see data/moves/moves.asm)
@@ -234,18 +234,24 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP
 	const BATTLEACTION_SWITCH4
 	const BATTLEACTION_SWITCH5
 	const BATTLEACTION_SWITCH6
-	const BATTLEACTION_A
-	const BATTLEACTION_B
-	const BATTLEACTION_C
-	const BATTLEACTION_D
+	const_skip
+	const_skip
+	const_skip
+	const BATTLEACTION_SKIPTURN
 	const BATTLEACTION_STRUGGLE
 	const BATTLEACTION_FORFEIT
 
-; wBattleResult
+; wBattlePlayerAction
 	const_def
-	const DRAW
-	const LOSE
+	const BATTLEPLAYERACTION_USEMOVE
+	const BATTLEPLAYERACTION_USEITEM
+	const BATTLEPLAYERACTION_SWITCH
+
+; wBattleEnded
+	const_def
 	const WIN
+	const LOSE
+	const DRAW
 
 DEF BATTLERESULT_BOX_FULL EQU 7
 DEF BATTLERESULT_BITMASK EQU (1 << BATTLERESULT_BOX_FULL)

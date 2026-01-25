@@ -115,7 +115,7 @@ TitleSequenceInit::
 
 	ld hl, vBGMap0
 	ld bc, 128 tiles
-	ld a, "　"
+	ld a, '　'
 	call ByteFill
 
 	ld b, SGB_TITLE_SCREEN
@@ -483,7 +483,7 @@ LoadPrintArea::
 
 PrintPMJapaneseChara::
 	coord hl, 15, 2
-	ld a, "こ"
+	ld a, 'こ'
 	lb bc, 4, 4
 	jr PrintBoxArea
 
@@ -540,12 +540,13 @@ SRAMClearMenu::
 	cp $01
 	jp z, Init
 
-	callfar InitAllSRAMBanks
+	callfar EmptyAllSRAMBanks
 	jp Init
 
 SRAMClear_Message::
-	db "<NULL>すべての　セーブデータエりアを"
-	db "<LINE>クりア　しますか？<DONE>"
+	text "すべての　セーブデータエリアを"
+	line "クリア　しますか？"
+	done
 
 SRAMClear_WinPOS::
 	db 0

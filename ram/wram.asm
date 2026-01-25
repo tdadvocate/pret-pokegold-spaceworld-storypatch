@@ -297,9 +297,10 @@ SECTION "Map Buffer", WRAM0
 wMapBuffer::
 wMapScriptNumber:: db
 wMapScriptNumberLocation:: dw
-wUnknownMapPointer:: dw ; TODO
+wMapScriptPointerLocation:: dw ; TODO
 ; setting bit 7 seems to disable overworld updates and player control?
-wc5ed:: db
+; setting bit 6 disables map connections
+wOverworldFlags:: db
 	ds 18
 wMapBufferEnd::
 
@@ -458,6 +459,7 @@ wBattleAnimTempXOffset:: db
 wBattleAnimTempYOffset:: db
 wBattleAnimTempFrameOAMFlags:: db
 wBattleAnimTempPalette:: db
+wBattleAnimEnd::
 
 NEXTU
 wBattleAnimGFXTempTileID::
@@ -466,8 +468,8 @@ wBattlePicResizeTempPointer:: dw
 
 ENDU
 
-	ds $32
-wBattleAnimEnd::
+	ds 50
+wActualBattleAnimEnd::
 
 	ds $1a3 ; TODO
 
@@ -479,8 +481,11 @@ wEnemyMonNickname:: ds 6
 wBattleMonNickname:: ds 6
 
 UNION
+; battle mon
 wBattleMon:: battle_struct wBattleMon
+
 NEXTU
+; intro water/grass/fire cutscene data
 	ds 14
 wIntroJumptableIndex:: db
 wIntroBGMapPointer:: ds 2
@@ -490,12 +495,13 @@ wIntroFrameCounter1:: ds 1
 wIntroFrameCounter2:: ds 1
 wIntroSpriteStateFlag:: ds 1
 ENDU
-wca22:: ds 1
-wca23:: ds 1
-wca24:: ds 1
-	ds 6
-wca2b:: ds 1
-	ds 10
+
+wTrainerClass:: db
+wEnemyTrainerGraphicsPointer:: dw
+	ds 2
+wEnemyTrainerBaseReward:: db
+	ds 3
+wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH
 wCurOTMon:: db
 
 wBattleParticipantsNotFainted::
@@ -619,7 +625,8 @@ wEnemyEvaLevel:: db
 	ds 1
 
 wForceEvolution:: db
-wcaba:: ds 1
+
+wEnemyTurnsTaken:: db
 
 	ds 1
 
@@ -631,8 +638,8 @@ wPlayerDebugSelectedMove:: ds 1
 
 wMoveSelectionMenuType:: ds 1
 
-wCurPlayerSelectedMove:: db
-wCurEnemySelectedMove:: db
+wCurPlayerMove:: db
+wCurEnemyMove:: db
 
 wLinkBattleRNCount:: db
 
@@ -651,27 +658,21 @@ wcacb:: ds 1
 wcacc:: ds 1
 ENDU
 
-wcacd:: ds 1
-wcace:: ds 1
+wUnused_SafariEscapeFactor:: db
+wUnused_SafariBaitFactor:: db
 
 	ds 1
 
 wEnemyBackupDVs:: dw
 
-wAlreadyDisobeyed::
-wcad2:: ds 1
+wAlreadyDisobeyed:: db
 
-wDisabledMove:: ds 1
-wEnemyDisabledMove:: ds 1
-wcad5:: ds 1
+wDisabledMove:: db
+wEnemyDisabledMove:: db
+wWhichMonFaintedFirst:: db
 
-UNION
-wCurPlayerMove:: ds 1
-wCurEnemyMove:: ds 1
-NEXTU
-wcad6:: ds 1
-wcad7:: ds 1
-ENDU
+wLastPlayerCounterMove:: db
+wLastEnemyCounterMove:: db
 
 wEnemyMinimized:: db
 wAlreadyFailed:: db
@@ -680,11 +681,8 @@ wBattleParticipantsIncludingFainted:: db
 wBattleLowHealthAlarm:: db
 wPlayerMinimized:: db
 
-wPlayerScreens::
-wcadd:: db
-
-wEnemyScreens::
-wcade:: db
+wPlayerScreens:: db
+wEnemyScreens:: db
 
 wPlayerSafeguardCount:: db
 wEnemySafeguardCount:: db
@@ -700,6 +698,7 @@ ENDU
 
 
 SECTION "CB14", WRAM0[$CB14]
+wBattleEnd::
 
 UNION
 wRedrawRowOrColumnSrcTiles::
@@ -718,15 +717,21 @@ wRedrawFlashlightWidthHeight:: db
 ENDU
 
 SECTION "CB56", WRAM0[$CB4C]
+UNION
 wOtherPlayerLinkMode:: db
-wOtherPlayerLinkAction:: db
+wOtherPlayerLinkAction::
+wBattleAction:: db
 	ds 3 ; TODO
 
 wPlayerLinkAction:: db
 	ds 4 ; TODO
+NEXTU
+wLinkReceivedSyncBuffer:: ds 5
+wLinkPlayerSyncBuffer:: ds 5
+ENDU
 
 wLinkTimeoutFrames:: dw
-wcb58:: ds 2
+wLinkByteTimeout:: dw
 wMonType:: db
 
 wSelectedItem::
@@ -1051,6 +1056,11 @@ wStringBuffer2:: ds STRING_BUFFER_LENGTH
 
 NEXTU
 
+	ds 2
+wGainBoostedExp:: db
+
+NEXTU
+
 wcd31:: db
 wcd32:: db
 wcd33:: db
@@ -1059,7 +1069,6 @@ ENDU
 
 SECTION "CD3C", WRAM0[$CD3C]
 
-wcd3c::
 wPartyMenuCursor::
 wBillsPCCursor:: db
 wRegularItemsCursor:: db
@@ -1072,8 +1081,7 @@ wCurMoveNum:: db
 wCurBattleMon:: db
 
 wTMHolderCursor:: db
-wFieldDebugMenuCursorBuffer::
-wcd43:: db
+wFieldDebugMenuCursorBuffer:: db
 wRegularItemsScrollPosition:: db
 wBackpackAndKeyItemsScrollPosition:: db
 wBillsPCScrollPosition:: db
@@ -1113,9 +1121,12 @@ wBattlePlayerAction:: db
 
 wStateFlags:: db
 
-	ds 3 ; TODO
-wcd5d:: db
-	db
+	ds 3
+
+wBattleResult:: db
+
+	ds 1
+
 wChosenStarter:: db
 wcd60:: db
 
@@ -1180,6 +1191,7 @@ wPrevWarp:: db
 wEvolvableFlags:: db
 
 UNION
+wBoostExpByExpAll::
 wSkipMovesBeforeLevelUp::
 wListMovesLineSpacing::
 wFieldMoveScriptID:: db
@@ -1228,7 +1240,7 @@ wcdc6:: db
 wcdc7:: db
 wcdc8:: db
 	ds 1
-wcdca:: db
+wEnemyItemUsed:: db
 
 NEXTU
 ; battle HUD
@@ -1238,6 +1250,10 @@ NEXTU
 ; thrown ball data
 wFinalCatchRate:: db
 wThrownBallWobbleCount:: db
+
+NEXTU
+; move AI
+wEnemyAIMoveScores:: ds NUM_MOVES
 
 NEXTU
 ; evolution data
@@ -1256,16 +1272,17 @@ wTempBattleMonSpecies:: ds 1
 
 wEnemyMon:: battle_struct wEnemyMon
 wEnemyMonBaseStats:: ds NUM_EXP_STATS
-
 wEnemyMonCatchRate:: db
-wcdff:: ds 1
+wEnemyMonBaseExp:: db
+wEnemyMonEnd::
+
 wBattleMode:: db
 wTempWildMonSpecies:: ds 1
 wOtherTrainerClass:: ds 1
 wBattleType:: db
-wce04:: ds 1
+wUnused_GymLeaderNo:: ds 1 ; Unused
 wOtherTrainerID:: ds 1
-wBattleResult:: ds 1
+wBattleEnded:: ds 1
 
 wMonHeader::
 
@@ -1332,7 +1349,7 @@ wMonHLearnset::
 wMonHeaderEnd::
 
 
-wce26:: ds 1
+wMapAnimsBackup:: db
 
 	ds 2
 
@@ -1366,10 +1383,8 @@ wApplyStatLevelMultipliersToEnemy::
 wce37::
 	db
 
-wce38:: ds 1
-
-wNumFleeAttempts::
-wce39:: ds 1
+wFailedToFlee:: db
+wNumFleeAttempts:: db
 
 wMonTriedToEvolve:: db
 
@@ -1402,9 +1417,11 @@ wOptions::
 ; bit 7: battle scene off/on
 	db
 
-; A buffer for sOptions that is used to check if a save file exists.
-; Only checks the bottom bit, for whatever reason.
-wSaveFileExists:: db
+
+; Used as a buffer for sOptions to check if a save file exists.
+; Only checks the bottom bit (since all valid text speeds have that bit set).
+wSaveFileExists::
+wSaveFileFlags:: db
 
 wActiveFrame:: db
 
@@ -1421,19 +1438,14 @@ wce64:: ds 1
 wce65:: ds 1
 wce66:: ds 1
 
+wGameData::
 wPlayerName:: ds 6
 
 wMomsName:: ds 6
 
-SECTION "CE73", WRAM0[$CE73]
-
-UNION
 wPlayerID:: dw
-NEXTU
-wce73: ds 1
-wce74: ds 1
-ENDU
-wce75: ds 1
+
+	ds 1
 
 wObjectFollow_Leader::
 	db
@@ -1502,21 +1514,12 @@ wTimeOfDayPalset:: db
 
 wCurTimeOfDay:: db
 
-SECTION "D15B", WRAM0[$D15B]
+	ds 1
 
-wCoins:: db
-
-wd15c:: db
-
+wCoins:: dw
 wMoney:: ds 3
 
-;wd15d:: db
-
-;wd15e:: db
-
-;wd15f:: db
-
-SECTION "D163", WRAM0[$D163]
+	ds 3
 
 wBadges::
 wJohtoBadges::
@@ -1528,23 +1531,19 @@ wTMsHMs:: ds NUM_TM_HM
 
 wItems::
 wNumBagItems:: db
-
-SECTION "D1C8", WRAM0[$D1C8]
+wBagItems:: ds MAX_ITEMS * 2 + 1
 
 wNumKeyItems:: db
-wKeyItems:: db
-
-SECTION "D1DE", WRAM0[$D1DE]
+wKeyItems:: ds MAX_KEY_ITEMS + 1
 
 wNumBallItems:: db
-wBallQuantities:: db
+wBallQuantities:: ds MAX_BALLS + 1
 
-	ds 10
+wNumPCItems:: db
+wPCItems:: ds MAX_PC_ITEMS * 2 + 1
 
-wUnknownListLengthd1ea:: db
-wUnknownListd1eb:: db
+	ds 6
 
-SECTION "Rival's Name", WRAM0[$D256]
 wRegisteredItem:: db
 wRegisteredItemQuantity:: db
 wRivalName:: ds 6
@@ -1561,18 +1560,26 @@ wd266:: db
 
 ;The starting house's map script number is stored at d29a. Others are probably nearby.
 SECTION "D29A", WRAM0[$D29A]
-wd29a:: db
-wd29b:: db
-wd29c::	db
-wd29d:: db
-wd29e::	db
-	db
-wd2a0:: db
+wPlayerHouse2FCurScript:: db
+wPlayerHouse1FCurScript:: db
+wSilentHillCurScript:: db
+wSilentHillLabFrontCurScript:: db
+wSilentHillLabBackCurScript:: db
+wSilentHillPokecenterCurScript:: db
+wSilentHillHouseCurScript:: db
+wRoute1P1CurScript:: db
+wRoute1P2CurScript:: db
+wRoute1Gate1FCurScript:: db
+wRoute1Gate2FCurScript:: db
+wShizukanaOkaCurScript:: db
+wd2a6:: db
 
-SECTION "D35F", WRAM0[$D35F]
-wd35f:: db
 
-SECTION "D39D", WRAM0[$D39D]
+
+SECTION "D39D", WRAM0[$D39A]
+wd39a:: db
+wd39b:: db
+wd39c:: db
 wd39d:: db
 
 SECTION "D3A5", WRAM0[$D3A5]
@@ -1612,6 +1619,8 @@ wJoypadFlags:: db
 ; ||\------ don't wait for keypress to close text box
 ; |\------- joypad sync mtx
 ; \-------- joypad disabled
+	ds 1
+wMovementFlags_Old:: db
 
 SECTION "wDigWarpNumber", WRAM0[$D4B2]
 
@@ -1641,10 +1650,10 @@ REPT 32 ; TODO: confirm this
 ENDR
 
 
-wCurrMapSignCount::
+wCurMapBGEventCount::
 	db
 
-wCurrMapSigns::
+wCurrMapBGEvents::
 REPT 16 ; TODO: confirm this
 	ds 4
 ENDR
@@ -1653,15 +1662,21 @@ wCurrMapObjectCount::
 	db
 
 wCurrMapInlineTrainers::
-REPT 32 ; TODO: confirm this
+REPT NUM_OBJECTS
 	ds 2 ; inline trainers. each pair of bytes is direction, distance
 ENDR
+	ds 32
 
-SECTION "D637", WRAM0[$D637]
-wd637:: db ;OW battle state? $3 wild battle, $8 is trainer battle $4 is left battle, $B is load overworld? $0 is in overworld
-wd638:: db ;wd637's last written-to value
+wMapStatus:: db ;OW battle state? $3 wild battle, $8 is trainer battle $4 is left battle, $B is load overworld? $0 is in overworld
+wLastMapStatus:: db ;wMapStatus's last written-to value
 
-SECTION "Used sprites", WRAM0[$D642]
+wGameDataEnd::
+	
+; Sort of redundant to separate data like this when they're right next to each other.
+wGameData2::
+
+	ds 9
+
 wUnusedAddOutdoorSpritesReturnValue:: db
 wBGMapAnchor::
 	dw
@@ -1743,6 +1758,8 @@ wTilesetAnim::
 	ds 2 ; TODO
 wTilesetEnd::
 
+wGameData2End::
+
 wPokemonData::
 wPartyCount:: db
 wPartySpecies:: ds PARTY_LENGTH
@@ -1804,10 +1821,11 @@ wBreedMon2:: box_struct wBreedMon2
 ; Uses the last two bits to keep track of your breeder mons' genders.
 ; Bit clear = male, bit set = female
 wBreedMonGenders:: db
-wd8fe:: ds 1
+wOTPlayerName:: ds PLAYER_NAME_LENGTH
 
 SECTION "D913", WRAM0[$D913]
 
+wOTPartyData::
 wOTPartyCount:: db
 wOTPartySpecies:: ds PARTY_LENGTH
 wOTPartySpeciesEnd:: db
@@ -1815,8 +1833,16 @@ wOTPartySpeciesEnd:: db
 SECTION "Wild mon buffer", WRAM0[$D91B]
 
 UNION
-wWildMons::
-	ds 41
+wWildMonData::
+
+wMornEncounterRate::  db
+wDayEncounterRate::   db
+wNiteEncounterRate::  db
+
+wWildMons:: ds NUM_GRASSMON * 2
+
+	ds 2
+
 NEXTU
 wOTPartyMons::
 ; wOTPartyMon1 - wOTPartyMon6
@@ -1837,6 +1863,8 @@ wOTPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 wOTPartyDataEnd::
 ENDU
+
+wPokemonDataEnd::
 
 wBox:: box wBox
 

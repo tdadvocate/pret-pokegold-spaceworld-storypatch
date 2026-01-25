@@ -56,7 +56,7 @@ ShizukanaOkaTrainer2:
 	ld [wOtherTrainerClass], a
 	ld a, SCHOOLBOY_TETSUYA
 	ld [wOtherTrainerID], a
-	call Function38d8
+	call InitTrainerBattle
 	ret
 .Trainer2Won ;Already won
 	ld hl, ShizukanaOkaTrainer2WonString
@@ -75,7 +75,7 @@ ShizukanaOkaTrainer3:
 	ld [wOtherTrainerClass], a
 	ld a, BUG_CATCHER_BOY_JUNICHI
 	ld [wOtherTrainerID], a
-	call Function38d8
+	call InitTrainerBattle
 	ret
 .Trainer3Won ;Already won
 	ld hl, ShizukanaOkaTrainer3WonString
@@ -94,7 +94,7 @@ ShizukanaOkaTrainer4:
 	ld [wOtherTrainerClass], a
 	ld a, FIREBREATHER_AKITO
 	ld [wOtherTrainerID], a
-	call Function38d8
+	call InitTrainerBattle
 	ret
 .Trainer4Won ;Already won
 	ld hl, ShizukanaOkaTrainer4WonString
@@ -113,7 +113,7 @@ ShizukanaOkaTrainer5:
 	ld [wOtherTrainerClass], a
 	ld a, BEAUTY_MEGUMI
 	ld [wOtherTrainerID], a
-	call Function38d8
+	call InitTrainerBattle
 	ret
 .Trainer5Won ;Already won
 	ld hl, ShizukanaOkaTrainer5WonString
@@ -132,7 +132,7 @@ ShizukanaOkaTrainer6:
 	ld [wOtherTrainerClass], a
 	ld a, BUG_CATCHER_BOY_SOUSUKE
 	ld [wOtherTrainerID], a
-	call Function38d8
+	call InitTrainerBattle
 	ret
 .Trainer6Won ;Already won
 	ld hl, ShizukanaOkaTrainer6WonString
@@ -151,6 +151,7 @@ ShizukanaOkaSignpost1:
 
 ShizukanaOkaTrainer6EncounterString:
 	text "ねえ　ねえ　みてよ"
+
 	para "これ　ぜったい"
 	line "しんしゅの　ポケモン　だよ！"
 	done
@@ -189,6 +190,7 @@ ShizukanaOkaTrainer4EncounterString:
 ShizukanaOkaTrainer4WonString:
 	text "よるになると　くらくなるから"
 	line "こどもは　はやく　かえりなさい！"
+
 	para "おれ？"
 	line "おれは　ひをふくから　だいじょうぶ"
 	done
@@ -204,6 +206,7 @@ ShizukanaOkaTrainer3EncounterString:
 ShizukanaOkaTrainer3WonString:
 	text "ポケモンずかんを　つくるんだって？"
 	line "ちょっと　みせてよ"
+
 	para "へー"
 	line "タイプべつに　ポケモン　さがせるんだ"
 	done
@@ -227,6 +230,7 @@ ShizukanaOkaText1String:
 	text "この　おかの　ポケモンは　よわい！"
 	line "だから　ここで　しゅぎょう　している"
 	cont "トレーナーも　おおいよ"
+
 	para "みんな　バトルが　すきだから"
 	line "うでだめしを　するといい"
 	done

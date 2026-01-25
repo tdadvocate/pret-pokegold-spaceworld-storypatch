@@ -44,12 +44,12 @@ GiveItemPredef::
 	add_predef PrintMoveDescription
 	add_predef UpdatePlayerHUD
 	add_predef PlaceGraphic
-	add_predef Function3f068 ; 20
+	add_predef Old_ScaleSpriteByTwo ; 20
 	add_predef LoadMonBackPic
-	add_predef AnyPartyAlive
+	add_predef CheckPlayerPartyForFitMon
 	add_predef UpdateEnemyHUD
 	add_predef DoubleOrHalveSelectedStats_Old
-	add_predef Function3ef19
+	add_predef StartBattle
 	add_predef CalcAndPlaceExpBar
 	add_predef GetBattleMonBackpic
 	add_predef GetEnemyMonFrontpic ; 28
@@ -81,18 +81,18 @@ GiveItemPredef::
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef PredefShakeScreenVertically
 	add_predef PredefShakeScreenHorizontally
-	add_predef Function145b8
-	add_predef Function146dc
-	add_predef Function145de
+	add_predef SavePokemonData
+	add_predef TryLoadPokemonData
+	add_predef Dummy_SaveBox
 	add_predef ExecuteBGEffects ; 48
-	add_predef Function1457a
-	add_predef Function143e0
+	add_predef SaveOptionsAndGameData
+	add_predef SaveMenu
 	add_predef CheckSGB
 	add_predef LoadSGBLayout
 	add_predef Pokedex_GetArea
 	add_predef DoBattleTransition
-	add_predef Function8c9c6
-	add_predef Function8c940 ; 50
+	add_predef LeaveMapAnim_Old
+	add_predef EnterMapAnim_Old ; 50
 	add_predef PlayBattleAnim
 	add_predef Functioncc000
 	add_predef Functioncc000_2

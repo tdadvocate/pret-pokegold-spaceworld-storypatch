@@ -29,14 +29,14 @@ ItemNames::
 	db "みずのいし@" ; WATER_STONE (24)
 	db "しようきんし@" ; 19
 	db "マックスアップ@" ; HP_UP
-	db "タウりン@" ; PROTEIN
-	db "ブロムへキシン@" ; IRON
+	db "タウリン@" ; PROTEIN
+	db "ブロムヘキシン@" ; IRON
 	db "インドメタシン@" ; CARBOS
 	db "しようきんし@" ; 1E
-	db "りゾチウム@" ; CALCIUM
+	db "リゾチウム@" ; CALCIUM
 	db "ふしぎなアメ@" ; RARE_CANDY (32)
 	db "ヨクアタール@" ; X_ACCURACY
-	db "りーフのいし@" ; LEAF_STONE (34)
+	db "リーフのいし@" ; LEAF_STONE (34)
 	db "しようきんし@" ; 23
 	db "きんのたま@" ; NUGGET
 	db "ピッピにんぎょう@" ; POKE_DOLL

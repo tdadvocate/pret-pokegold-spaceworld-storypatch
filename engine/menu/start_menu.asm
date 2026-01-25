@@ -976,7 +976,7 @@ PartyCheckLessThanTwo:
 
 PartyHeldItem:
 	callfar FreezeMonIcons
-	ld hl, .GiveTakeItemMenuData
+	ld hl, GiveTakeItemMenuData
 	call LoadMenuHeader
 	call VerticalMenu
 	jp c, .close
@@ -1160,13 +1160,13 @@ PokemonTookItemText:
 	line "はずしました！"
 	prompt
 
-
-ItemPromptPokemonAskSwapItemText6753:
+PokemonAskSwapItemText:
 	text_from_ram wMonOrItemNameBuffer
 	text "は　@"
 	text_from_ram wStringBuffer1
 	text "を"
 	line "すでに　そうび　しています"
+
 	para "そうびしている　どうぐを"
 	line "とりかえますか？"
 	done

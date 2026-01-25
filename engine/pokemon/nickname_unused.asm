@@ -18,7 +18,7 @@ AskName_Old:
 	call GetPokemonName
 ; Test for being in debug field mode that doesn't go anywhere... maybe the name screen was skipped in debug mode?
 	ld a, [wDebugFlags]
-	bit 1, a
+	bit DEBUG_FIELD_F, a
 	pop hl
 	push hl
 	ld hl, AskGiveNickname_Old
@@ -51,7 +51,7 @@ AskName_Old:
 .done
 	pop hl
 	ld a, [hl]
-	cp "@"
+	cp '@'
 	jr nz, .not_terminated ; shouldn't this be the other way around? 'jr z' instead of 'jr nz'?
 .declined_nickname
 	ld d, h
@@ -81,7 +81,7 @@ Unreferenced_DisplayNameRaterScreen:
 	call UpdateTimePals
 	pop de
 	ld a, [de]
-	cp "@"
+	cp '@'
 	jr z, .empty_name
 	ld hl, wPartyMonNicknames
 	ld bc, MON_NAME_LENGTH

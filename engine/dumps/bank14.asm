@@ -98,7 +98,7 @@ PrintMonTypes::
 	jr PrintType
 
 .hide_type_2
-	ld a, "　"
+	ld a, '　'
 	ld bc, SCREEN_WIDTH - 3
 	add hl, bc
 	ld [hl], a
@@ -157,7 +157,7 @@ GetTrainerClassName_Old::
 ; Seemingly unreferenced.
 ; Loads a name to wStringBuffer1 from a partial list of Trainer classes leftover from Red/Green.
 	ld hl, .name_table
-	ld a, [wca22]
+	ld a, [wTrainerClass]
 	dec a
 	ld c, a
 	ld b, 0
@@ -171,23 +171,23 @@ GetTrainerClassName_Old::
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .copy_byte
 	ret
 
 .name_table:
-	dw .youngster, .bug_catcher, .lass, wca2b
+	dw .youngster, .bug_catcher, .lass, wOTClassName
 	dw .jr_trainer_male, .jr_trainer_female, .pokemaniac, .super_nerd
-	dw wca2b, wca2b, .burglar, .engineer
-	dw .jack, wca2b, .swimmer, wca2b
-	dw wca2b, .beauty, wca2b, .rocker
-	dw .juggler, wca2b, wca2b, .blackbelt
-	dw wca2b, .prof_oak, .chief, .scientist
-	dw wca2b, .rocket, .cooltrainer_male, .cooltrainer_female
-	dw wca2b, wca2b, wca2b, wca2b
-	dw wca2b, wca2b, wca2b, wca2b
-	dw wca2b, wca2b, wca2b, wca2b
-	dw wca2b, wca2b, wca2b
+	dw wOTClassName, wOTClassName, .burglar, .engineer
+	dw .jack, wOTClassName, .swimmer, wOTClassName
+	dw wOTClassName, .beauty, wOTClassName, .rocker
+	dw .juggler, wOTClassName, wOTClassName, .blackbelt
+	dw wOTClassName, .prof_oak, .chief, .scientist
+	dw wOTClassName, .rocket, .cooltrainer_male, .cooltrainer_female
+	dw wOTClassName, wOTClassName, wOTClassName, wOTClassName
+	dw wOTClassName, wOTClassName, wOTClassName, wOTClassName
+	dw wOTClassName, wOTClassName, wOTClassName, wOTClassName
+	dw wOTClassName, wOTClassName, wOTClassName
 
 
 .youngster
@@ -249,10 +249,10 @@ GetTrainerClassName_Old::
 	db "だんいん@"
 
 .cooltrainer_male
-	db "エりート♂@"
+	db "エリート♂@"
 
 .cooltrainer_female
-	db "エりート♀@"
+	db "エリート♀@"
 
 DrawPlayerHP::
 	ld a, 1
@@ -327,7 +327,7 @@ DrawHP:
 	lb bc, 2, 3
 	call PrintNumber
 
-	ld a, "／"  ; $f3
+	ld a, '／' ; $f3
 	ld [hli], a
 
 ; Print max HP
@@ -452,14 +452,14 @@ Function50340::
 	call PlaceString
 	push bc
 	call GetGender
-	ld a, "♂"
+	ld a, '♂'
 	jr c, .asm_50384
-	ld a, "♀"
+	ld a, '♀'
 .asm_50384
 	pop hl
 	ld [hl], a
 	hlcoord 1, 12
-	ld a, "／"
+	ld a, '／'
 	ld [hli], a
 	ld a, [wMonHIndex]
 	ld [wMoveGrammar], a
@@ -952,7 +952,7 @@ ListMovePP::
 	and a
 	jr z, .skip
 	ld c, a
-	ld a, "ー"
+	ld a, 'ー'
 	call .load_loop
 
 .skip
@@ -994,7 +994,7 @@ ListMovePP::
 	ld de, wStringBuffer1 + 4
 	lb bc, 1, 2
 	call PrintNumber
-	ld a, "／"
+	ld a, '／'
 	ld [hli], a
 	ld de, wNamedObjectIndexBuffer
 	lb bc, 1, 2
@@ -1074,12 +1074,12 @@ OpenPartyMenu::
 	ld [w2DMenuNumRows], a
 
 	ld b, a
-	ld a, [wce38]
+	ld a, [wFailedToFlee]
 	and a
 	ld a, $03
 	jr z, .asm_507b4
-	xor a
-	ld [wce38], a
+	xor a ; FALSE
+	ld [wFailedToFlee], a
 	ld a, $01
 .asm_507b4
 	ld [wMenuJoypadFilter], a
@@ -1252,7 +1252,7 @@ PlacePartyMember::
 	dec hl
 	dec hl
 	dec hl
-	ld a, "▷"
+	ld a, '▷'
 	ld [hli], a
 	inc hl
 	inc hl
@@ -1549,7 +1549,7 @@ RevitalizedText:
 
 _GrewToLevelText:
 	text_from_ram wStringBuffer1
-	text "の　レべルが@"
+	text "の　レベルが@"
 	deciram wCurPartyLevel, 1, 3
 	text "になった@"
 	sound_dex_fanfare_50_79
@@ -1581,11 +1581,11 @@ PlaceStatusString::
 	pop de
 	jr nz, PlaceNonFaintStatus
 	; "FNT" equivalent string
-	ld a, "ひ"
+	ld a, 'ひ'
 	ld [hli], a
-	ld a, "ん"
+	ld a, 'ん'
 	ld [hli], a
-	ld [hl], "し"
+	ld [hl], 'し'
 	and a
 	ret
 
@@ -1602,39 +1602,39 @@ PlaceNonFaintStatus::
 	and SLP
 	ret z
 	; "SLP" equivalent string
-	ld a, "ね"
+	ld a, 'ね'
 	ld [hli], a
-	ld a, "む"
+	ld a, 'む'
 	ld [hli], a
-	ld [hl], "り"
+	ld [hl], 'り'
 	ret
 
 .PsnString
-	ld a, "<DO>"
+	ld a, '<DO>'
 	ld [hli], a
-	ld [hl], "く"
+	ld [hl], 'く'
 	ret
 
 .BrnString
-	ld a, "や"
+	ld a, 'や'
 	ld [hli], a
-	ld a, "け"
+	ld a, 'け'
 	ld [hli], a
-	ld [hl], "<DO>"
+	ld [hl], '<DO>'
 	ret
 
 .FrzString
-	ld a, "こ"
+	ld a, 'こ'
 	ld [hli], a
-	ld a, "お"
+	ld a, 'お'
 	ld [hli], a
-	ld [hl], "り"
+	ld [hl], 'り'
 	ret
 
 .ParString
-	ld a, "ま"
+	ld a, 'ま'
 	ld [hli], a
-	ld [hl], "ひ"
+	ld [hl], 'ひ'
 	ret
 
 GetMonBackpic::
@@ -1975,7 +1975,7 @@ _SwitchPartyMons::
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, "　"
+	ld a, '　'
 	call ByteFill
 	pop af
 	ld hl, wShadowOAMSprite00
@@ -2102,7 +2102,7 @@ PartyMenu_ClearCursor::
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, PARTY_LENGTH
 .next
-	ld [hl], "　"
+	ld [hl], '　'
 	add hl, bc
 	dec a
 	jr nz, .next

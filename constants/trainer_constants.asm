@@ -87,9 +87,9 @@ ENDM
 
 	trainerclass TRAINER_FISHER ; 25
 
-	trainerclass TRAINER_SWIMMER_F ; 26
+	trainerclass TRAINER_SWIMMER_M ; 26
 
-	trainerclass TRAINER_SWIMMER_M ; 27
+	trainerclass TRAINER_SWIMMER_F ; 27
 
 	trainerclass TRAINER_SAILOR ; 28
 
@@ -146,3 +146,5 @@ ENDM
 	trainerclass TRAINER_ELITE_FOUR_F ; 40
 
 DEF NUM_TRAINER_CLASSES EQU __trainer_class__
+
+DEF TRAINER_OPP_RIVAL3_RED EQU $2b

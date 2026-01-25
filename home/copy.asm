@@ -78,12 +78,14 @@ UncompressSpriteFromDE::
 	ld [hl], d
 	jp UncompressSpriteData
 
+; TODO: Rename to LoadTilemapToTempTilemap
 BackUpTilesToBuffer::
 	hlcoord 0, 0
 	decoord 0, 0, wTileMapBackup
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	jp CopyBytes
 
+; TODO: Rename to SafeLoadTempTilemapToTilemap
 ReloadTilesFromBuffer::
 	xor a
 	ldh [hBGMapMode], a
@@ -105,6 +107,6 @@ CopyString::
 	ld a, [de]
 	inc de
 	ld [hli], a
-	cp "@"
+	cp '@'
 	jr nz, CopyString
 	ret

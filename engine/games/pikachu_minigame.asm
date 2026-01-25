@@ -240,7 +240,7 @@ PikachuMiniGame_BlinkText:
 
 .render_dakutens
 ; Render dakuten marks separately
-	ld a, "ﾞ" + $10
+	ld a, 'ﾞ' + $10
 
 	hlcoord 5, 0
 	ld [hl], a
@@ -398,7 +398,7 @@ PikachuMiniGame_RunFrame:
 	ldh [hSCX], a
 	ldh [hSCY], a
 
-	ld a, 144
+	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
 	scf
 	ret
