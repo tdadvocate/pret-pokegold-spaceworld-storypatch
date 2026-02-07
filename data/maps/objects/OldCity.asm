@@ -23,13 +23,13 @@ OldCity_MapEvents::
 	warp_event  3, 31, OLD_CITY_KURTS_HOUSE, 1, 418
 	warp_event 18, 30, ROUTE_1_GATE_1F, 3, 426
 	warp_event 19, 30, ROUTE_1_GATE_1F, 4, 426
-	warp_event 22, 26, OLD_CITY_SCHOOL, 1, 376
+	warp_event 21, 26, OLD_CITY_SCHOOL, 1, 376
 
 	def_bg_events
 	bg_event  8, 14, 1
 	bg_event  8, 16, 2
 	bg_event 28, 16, 3
-	bg_event 20, 22, 4
+	bg_event 23, 27, 4
 	bg_event 26, 22, 5
 	bg_event  8, 26, 6
 	bg_event 28, 28, 7
