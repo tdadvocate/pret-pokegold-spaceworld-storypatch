@@ -62,7 +62,7 @@ SECTION "engine/landmarks.asm@2", ROMX
 
 WarpMenuOptions::
 
-	db 45 ; Number of options in the menu - 43 total stored in data (2 normally missing but added manually), but most are unused (orig 16)
+	db 16 ; Number of options in the menu - 43 total stored in data (2 normally missing but added manually), but most are unused (orig 16 but changing to 45 allows full list though that will break saving for some reason)
 
 	db SPAWN_POINT_SILENT
 	db SPAWN_POINT_OLD
@@ -78,43 +78,43 @@ WarpMenuOptions::
 
 	; PRINCE and MT_FUJI are skipped in the menu
 	; Manually adding these back because it makes sense
-	db SPAWN_POINT_PRINCE
-	db SPAWN_POINT_MT_FUJI
+	;db SPAWN_POINT_PRINCE
+	;db SPAWN_POINT_MT_FUJI
 
 	db SPAWN_POINT_SOUTH
 	db SPAWN_POINT_NORTH
 	db SPAWN_POINT_ROUTE_15
 	db SPAWN_POINT_ROUTE_18
 	db SPAWN_POINT_SILENT_HILL
-;	db $ff ; commented out to allow full list of debug warp menu options
+	db $ff ; commenting this out will allow full list of debug warp menu options
 
 	; The demo's options stop here, but the spawn points included actually extend far beyond what is available
 
-	db SPAWN_POINT_POWER_PLANT_1
-	db SPAWN_POINT_POWER_PLANT_2
-	db SPAWN_POINT_POWER_PLANT_3
-	db SPAWN_POINT_POWER_PLANT_4
-	db SPAWN_POINT_RUINS_1
-	db SPAWN_POINT_RUINS_2
-	db SPAWN_POINT_MINES_1
-	db SPAWN_POINT_MINES_2
-	db SPAWN_POINT_MINES_3
-	db SPAWN_POINT_MINES_4
-	db SPAWN_POINT_MINES_5
-	db SPAWN_POINT_MINES_6
-	db SPAWN_POINT_MINES_7
-	db SPAWN_POINT_HIDEOUT_1
-	db SPAWN_POINT_HIDEOUT_2
-	db SPAWN_POINT_HIDEOUT_3
-	db SPAWN_POINT_SLOWPOKE_WELL_1
-	db SPAWN_POINT_SLOWPOKE_WELL_2
-	db SPAWN_POINT_POKEMON_LEAGUE_1
-	db SPAWN_POINT_POKEMON_LEAGUE_1_2
-	db SPAWN_POINT_POKEMON_LEAGUE_2
-	db SPAWN_POINT_POKEMON_LEAGUE_3
-	db SPAWN_POINT_POKEMON_LEAGUE_4
-	db SPAWN_POINT_POKEMON_LEAGUE_5
-	db SPAWN_POINT_POKEMON_LEAGUE_6
-	db SPAWN_POINT_POKEMON_LEAGUE_7
-	db SPAWN_POINT_POKEMON_LEAGUE_7_2
-	db $ff
+;	db SPAWN_POINT_POWER_PLANT_1
+;	db SPAWN_POINT_POWER_PLANT_2
+;	db SPAWN_POINT_POWER_PLANT_3
+;	db SPAWN_POINT_POWER_PLANT_4
+;	db SPAWN_POINT_RUINS_1
+;	db SPAWN_POINT_RUINS_2
+;	db SPAWN_POINT_MINES_1
+;	db SPAWN_POINT_MINES_2
+;	db SPAWN_POINT_MINES_3
+;	db SPAWN_POINT_MINES_4
+;	db SPAWN_POINT_MINES_5
+;	db SPAWN_POINT_MINES_6
+;	db SPAWN_POINT_MINES_7
+;	db SPAWN_POINT_HIDEOUT_1
+;	db SPAWN_POINT_HIDEOUT_2
+;	db SPAWN_POINT_HIDEOUT_3
+;	db SPAWN_POINT_SLOWPOKE_WELL_1
+;	db SPAWN_POINT_SLOWPOKE_WELL_2
+;	db SPAWN_POINT_POKEMON_LEAGUE_1
+;	db SPAWN_POINT_POKEMON_LEAGUE_1_2
+;	db SPAWN_POINT_POKEMON_LEAGUE_2
+;	db SPAWN_POINT_POKEMON_LEAGUE_3
+;	db SPAWN_POINT_POKEMON_LEAGUE_4
+;	db SPAWN_POINT_POKEMON_LEAGUE_5
+;	db SPAWN_POINT_POKEMON_LEAGUE_6
+;	db SPAWN_POINT_POKEMON_LEAGUE_7
+;	db SPAWN_POINT_POKEMON_LEAGUE_7_2
+;	db $ff

@@ -183,8 +183,8 @@ MainMenuHeader:
 .MenuData:
 	db STATICMENU_CURSOR
 	db 0 ; items
-	dw ContinueMenu ; changed from MainMenuItems to force the continue screen to show
-	db PlaceMenuStrings; effects the text displayed on the menu screen
+	dw ContinueMenu ; changed from MainMenuItems to force the continue screen to show ContinueMenu
+	dw PlaceMenuStrings ; effects the text displayed on the menu screen
 	dw .Strings
 
 .Strings:
@@ -321,7 +321,7 @@ PrintPlayTime::
 PlayerInfoText:
 	db   "しゅじんこう"
 	next "もっているバッジ　　　　こ" ; Badges (lit: Badges being carried)
-	next "#ずかん　　　　ひき"
+	next "#ずかん　　　　ひき" ; Dex Count
 	next "プレイじかん" ; Time (lit: Play Time)
 	text_end
 
