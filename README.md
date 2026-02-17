@@ -8,37 +8,10 @@ At the very bottom of this README, you will find the original README provided on
 Please see the [Wiki](https://github.com/tdadvocate/pret-pokegold-spaceworld-storypatch/wiki/Debug-Menu-Guide) for more info
 
 ## Features to Implement
-- [x] Change from Demo Mode to Story Mode
-- [ ] Fix the Title Menu to show Continue Game only after the player saves the game at least once to resolve crash
-- [ ] Fix start menu to actually update with the story mode flags
-- [x] Allow saving via Start Menu
-- [x] Re-enable evolutions
-- [x] Fix Heart and Poison Stone evolutions
-- [x] Remove locked door text for Oak's Lab
-- [x] Disable Blackout Demo Mode game reset
-- [ ] Heal party post Blackout
-- [x] Remove map blocks at North & East of Silent Town
-- [ ] Implement Blue Follow feature at North & East exits like West to resolve crashing
-- [x] Fix Rival battle
-- [x] Fix collision data for almost all normally available maps
-- [ ] Remove some other map blockades w/minimal design changes
-- [ ] Fix collision data for normally inaccessible maps
-- [x] Debug Menu for Healing, Surf, Cut, PC Storage, etc
-- [ ] Fix PC Storage to not corrupt mon semi-randomly
-- [ ] Prevent PC Storage from being opened w/no Pokémon to resolve crashing
-- [ ] Fix healing/PC access in Pokémon Center
-- [ ] Fix PokéMarts buy/sell features
-- [x] Route 1 Rival Demo Reset dialogue partially disabled (still triggers when manually talking to Rival)
-- [x] Temporary Fix: Nanami gives extra items after Rival Battle
-
-## Stretch Goal Changes
-- [ ] English translation (very unlikely without assembly help)
-- [ ] Full story recreation (even less likely)
-- [ ] Full Japanese story recreation (basically 0% chance)
-- Full story recreation may include: Add the boat to travel between Fonto, High Tech, & West, Add the proper connections for Cave & Power Plant if actually intended to be used, story events found in other leaked sources, etc.
+A full list of currently implemented changes as well as planned changes can be seen on the [Wiki](https://github.com/tdadvocate/pret-pokegold-spaceworld-storypatch/wiki/Debug-Menu-Guide) 
 
 ## KNOWN BUGS
-Please see the [Wiki](https://github.com/tdadvocate/pret-pokegold-spaceworld-storypatch/wiki/Known-Bugs) for more info
+Please see the [Wiki](https://github.com/tdadvocate/pret-pokegold-spaceworld-storypatch/wiki/Features-and-Changes) for more info
 
 ## CONTRIBUTIONS EXTREMELY WELCOMED!
 Please feel free to help with this as much as you want. I am doing this solo as of the time of writing this README and do not have a ton of experience working with ROMs at this level. Any and all help is immensely appreciated!
