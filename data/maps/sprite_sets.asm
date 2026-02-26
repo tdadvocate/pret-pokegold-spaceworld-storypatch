@@ -40,7 +40,7 @@ MapGroupSpriteSets:
 SpriteSets:
 ; Each sprite set is 10 entries long, instead of 11 entries like in Gen I / II.
 
-; sprite set $01
+; sprite set $01 (MAPGROUP_SILENT/MAPGROUP_MISC/MAPGROUP_EMPTY/blanks)
 	db SPRITE_BLUE
 	db SPRITE_SILVER
 	db SPRITE_OFFICER
@@ -52,7 +52,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $02
+; sprite set $02 (MAPGROUP_OLD)
 	db SPRITE_GRAMPS
 	db SPRITE_TWIN
 	db SPRITE_BUG_CATCHER_BOY
@@ -64,7 +64,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $03
+; sprite set $03 (MAPGROUP_WEST)
 	db SPRITE_LASS
 	db SPRITE_COOLTRAINER_F
 	db SPRITE_ROCKER
@@ -76,7 +76,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $04
+; sprite set $04 (MAPGROUP_HAITEKU)
 	db SPRITE_SILVER
 	db SPRITE_TWIN
 	db SPRITE_SAILOR
@@ -88,7 +88,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $05
+; sprite set $05 (MAPGROUP_FONTO)
 	db SPRITE_LASS
 	db SPRITE_BUG_CATCHER_BOY
 	db SPRITE_YOUNGSTER
@@ -100,7 +100,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $06
+; sprite set $06 (MAPGROUP_BAADON)
 	db SPRITE_36
 	db SPRITE_LASS
 	db SPRITE_YOUNGSTER
@@ -112,7 +112,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $07
+; sprite set $07 (MAPGROUP_NEWTYPE)
 	db SPRITE_SILVER
 	db SPRITE_YOUNGSTER
 	db SPRITE_GIRL
@@ -124,7 +124,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $08
+; sprite set $08 (MAPGROUP_SUGAR)
 	db SPRITE_TWIN
 	db SPRITE_BUG_CATCHER_BOY
 	db SPRITE_GRAMPS
@@ -136,7 +136,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $09
+; sprite set $09 (MAPGROUP_STAND)
 	db SPRITE_SAKAKI
 	db SPRITE_CAPTAIN
 	db SPRITE_TWIN
@@ -148,7 +148,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $0a
+; sprite set $0a (MAPGROUP_KANTO)
 	db SPRITE_LASS
 	db SPRITE_YOUNGSTER
 	db SPRITE_COOLTRAINER_F
@@ -160,7 +160,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $0b
+; sprite set $0b (MAPGROUP_PRINCE)
 	db SPRITE_OKIDO
 	db SPRITE_TWIN
 	db SPRITE_BUG_CATCHER_BOY
@@ -172,7 +172,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $0c
+; sprite set $0c (MAPGROUP_SOUTH)
 	db SPRITE_SILVER
 	db SPRITE_TWIN
 	db SPRITE_TEACHER
@@ -184,7 +184,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $0d
+; sprite set $0d (MAPGROUP_MT_FUJI)
 	db SPRITE_YOUNGSTER
 	db SPRITE_GIRL
 	db SPRITE_24
@@ -196,7 +196,7 @@ SpriteSets:
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
 
-; sprite set $0e
+; sprite set $0e (MAPGROUP_BULL/MAPGROUP_NORTH)
 	db SPRITE_SILVER
 	db SPRITE_TWIN
 	db SPRITE_YOUNGSTER
