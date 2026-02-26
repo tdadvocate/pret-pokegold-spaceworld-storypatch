@@ -275,10 +275,10 @@ MapGroup_North:
 	map NorthPokecenter2F, TILESET_POKECENTER, INDOOR, LANDMARK_NORTH
 
 MapGroup_Misc:
-	map PowerPlant1, TILESET_POWER_PLANT, INDOOR, LANDMARK_NONE
-	map PowerPlant2, TILESET_POWER_PLANT, INDOOR, LANDMARK_NONE
-	map PowerPlant3, TILESET_POWER_PLANT, INDOOR, LANDMARK_NONE
-	map PowerPlant4, TILESET_POWER_PLANT, INDOOR, LANDMARK_NONE
+	map PowerPlant1, TILESET_POWER_PLANT, ENVIRONMENT_5, LANDMARK_NONE ; On Route 18 - Changed from INDOOR to remove nuclear yellow SGB palette
+	map PowerPlant2, TILESET_POWER_PLANT, ENVIRONMENT_5, LANDMARK_NONE ; Changed from INDOOR to remove nuclear yellow SGB palette
+	map PowerPlant3, TILESET_POWER_PLANT, ENVIRONMENT_5, LANDMARK_NONE ; Changed from INDOOR to remove nuclear yellow SGB palette
+	map PowerPlant4, TILESET_POWER_PLANT, ENVIRONMENT_5, LANDMARK_NONE ; Changed from INDOOR to remove nuclear yellow SGB palette
 	map RuinsOfAlphEntrance, TILESET_RUINS_OF_ALPH, CAVE, LANDMARK_NONE
 	map RuinsOfAlphMain, TILESET_RUINS_OF_ALPH, CAVE, LANDMARK_NONE
 	map CaveMinecarts1, TILESET_CAVE, CAVE, LANDMARK_NONE
