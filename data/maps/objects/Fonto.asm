@@ -16,6 +16,8 @@ Fonto_MapEvents::
 	warp_event  3,  7, FONTO_HOUSE, 1, 66
 	warp_event  3, 12, FONTO_POKECENTER_1F, 1, 114
 	warp_event 16, 13, FONTO_LAB, 1, 121
+	; testing ruins of alph warp
+	warp_event 10, 6, RUINS_OF_ALPH_MAIN, 1, 0
 
 	def_bg_events
 	bg_event 15,  4, 1

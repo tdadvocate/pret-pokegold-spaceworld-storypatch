@@ -8,6 +8,8 @@ RuinsOfAlphMain_MapEvents::
 	dw $0 ; unknown
 
 	def_warp_events
+	warp_event 23, 47, FONTO, 6, 0
+	warp_event 24, 47, FONTO, 6, 0
 
 	def_bg_events
 

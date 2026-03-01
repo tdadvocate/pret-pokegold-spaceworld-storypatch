@@ -639,4 +639,28 @@ endc
 	db 5, DEX_METAPOD
 	db 5, DEX_PIKACHU
 
+	map_id RUINS_OF_ALPH_MAIN
+	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
+	; morn
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	; day
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	; nite
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+	db 5, DEX_ANNON
+
 	db -1 ; end
