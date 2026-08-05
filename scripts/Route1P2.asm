@@ -80,7 +80,7 @@ Route1P2TextSign1:
 	call OpenTextbox
 	ret
 
-Route1P2TextString1:
+Route1P2TextString1: ; Kimono Girl Start Text
 	text "まあ　かわいらしい　トレーナーやこと"
 	line "うちと　ポケモン　しはります？"
 	done

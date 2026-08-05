@@ -78,12 +78,21 @@ OverworldLoop_05::
 OverworldLoop_ExitBattle::
 	ld a, [wBattleResult]
 	cp LOSE
-;	jr z, .DemoGameOver ; just removing this is enough to remove the demo reset code but doesn't heal mon
-; Commenting out the above also disables retries against the trainer you lost too unfortunately
-;	callfar HealParty ; This heals after every battle, not just whiteouts
+;	jr z, .DemoGameOver
 	ld a, MAPSTATUS_RETURN_TO_MAIN
 	call SetMapStatus
 	ret
+
+; Blackout heal code from MDTravisYT (Still doesn't seem to allow rematches with trainers if blackout)
+;.DemoGameOver:
+;    xor a
+;    ld [wBattleResult], a
+;    callfar HealParty
+;    ld a, 1
+;    ld [wDefaultSpawnPoint], a
+;    ld a, MAPSETUP_TELEPORT
+;    ldh [hMapEntryMethod], a
+;    ret
 
 ; Demo Mode Reset Code 
 ;.DemoGameOver:
