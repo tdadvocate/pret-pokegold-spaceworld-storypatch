@@ -74,18 +74,28 @@ OverworldLoop_05::
 OverworldLoop_ExitBattle::
 	ld a, [wBattleResult]
 	cp LOSE
-	jr z, .DemoGameOver
+;	jr z, .DemoGameOver
 	ld a, MAPSTATUS_RETURN_TO_MAIN
 	call SetMapStatus
 	ret
 
-.DemoGameOver:
-	ld hl, wJoypadFlags
-	res 4, [hl]
-	ld hl, .text
-	call OpenTextbox
-	call GBFadeOutToBlack
-	jp Init
+;DemoGameOver:
+;	ld hl, wJoypadFlags
+;	res 4, [hl]
+;	ld hl, .text
+;	call OpenTextbox
+;	call GBFadeOutToBlack
+;	jp Init
+
+;.DemoGameOver:
+;    xor a
+;    ld [wBattleResult], a
+;    callfar HealParty
+;    ld a, 1
+;    ld [wDefaultSpawnPoint], a
+;    ld a, MAPSETUP_TELEPORT
+;    ldh [hMapEntryMethod], a
+;    ret
 
 .text:
 	text "つぎは　がんばるぞ！！"
