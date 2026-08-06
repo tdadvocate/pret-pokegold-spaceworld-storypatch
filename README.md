@@ -13,7 +13,7 @@ At the very bottom of this README, you will find the original README provided on
 
 ### Story Mode
 - [x] Change from Demo Mode to Story Mode
-- [ ] Fix Rival battle
+- [x] Fix Rival battle
 - [ ] Fix start menu to actually update with the story mode flags (partially functional)
 - [ ] Allow saving via Start Menu
 - [ ] Re-enable evolutions
@@ -51,7 +51,7 @@ At the very bottom of this README, you will find the original README provided on
 - > _Full story recreation may include: Add the boat to travel between Fonto, High Tech, & West, Add the proper connections for Cave & Power Plant if actually intended to be used, story events found in other leaked sources, etc._
 
 ## KNOWN BUGS
-There have not been any builds of the rewrite yet so this section is empty for the time being.
+- Clicking the continue option from the title menu without creating a save file will crash the game
 
 ## CONTRIBUTIONS EXTREMELY WELCOMED!
 Please feel free to help with this as much as you want. I am doing this solo as of the time of writing this README and do not have a ton of experience working with ROMs at this level. Any and all help is immensely appreciated!
