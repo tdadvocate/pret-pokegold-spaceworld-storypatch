@@ -79,6 +79,7 @@ OverworldLoop_ExitBattle::
 	call SetMapStatus
 	ret
 
+; Orig code to reset demo on blackout
 ;DemoGameOver:
 ;	ld hl, wJoypadFlags
 ;	res 4, [hl]
@@ -87,6 +88,7 @@ OverworldLoop_ExitBattle::
 ;	call GBFadeOutToBlack
 ;	jp Init
 
+; Blackout heal code from MDTravisYT (Still doesn't seem to allow rematches with trainers if blackout)
 ;.DemoGameOver:
 ;    xor a
 ;    ld [wBattleResult], a

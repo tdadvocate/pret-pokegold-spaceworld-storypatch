@@ -19,7 +19,7 @@ At the very bottom of this README, you will find the original README provided on
 - [ ] Re-enable evolutions
 - [ ] Fix Heart and Poison Stone evolutions
 - [ ] Remove locked door text for Oak's Lab
-- [ ] Disable Blackout Demo Mode game reset
+- [x] Disable Blackout Demo Mode game reset
 - [ ] Heal party post Blackout
 - [ ] Debug Menu for Healing, Surf, Cut, PC Storage, etc
 - [ ] Temporary Fix: Nanami gives extra items after Rival Battle
