@@ -158,7 +158,7 @@ MainMenu::
 	ld a, M_SET_TIME
 	jr .triggerMenu
 .setMenuPlay
-	ld a, M_PLAY_GAME
+	ld a, M_NEW_GAME ; changed from M_PLAY_GAME to mimic what a production copy would have
 .triggerMenu
 	ld [wWhichIndexSet], a
 	ld hl, MainMenuHeader
@@ -179,7 +179,7 @@ MainMenuHeader:
 .MenuData:
 	db STATICMENU_CURSOR
 	db 0 ; items
-	dw MainMenuItems
+	dw ContinueMenu ; changed from MainMenuItems to force the custom menu
 	dw PlaceMenuStrings
 	dw .Strings
 
@@ -336,6 +336,6 @@ NewGame::
 	ldh [hMapAnims], a
 	ld a, [wDebugFlags]
 	bit DEBUG_FIELD_F, a
-	jp z, DemoStart
+	jp z, GameStart ; changed from DemoStart to switch from Demo Mode to Story Mode
 	call DebugSetUpPlayer
 	jp IntroCleanup

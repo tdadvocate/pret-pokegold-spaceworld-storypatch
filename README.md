@@ -9,10 +9,10 @@ At the very bottom of this README, you will find the original README provided on
 
 ### Main Menu
 - [ ] Change menu to show Demo Mode, Story Mode options, and normal other options
-- [ ] Fix the Title Menu to show Continue Game only after the player saves the game at least once to resolve crash
+- [x] Fix the Title Menu to show Continue Game only after the player saves the game at least once to resolve crash
 
 ### Story Mode
-- [ ] Change from Demo Mode to Story Mode
+- [x] Change from Demo Mode to Story Mode
 - [ ] Fix Rival battle
 - [ ] Fix start menu to actually update with the story mode flags (partially functional)
 - [ ] Allow saving via Start Menu
