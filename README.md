@@ -23,10 +23,10 @@ At the very bottom of this README, you will find the original README provided on
 - [ ] Heal party post Blackout
 - [ ] Debug Menu for Healing, Surf, Cut, PC Storage, etc
 - [ ] Temporary Fix: Nanami gives extra items after Rival Battle
-- [ ] Make all new mon (and maybe old mon) accessible within just Gold Version until Silver can be built also
-- > _This might also stick around even after Silver can be built and may also have a hacky workaround for trade evolutons until trading can MAYBE be implemented down the road_
 - [ ] Fix shiny sparkle effect
 - [ ] Add shiny icon to mon status screen
+- [ ] Make all mon accessible within just either version alone
+- > _This might stick around to have a hacky workaround for trade evolutons until trading can MAYBE be implemented down the road_
 
 ### Pokemon Center/PokeMart
 - [ ] Fix PC Storage to not corrupt mon semi-randomly
