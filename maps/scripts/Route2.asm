@@ -17,7 +17,7 @@ Route2SignPointers:
 	dw Route2TextSign1
 
 Route2_TextPointers::
-	dw Route2Text1
+;	dw Route2Text1
 	dw Route2Text2
 
 Route2Script::
@@ -40,12 +40,12 @@ Route2Script::
 	call CallMapTextSubroutine
 	ret
 
-.endDemo
-Route2Text1:
-	ld hl, Route2TextString4
-	call OpenTextbox
-	call GBFadeOutToBlack
-	jp Init
+;.endDemo
+;Route2Text1:
+;	ld hl, Route2TextString4
+;	call OpenTextbox
+;	call GBFadeOutToBlack
+;	jp Init
 
 Route2Text2:
 	ld hl, wRoute2Flags
@@ -112,28 +112,28 @@ Route2TextString3:
 	done
 endc
 
-Route2TextString4:
-if DEF(_GOLD)
-	text "シゲル『おっ　サトシじゃないか！"
-
-	para "なんとか　ここまで　これた"
-	line "って　かんじだな"
-endc
-if DEF(_SILVER)
-	text "サトシ『おっ　シゲルじゃないか"
-	line "なんとか　ここまで　これた"
-	cont "って　かんじだな"
-endc
-	para "じつりょくが　ないのに"
-	line "むり　するなよな"
-
-	para "もっと　ポケモン　あつめるとか"
-	line "いろんな　ポケモン　そだてるとか"
-	cont "やること　あるだろ？"
-
-	para "ここで　ひきかえしたほうが　いいぜ！"
-	line "じゃあな"
-	done
+;Route2TextString4:
+;if DEF(_GOLD)
+;	text "シゲル『おっ　サトシじゃないか！"
+;
+;	para "なんとか　ここまで　これた"
+;	line "って　かんじだな"
+;endc
+;if DEF(_SILVER)
+;	text "サトシ『おっ　シゲルじゃないか"
+;	line "なんとか　ここまで　これた"
+;	cont "って　かんじだな"
+;endc
+;	para "じつりょくが　ないのに"
+;	line "むり　するなよな"
+;
+;	para "もっと　ポケモン　あつめるとか"
+;	line "いろんな　ポケモン　そだてるとか"
+;	cont "やること　あるだろ？"
+;
+;	para "ここで　ひきかえしたほうが　いいぜ！"
+;	line "じゃあな"
+;	done
 
 Route2TextString5:
 	text "ここは　１ばん　どうろ"

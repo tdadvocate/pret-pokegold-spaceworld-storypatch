@@ -19,7 +19,6 @@ At the very bottom of this README, you will find the original README provided on
 - [ ] Allow saving via Start Menu
 - [x] Re-enable evolutions
 - [x] Fix Heart and Poison Stone evolutions
-- [ ] Remove locked door text for Oak's Lab
 - [x] Disable Blackout Demo Mode game reset
 - [ ] Heal party post Blackout
 - [ ] Debug Menu for Healing, Surf, Cut, PC Storage, etc
@@ -45,7 +44,8 @@ At the very bottom of this README, you will find the original README provided on
 - [ ] Fix collision data for almost all normally available maps
 - [ ] Remove some other map blockades w/minimal design changes (please let me know if I missed anything)
 - [ ] Fix collision data for normally inaccessible maps
-- [ ] Disable Route 1/2  (whatever people call it nowadays) Rival Demo Reset dialogue
+- [X] Disable Route 2 Rival Demo Reset dialogue
+- [x] Remove locked door text for Oak's Lab
 
 ## Stretch Goal Changes
 - [ ] Allow trading between at least between SW97 patched games

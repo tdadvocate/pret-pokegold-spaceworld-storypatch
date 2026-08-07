@@ -285,29 +285,29 @@ CheckLabDoor:
 	call SetObjectFacing
 	ld hl, wJoypadFlags
 	set 6, [hl]
-	ld hl, SilentHillTextString1
-	call OpenTextbox
-	call LabClosed
-	call xor_a
+;	ld hl, SilentHillTextString1
+;	call OpenTextbox
+;	call LabClosed
+;	call xor_a
 	ret
 
-LabClosed:
-	ld a, 0
-	ld hl, SilentHillMovement7
-	call LoadMovementDataPointer
-	ld hl, wOverworldFlags
-	set OVERWORLD_PAUSE_MAP_PROCESSES_F, [hl]
-	ld a, MAPSTATUS_EVENT_RUNNING
-	call SetMapStatus
-	ret
+;LabClosed:
+;	ld a, 0
+;	ld hl, SilentHillMovement7
+;	call LoadMovementDataPointer
+;	ld hl, wOverworldFlags
+;	set OVERWORLD_PAUSE_MAP_PROCESSES_F, [hl]
+;	ld a, MAPSTATUS_EVENT_RUNNING
+;	call SetMapStatus
+;	ret
 
-SilentHillTextString1:
-	text "あれ？　カギが　かかっている"
-	done
+;SilentHillTextString1:
+;	text "あれ？　カギが　かかっている"
+;	done
 
-SilentHillMovement7:
-	slow_step DOWN
-	step_end
+;SilentHillMovement7:
+;	slow_step DOWN
+;	step_end
 
 SilentHillSignPointers::
 	dw SilentHillPlayerHouseText
