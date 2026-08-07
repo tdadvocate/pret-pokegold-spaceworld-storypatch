@@ -10,7 +10,6 @@ ROM_OBJ := \
 	main.o \
 	maps.o \
 	ram.o \
-	garbage/garbage.o \
 	gfx/misc.o \
 	gfx/pics.o \
 	gfx/sprites.o \
