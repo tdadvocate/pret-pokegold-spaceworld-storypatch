@@ -45,7 +45,7 @@ At the very bottom of this README, you will find the original README provided on
 - [ ] Fix collision data for almost all normally available maps
 - [ ] Remove some other map blockades w/minimal design changes (please let me know if I missed anything)
 - [ ] Fix collision data for normally inaccessible maps
-- [ ] Route 1 (or 2 idk what people call it nowadays) Rival Demo Reset dialogue partially disabled (still triggers when manually talking to Rival)
+- [ ] Disable Route 1/2  (whatever people call it nowadays) Rival Demo Reset dialogue
 
 ## Stretch Goal Changes
 - [ ] Allow trading between at least between SW97 patched games

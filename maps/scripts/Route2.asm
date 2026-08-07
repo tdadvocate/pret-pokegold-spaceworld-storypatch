@@ -9,7 +9,7 @@ Route2ScriptPointers::
 	script_pointer Route2Script, Route2NPCIDs, SCENE_ROUTE_2_DEFAULT
 
 Route2NPCIDs:
-	npc_id ROUTE_2_RIVAL
+;	npc_id ROUTE_2_RIVAL
 	npc_id ROUTE_2_KIMONO_GIRL
 	db -1
 
@@ -27,13 +27,13 @@ Route2Script::
 	ld a, [wXCoord]
 	cp $09
 	jr nz, .skipCheck
-	ld a, 0 ; player
-	ld d, LEFT
-	call SetObjectFacing
-	ld a, 2
-	ld d, RIGHT
-	call SetObjectFacing
-	jr .endDemo
+;	ld a, 0 ; player
+;	ld d, LEFT
+;	call SetObjectFacing
+;	ld a, 2
+;	ld d, RIGHT
+;	call SetObjectFacing
+;	jr .endDemo
 .skipCheck
 	ld hl, Route2NPCIDs ;data
 	ld de, Route2SignPointers ;start of textld pointers?
