@@ -15,8 +15,9 @@ At the very bottom of this README, you will find the original README provided on
 ### Story Mode
 - [x] Change from Demo Mode to Story Mode
 - [x] Fix Rival battle
-- [ ] Fix start menu to actually update with the story mode flags (partially functional)
-- [ ] Allow saving via Start Menu
+- [x] Full start menu temporary fix for below issue
+- [ ] Fix start menu to actually update with the story mode flags
+- [x] Allow saving via Start Menu
 - [x] Re-enable evolutions
 - [x] Fix Heart and Poison Stone evolutions
 - [x] Disable Blackout Demo Mode game reset

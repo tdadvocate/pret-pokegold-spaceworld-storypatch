@@ -142,7 +142,7 @@ GetStartMenuState:
 ; based on story flags and debug mode.
 ; 4 = debug, 3 = starting, 2 = rival beat in lab
 ; 1 = pokedex recieved, 0 = chose starter
-	ld b, 4
+	ld b, 3 ; from 4 to 3 but doesn't update w/flags
 	ld hl, wDebugFlags
 	bit DEBUG_FIELD_F, [hl]
 	jr z, .store
