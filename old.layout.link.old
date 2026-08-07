@@ -25,95 +25,135 @@ ROM0
 	"Serial interrupt vector"
 	org $0060
 	"Joypad interrupt vector"
+	org $0068
+	"High Home Garbage"
 	org $0100
 	"Entry point"
 	org $014e
 	"Global check value"
 	org $150
 	"Home"
+	"Home Garbage"
 ROMX $01
 	"bank1"
+	"Bank 01 Garbage"
 ROMX $02
 	"bank2"
+	"Bank 02 Garbage"
 ROMX $03
 	"bank3"
+	"Bank 03 Garbage"
 ROMX $04
 	"Maps"
 	"Shrink GFX"
 	"Title Screen GFX"
 	"bank4"
+	"Bank 04 Garbage"
 ROMX $05
 	"bank5"
+	"Bank 05 Garbage"
 ROMX $06
 	"Tilesets 1"
+	"Bank 06 Garbage"
 ROMX $07
 	"Tilesets 2"
 ROMX $08
 	"Tilesets 3"
 ROMX $09
 	"Menu"
+	"Bank 09 Garbage"
 ROMX $0a
 	"Link Cable"
 	"Link Cable Maps"
 	"Link Cable 2"
+	"Bank 0a Garbage"
 ROMX $0b
 	"Item Descriptions"
+	"Bank 0b Garbage"
 ROMX $0c
 	"Tilesets 4"
+	"Bank 0c Garbage"
 ROMX $0d
 	"Effect Commands"
+	"Bank 0d Garbage"
 ROMX $0e
 	"Enemy Trainers"
+	"Bank 0e Garbage"
 ROMX $0f
 	"Battle Core"
+	"Bank 0f Garbage"
 ROMX $10
 	"bank10"
+	"Bank 10 Garbage"
 ROMX $11
 	"Dex Entries"
+	"Bank 11 Garbage"
 ROMX $12
 	"Trainer Pics"
+	"Bank 12 Garbage"
 ROMX $13
 	"Tilesets 5"
+	"Bank 13 Garbage"
 ROMX $14
 	"bank14"
 	"Pic Banks"
+	"Bank 14 Garbage"
 ROMX $15
 	"Pics 1"
+	"Bank 15 Garbage"
 ROMX $16
 	"Pics 2"
+	"Bank 16 Garbage"
 ROMX $17
 	"Pics 3"
+	"Bank 17 Garbage"
 ROMX $18
 	"Pics 4"
+	"Bank 18 Garbage"
 ROMX $19
 	"Pics 5"
+	"Bank 19 Garbage"
 ROMX $1a
 	"Pics 6"
+	"Bank 1a Garbage"
 ROMX $1b
 	"Pics 7"
+	"Bank 1b Garbage"
 ROMX $1c
 	"Pics 8"
+	"Bank 1c Garbage"
 ROMX $1d
 	"Pics 9"
+	"Bank 1d Garbage"
 ROMX $1e
 	"Pics 10"
+	"Bank 1e Garbage"
 ROMX $1f
 	"Pics 11"
 	"Annon Pic Ptrs and Pics"
 	"Egg Pic"
+	"Bank 1f Garbage"
 ROMX $20
+	"Bank 20 Garbage"
 ROMX $21
+	"Attack Animation GFX"
+	"Bank 21 Garbage"
 ROMX $22
+	"Bank 22 Garbage"
 ROMX $23
 	"Overworld Anims"
 	"Pokemon Party Sprites"
 	"Mon Icons"
+	"Bank 23 Garbage"
 ROMX $24
 	"Subgames 1"
+	"Bank 24 Garbage"
 ROMX $25
 	"Old City Interior Maps"
+	"Bank 25 Garbage"
 ROMX $26
 	"West Interior Maps"
+	"Bank 26 Garbage"
 ROMX $27
 	"High-Tech Interior Maps"
 	"Font Interior Maps"
@@ -126,51 +166,76 @@ ROMX $27
 	"Kanto Interior Maps"
 	"South Interior Maps"
 	"North Interior Maps"
+	"Bank 27 Garbage"
 ROMX $28
+	"Bank 28 Garbage"
 ROMX $29
+	"Bank 29 Garbage"
 ROMX $2a
+	"Bank 2a Garbage"
 ROMX $2b
+	"Bank 2b Garbage"
 ROMX $2c
+	"Bank 2c Garbage"
 ROMX $2d
+	"Bank 2d Garbage"
 ROMX $2e
+	"Bank 2e Garbage"
 ROMX $2f
 	"Dungeon Maps"
+	"Bank 2f Garbage"
 ROMX $30
 	"Sprites 1"
+	"Bank 30 Garbage"
 ROMX $31
 	"Sprites 2"
+	"Bank 31 Garbage"
 ROMX $32
 	"bank32"
+	"Bank 32 Garbage"
 ROMX $33
 	"Move Animations"
+	"Bank 33 Garbage"
 ROMX $34
 	"Silent Hill Maps"
+	"Bank 34 Garbage"
 ROMX $35
+	"Bank 35 Garbage"
 ROMX $36
 	"City Maps"
 	"Route Maps"
 	"Silent Hill Scripts"
 	"Set Time"
 	"Route Scripts"
+	"Bank 36 Garbage"
 ROMX $37
 	"Tilesets 6"
+	"Bank 37 Garbage"
 ROMX $38
 	"Subgames 2"
+	"Bank 38 Garbage"
 ROMX $39
 	"Intro"
+	"Bank 39 Garbage"
 ROMX $3a
 	"Audio"
+	"Bank 3a Garbage"
 ROMX $3b
 	"Songs 1"
+	"Bank 3b Garbage"
 ROMX $3c
 	"Sound Effects"
 	"Cries"
 	"Songs 2"
+	"Bank 3c Garbage"
 ROMX $3d
+	"Bank 3d Garbage"
 ROMX $3e
 	"bank3E"
+	"Bank 3e Garbage"
 ROMX $3f
 	"Debug"
+	"Bank 3f Garbage"
 WRAM0
 	"Music engine RAM"
 	"OAM Buffer"
