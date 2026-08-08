@@ -22,7 +22,7 @@ At the very bottom of this README, you will find the original README provided on
 - [x] Fix Heart and Poison Stone evolutions
 - [x] Disable Blackout Demo Mode game reset
 - [ ] Heal party post Blackout
-- [x] Debug Menu for Healing, Surf, Cut, PC Storage, etc
+- [x] Debug Menu for Healing, Surf, Cut, PC Storage (not functional currently), etc
 - [ ] Temporary Fix: Nanami gives extra items after Rival Battle
 - [x] Fix shiny palette for "pinkmon"
 - [ ] Fix shiny sparkle effect
@@ -62,6 +62,7 @@ At the very bottom of this README, you will find the original README provided on
 - Rival's name has a grammatical error in the JP text
 - Start menu does not update with story flags
 - Maps past the 4 demo maps do not have proper collision or wild data
+- Using cut on tree in Old City will cause a corrupt tile to take its place until I update the map tileset file
 
 ## CONTRIBUTIONS EXTREMELY WELCOMED!
 Please feel free to help with this as much as you want. I am doing this solo as of the time of writing this README and do not have a ton of experience working with ROMs at this level. Any and all help is immensely appreciated!

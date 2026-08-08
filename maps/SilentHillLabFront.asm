@@ -629,11 +629,55 @@ SilentHillLabFrontScript17:
 	call OpenTextbox
 	SetEvent SILENT_HILL_LAB_FRONT_RIVAL_BATTLED
 	ld hl, wNumBagItems
-	ld a, ITEM_POKE_BALL
+	; Gives Ball Holder in first bag slot
+	ld a, ITEM_BALL_HOLDER
 	ld [wCurItem], a
-	ld a, 6
+	ld a, 1 ; item qty
 	ld [wItemQuantity], a
 	call ReceiveItem
+	; Gives 99 Masterballs in Ball Holder
+	ld a, ITEM_MASTER_BALL
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Masterballs in Ball Holder
+	ld a, ITEM_MASTER_BALL
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives TM Holder in second bag slot
+	ld a, ITEM_TM_HOLDER
+	ld [wCurItem], a
+	ld a, 1 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives Cut TM51/HM01 in TM Holder
+	ld a, ITEM_HM01
+	ld [wCurItem], a
+	ld a, 1 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Rare Candy in third bag slot
+	ld a, ITEM_RARE_CANDY
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Rare Candy in fourth bag slot
+	ld a, ITEM_RARE_CANDY
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+	; Gives 99 Rare Candy in fifth bag slot
+	ld a, ITEM_RARE_CANDY
+	ld [wCurItem], a
+	ld a, 99 ; item qty
+	ld [wItemQuantity], a
+	call ReceiveItem
+; end new bag item additions
 	call UnfreezeEverything
 	ld a, SCENE_SILENT_HILL_LAB_FRONT_GOT_POKEBALLS
 	ld [wMapScriptNumber], a
