@@ -22,7 +22,7 @@ At the very bottom of this README, you will find the original README provided on
 - [x] Fix Heart and Poison Stone evolutions
 - [x] Disable Blackout Demo Mode game reset
 - [ ] Heal party post Blackout
-- [ ] Debug Menu for Healing, Surf, Cut, PC Storage, etc
+- [x] Debug Menu for Healing, Surf, Cut, PC Storage, etc
 - [ ] Temporary Fix: Nanami gives extra items after Rival Battle
 - [x] Fix shiny palette for "pinkmon"
 - [ ] Fix shiny sparkle effect
@@ -57,10 +57,11 @@ At the very bottom of this README, you will find the original README provided on
 
 ## KNOWN BUGS
 - Clicking the continue option from the title menu without creating a save file will crash the game
-- Cannot heal Pokemon after blackout
+- Entering battle after blackout without manually healing mon will crash the game 
 - Cannot obtain new evo stones or some new stone evo mon
-- Cannot return to Oak's Lab after rival battle
 - Rival's name has a grammatical error in the JP text
+- Start menu does not update with story flags
+- Maps past the 4 demo maps do not have proper collision or wild data
 
 ## CONTRIBUTIONS EXTREMELY WELCOMED!
 Please feel free to help with this as much as you want. I am doing this solo as of the time of writing this README and do not have a ton of experience working with ROMs at this level. Any and all help is immensely appreciated!

@@ -89,4 +89,8 @@ FieldDebug_FieldCut:
 	db METATILE_SMALL_TREE_NW
 	db METATILE_CUT_NE_TREE_SE
 	db METATILE_SMALL_TREE_SE
+	db METATILE_NOT_CUT_SILENT ; Manually created for temp Silent cut tree (not cut)
+	db METATILE_YES_CUT_SILENT ; Manually created for temp Silent cut tree (tree gone)
+	db METATILE_NOT_CUT_OLD ; Manually created for cut tree in Old (not cut)
+	db METATILE_YES_CUT_OLD ; Manually created for cut tree in Old (tree gone)
 	db -1
