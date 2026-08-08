@@ -56,12 +56,19 @@ At the very bottom of this README, you will find the original README provided on
 - > _Full story recreation may include: Add the boat to travel between Fonto, High Tech, & West, Add the proper connections for Cave & Power Plant if actually intended to be used, story events found in other leaked sources, etc._
 
 ## KNOWN BUGS
-- Clicking the continue option from the title menu without creating a save file will crash the game
+###_MAJOR:_###
+- Selecting the Continue Game option on the title screen without having a save made will cause the game to crash
 - Entering battle after blackout without manually healing mon will crash the game 
-- Cannot obtain new evo stones or some new stone evo mon
-- Rival's name has a grammatical error in the JP text
-- Start menu does not update with story flags
+
+###_Minor:_###
+- Rival's name has a grammatical error in the JP text during battle
+- Start menu does not update along with the story flags being achieved
+- Title screen menu does not update along with existing/missing save data
+- Blackout to trainer marks them as defeated instead of unbattled (no rematches)
 - Maps past the 4 demo maps do not have proper collision or wild data
+- Demo map blocks in Silent still exist
+- Some marts are not sized correctly
+- Cannot obtain new evo stones or some new stone evo mon
 - Using cut on tree in Old City will cause a corrupt tile to take its place until I update the map tileset file
 - Nanami JP text says 6 Poke Balls even though lots of other items while trying to fix the marts
 
