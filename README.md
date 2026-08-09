@@ -5,7 +5,7 @@ This is a work-in-progress build of making the Pokémon Gold and Silver prototyp
 At the very bottom of this README, you will find the original README provided on the PRET disassembly repository that this was initially forked from. Below you will also find the currently planned changes/features/fixes, stretch goal plans, and the necessary tools for building or contributing to this project. 
 
 ## Planned Features
-- [ ] English translation (thanks to MDTravis's English patch work, this will likely be happening relatively soon _tm_!)
+- [ ] English translation (thanks to MDTravis's English patch work, this will likely be happening relatively "soon _tm_"!)
 
 ### Main Menu
 - [x] Change title menu to show Continue/New Game options
