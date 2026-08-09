@@ -43,6 +43,7 @@ At the very bottom of this README, you will find the original README provided on
 - [ ] Implement Blue Follow feature at North & East exits like West to resolve crashing (or some other scripted event)
 - [ ] Cut tree implementation at Eastern exit of Silent to reduce likelihood of soft lock during battle
 - [ ] Fix collision data for almost all normally available maps
+- [x] Fix wild encounters outside of demo areas
 - [ ] Remove some other map blockades w/minimal design changes (please let me know if I missed anything)
 - [ ] Fix collision data for normally inaccessible maps
 - [X] Disable Route 2 Rival Demo Reset dialogue
@@ -65,7 +66,7 @@ At the very bottom of this README, you will find the original README provided on
 - Start menu does not update along with the story flags being achieved
 - Title screen menu does not update along with existing/missing save data
 - Blackout to trainer marks them as defeated instead of unbattled (no rematches)
-- Maps past the 4 demo maps do not have proper collision or wild data
+- Maps past the 4 demo maps do not have proper collision
 - Demo map blocks in Silent still exist
 - Some marts are not sized correctly
 - Cannot obtain new evo stones or some new stone evo mon
