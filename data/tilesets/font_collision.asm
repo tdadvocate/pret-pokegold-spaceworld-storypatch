@@ -52,8 +52,8 @@
 	tilecoll FLOOR, OLD_CUT_TREE, FLOOR, WALL ; 33
 	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 34
 	tilecoll FLOOR, FLOOR, FLOOR, WALL ; 35
-	tilecoll FLOOR, FLOOR, OLD_LEDGE, OLD_LEDGE ; 36
-	tilecoll FLOOR, FLOOR, FLOOR, OLD_LEDGE ; 37
+	tilecoll FLOOR, FLOOR, JUMP_S, JUMP_S ; 36
+	tilecoll FLOOR, FLOOR, FLOOR, JUMP_S ; 37
 	tilecoll WALL, WALL, WALL, FLOOR ; 38
 	tilecoll WALL, WALL, FLOOR, FLOOR ; 39
 	tilecoll WALL, WALL, FLOOR, WALL ; 3a
